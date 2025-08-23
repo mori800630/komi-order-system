@@ -415,8 +415,18 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (selectedCustomerId) {
             // 既存顧客を選択した場合
-            fetch(`/customers/${selectedCustomerId}`)
-                .then(response => response.json())
+            fetch(`/api/customers/${selectedCustomerId}`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
                 .then(customer => {
                     // 各項目に自動入力
                     document.getElementById('customer_name').value = customer.name || '';
@@ -433,6 +443,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 .catch(error => {
                     console.error('顧客情報の取得に失敗しました:', error);
+                    console.error('Response status:', error.status);
+                    console.error('Response text:', error.message);
                 });
         } else {
             // 新規顧客の場合

@@ -61,7 +61,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        if (request()->wantsJson()) {
+        if (request()->wantsJson() || request()->ajax()) {
             return response()->json($customer);
         }
         
@@ -108,5 +108,11 @@ class CustomerController extends Controller
             ->with('success', '顧客が正常に削除されました。');
     }
 
-
+    /**
+     * Get customer data for API
+     */
+    public function getCustomerData(Customer $customer)
+    {
+        return response()->json($customer);
+    }
 }

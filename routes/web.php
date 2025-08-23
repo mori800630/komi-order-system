@@ -27,6 +27,9 @@ Route::middleware(['auth'])->group(function () {
     // 顧客管理
     Route::resource('customers', CustomerController::class);
     
+    // 顧客情報取得API（CSRF除外）
+    Route::get('/api/customers/{customer}', [CustomerController::class, 'getCustomerData'])->name('api.customers.show');
+    
     // 商品管理
     Route::resource('products', ProductController::class);
     
