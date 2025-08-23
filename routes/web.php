@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // 認証ルート
@@ -28,6 +29,11 @@ Route::middleware(['auth'])->group(function () {
     
     // 商品管理
     Route::resource('products', ProductController::class);
+    
+    // ユーザー管理（管理者のみ）
+    Route::middleware(['auth', 'role:admin'])->group(function () {
+        Route::resource('users', UserController::class);
+    });
     
     // 部門別注文表示（製造部門用）
     Route::get('/department/{department}/orders', [OrderController::class, 'departmentOrders'])->name('department.orders');

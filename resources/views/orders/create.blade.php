@@ -122,7 +122,7 @@
                     </div>
                     
                     <!-- 顧客情報表示・編集エリア -->
-                    <div id="customer_info" style="display: none;">
+                    <div id="customer_info">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -412,16 +412,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // 顧客選択時の処理
     customerSelect.addEventListener('change', function() {
         const selectedCustomerId = this.value;
-        const customerInfo = document.getElementById('customer_info');
         
         if (selectedCustomerId) {
             // 既存顧客を選択した場合
             fetch(`/customers/${selectedCustomerId}`)
                 .then(response => response.json())
                 .then(customer => {
-                    // 顧客情報を表示・編集可能にする
-                    customerInfo.style.display = 'block';
-                    
                     // 各項目に自動入力
                     document.getElementById('customer_name').value = customer.name || '';
                     document.getElementById('customer_phone').value = customer.phone || '';
@@ -440,7 +436,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
         } else {
             // 新規顧客の場合
-            customerInfo.style.display = 'block';
             // フィールドをクリア
             document.getElementById('customer_name').value = '';
             document.getElementById('customer_phone').value = '';
@@ -612,6 +607,12 @@ document.addEventListener('DOMContentLoaded', function() {
         deliveryForm.style.display = 'none';
     } else {
         deliveryForm.style.display = 'block';
+    }
+    
+    // 初期顧客が選択されている場合、情報を自動入力
+    const initialCustomerId = customerSelect.value;
+    if (initialCustomerId) {
+        customerSelect.dispatchEvent(new Event('change'));
     }
 });
 </script>

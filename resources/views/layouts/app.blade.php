@@ -159,7 +159,7 @@
 
                         @if(auth()->user()->isAdmin())
                         <div class="mt-3">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}" href="{{ route('users.index') }}">
                                 <i class="fas fa-user-cog"></i> ユーザー管理
                             </a>
                         </div>
