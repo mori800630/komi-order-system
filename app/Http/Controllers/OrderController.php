@@ -277,6 +277,23 @@ class OrderController extends Controller
     }
 
     /**
+     * Update packaging requirement
+     */
+    public function updatePackaging(Request $request, Order $order)
+    {
+        $request->validate([
+            'requires_packaging' => 'required|boolean',
+        ]);
+
+        $order->update([
+            'requires_packaging' => $request->requires_packaging,
+        ]);
+
+        return redirect()->route('orders.show', $order)
+            ->with('success', '梱包物流設定が正常に更新されました。');
+    }
+
+    /**
      * Department orders view
      */
     public function departmentOrders(Department $department)

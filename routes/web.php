@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('orders', OrderController::class);
     Route::post('/orders/{order}/update-status', [OrderController::class, 'updateStatus'])->name('orders.update-status');
     Route::post('/orders/{order}/update-department-status', [OrderController::class, 'updateDepartmentStatus'])->name('orders.update-department-status');
+    Route::post('/orders/{order}/update-packaging', [OrderController::class, 'updatePackaging'])->name('orders.update-packaging');
     
     // 顧客管理
     Route::resource('customers', CustomerController::class);

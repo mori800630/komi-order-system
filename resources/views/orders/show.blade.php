@@ -110,13 +110,19 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label fw-bold">梱包物流</label>
-                            <p class="mb-0">
-                                @if($order->requires_packaging)
-                                    <span class="badge bg-info">必要</span>
-                                @else
-                                    <span class="badge bg-light text-dark">不要</span>
-                                @endif
-                            </p>
+                            <div class="d-flex align-items-center">
+                                <span class="me-2">
+                                    @if($order->requires_packaging)
+                                        <span class="badge bg-info">必要</span>
+                                    @else
+                                        <span class="badge bg-light text-dark">不要</span>
+                                    @endif
+                                </span>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" 
+                                        data-bs-toggle="modal" data-bs-target="#packagingModal">
+                                    <i class="fas fa-edit"></i> 変更
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -375,6 +381,44 @@
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- 梱包物流変更モーダル -->
+<div class="modal fade" id="packagingModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">梱包物流設定</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="{{ route('orders.update-packaging', $order) }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">梱包物流</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="requires_packaging" id="packaging_required" value="1" 
+                                   {{ $order->requires_packaging ? 'checked' : '' }}>
+                            <label class="form-check-label" for="packaging_required">
+                                必要
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="requires_packaging" id="packaging_not_required" value="0" 
+                                   {{ !$order->requires_packaging ? 'checked' : '' }}>
+                            <label class="form-check-label" for="packaging_not_required">
+                                不要
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="submit" class="btn btn-primary">更新</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

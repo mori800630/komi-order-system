@@ -88,6 +88,7 @@
                             <th>注文ソース</th>
                             <th>受け取り日時</th>
                             <th>注文ステータス</th>
+                            <th>梱包物流</th>
                             <th>金額</th>
                             <th>製造部門</th>
                             <th>操作</th>
@@ -163,6 +164,13 @@
                                             </form>
                                         @endforeach
                                     </div>
+                                @endif
+                            </td>
+                            <td>
+                                @if($order->requires_packaging)
+                                    <span class="badge bg-info">必要</span>
+                                @else
+                                    <span class="badge bg-light text-dark">不要</span>
                                 @endif
                             </td>
                             <td>¥{{ number_format($order->total_amount) }}</td>

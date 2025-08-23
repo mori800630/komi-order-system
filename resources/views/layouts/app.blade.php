@@ -82,11 +82,23 @@
             font-weight: 500;
         }
 
-        .status-order-received { background-color: #e3f2fd; color: #1976d2; }
+        .status-order-received { 
+            background-color: #ffebee; 
+            color: #c62828; 
+            border: 2px solid #f44336;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
         .status-manufacturing { background-color: #fff3e0; color: #f57c00; }
         .status-packaging { background-color: #f3e5f5; color: #7b1fa2; }
         .status-in-transit { background-color: #e8f5e8; color: #388e3c; }
         .status-delivered { background-color: #e8f5e8; color: #2e7d32; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(244, 67, 54, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0); }
+        }
 
         .department-tag {
             background-color: var(--secondary-color);
