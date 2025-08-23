@@ -13,7 +13,6 @@ class ProductSeeder extends Seeder
         // 部門を取得
         $cheesecakeDept = Department::where('name', 'チーズケーキ製造部(本店)')->first();
         $westernDept = Department::where('name', '洋菓子製造部')->first();
-        $accessoryDept = Department::where('name', '洋菓子製造部')->first(); // アクセサリーは洋菓子部門に含める
 
         // チーズケーキ部門の商品
         $cheesecakeProducts = [
@@ -24,22 +23,22 @@ class ProductSeeder extends Seeder
             ['name' => '上面にメッセージ(30文字以内)+300円', 'size' => '7号', 'details' => '21cm/8～12名様用', 'price' => 4100],
             ['name' => '【来店用】ﾊｯﾋﾟｰﾊﾞｰｽﾃﾞｰ金プレート付チーズケーキ', 'size' => '7号', 'details' => '21cm/8～12名様用', 'price' => 3600],
             ['name' => 'チョコプレート付チーズケーキ', 'size' => '7号', 'details' => 'おたんじょうびおめでとう', 'price' => 3700],
-            ['name' => 'チーズケーキ（メッセージ指定）', 'size' => '7号', 'details' => 'ご希望のメッセージ（20文字以内）備考欄にご記入ください', 'price' => 3700],
+            ['name' => 'チョコプレート付チーズケーキ', 'size' => '7号', 'details' => 'ご希望のメッセージ（20文字以内）備考欄にご記入ください', 'price' => 3700],
             ['name' => 'メッセージ入りチーズケーキ', 'size' => '7号', 'details' => 'おたんじょうびおめでとう', 'price' => 3800],
-            ['name' => 'メッセージ入りチーズケーキ（メッセージ指定）', 'size' => '7号', 'details' => 'ご希望のメッセージ（30文字以内）備考欄にご記入ください', 'price' => 3800],
+            ['name' => 'メッセージ入りチーズケーキ', 'size' => '7号', 'details' => 'ご希望のメッセージ（30文字以内）備考欄にご記入ください', 'price' => 3800],
             ['name' => 'フルーツ＆メッセージ入りチーズケーキ', 'size' => '7号', 'details' => 'おたんじょうびおめでとう', 'price' => 4000],
-            ['name' => 'フルーツ＆メッセージ入りチーズケーキ（メッセージ指定）', 'size' => '7号', 'details' => 'ご希望のメッセージ（20文字以内）備考欄にご記入ください', 'price' => 4000],
+            ['name' => 'フルーツ＆メッセージ入りチーズケーキ', 'size' => '7号', 'details' => 'ご希望のメッセージ（20文字以内）備考欄にご記入ください', 'price' => 4000],
             ['name' => 'お顔を書いたチーズケーキ', 'size' => '7号', 'details' => 'おたんじょうびおめでとう', 'price' => 4000],
-            ['name' => 'お顔を書いたチーズケーキ（メッセージ指定）', 'size' => '7号', 'details' => 'ご希望のメッセージ（ひらがなのみで18文字前後）備考欄にご記入ください', 'price' => 4000],
-            ['name' => 'お顔を書いたチーズケーキ（メッセージなし）', 'size' => '7号', 'details' => 'メッセージなし', 'price' => 4000],
+            ['name' => 'お顔を書いたチーズケーキ', 'size' => '7号', 'details' => 'ご希望のメッセージ（ひらがなのみで18文字前後）備考欄にご記入ください', 'price' => 4000],
+            ['name' => 'お顔を書いたチーズケーキ', 'size' => '7号', 'details' => 'メッセージなし', 'price' => 4000],
             ['name' => 'お花デコチーズケーキ', 'size' => '7号', 'details' => 'おたんじょうびおめでとう', 'price' => 4000],
-            ['name' => 'お花デコチーズケーキ（メッセージ指定）', 'size' => '7号', 'details' => 'ご希望のメッセージ（30文字以内）備考欄にご記入ください', 'price' => 4000],
+            ['name' => 'お花デコチーズケーキ', 'size' => '7号', 'details' => 'ご希望のメッセージ（30文字以内）備考欄にご記入ください', 'price' => 4000],
             ['name' => 'クリーム多めチーズケーキデコ', 'size' => '7号', 'details' => 'おたんじょうびおめでとう', 'price' => 5800],
-            ['name' => 'クリーム多めチーズケーキデコ（メッセージ指定）', 'size' => '7号', 'details' => 'ご希望のメッセージ（20文字以内）備考欄にご記入ください', 'price' => 5800],
-            ['name' => 'クリーム多めチーズケーキデコ（メッセージなし）', 'size' => '7号', 'details' => 'メッセージなし', 'price' => 5800],
+            ['name' => 'クリーム多めチーズケーキデコ', 'size' => '7号', 'details' => 'ご希望のメッセージ（20文字以内）備考欄にご記入ください', 'price' => 5800],
+            ['name' => 'クリーム多めチーズケーキデコ', 'size' => '7号', 'details' => 'メッセージなし', 'price' => 5800],
             ['name' => 'フルーツ多めチーズケーキデコ', 'size' => '7号', 'details' => 'おたんじょうびおめでとう', 'price' => 5800],
-            ['name' => 'フルーツ多めチーズケーキデコ（メッセージ指定）', 'size' => '7号', 'details' => 'ご希望のメッセージ（20文字以内）備考欄にご記入ください', 'price' => 5800],
-            ['name' => 'フルーツ多めチーズケーキデコ（メッセージなし）', 'size' => '7号', 'details' => 'メッセージなし', 'price' => 5800],
+            ['name' => 'フルーツ多めチーズケーキデコ', 'size' => '7号', 'details' => 'ご希望のメッセージ（20文字以内）備考欄にご記入ください', 'price' => 5800],
+            ['name' => 'フルーツ多めチーズケーキデコ', 'size' => '7号', 'details' => 'メッセージなし', 'price' => 5800],
         ];
 
         foreach ($cheesecakeProducts as $product) {
@@ -50,7 +49,7 @@ class ProductSeeder extends Seeder
                 'details' => $product['details'],
                 'price' => $product['price'],
                 'department_id' => $cheesecakeDept->id,
-                'sales_status' => 'on_sale',
+                'status' => 'on_sale',
                 'requires_packaging' => true,
                 'decoration' => 'available',
             ]);
@@ -134,6 +133,14 @@ class ProductSeeder extends Seeder
             ['name' => '【来店用】アップルパイ', 'size' => '6号', 'details' => '18cm：HappyBirthday金プレート(+100円)', 'price' => 3100],
             ['name' => '【来店用】アップルパイ', 'size' => 'なし', 'details' => '18cm：メッセージあり(+200円)20文字以内', 'price' => 3200],
             
+            // クッキーメダル
+            ['name' => 'クッキーメダル', 'size' => 'なし', 'details' => 'がんばったね', 'price' => 430],
+            ['name' => 'クッキーメダル', 'size' => 'なし', 'details' => 'おつかれさま', 'price' => 430],
+            ['name' => 'クッキーメダル', 'size' => 'なし', 'details' => 'おめでとう', 'price' => 430],
+            ['name' => 'クッキーメダル', 'size' => 'なし', 'details' => 'ありがとう', 'price' => 430],
+            ['name' => 'クッキーメダル', 'size' => 'なし', 'details' => 'だいすき', 'price' => 430],
+            ['name' => 'クッキーメダル', 'size' => 'なし', 'details' => 'スマイル', 'price' => 430],
+            
             // フルーツロール
             ['name' => 'フルーツロール', 'size' => 'なし', 'details' => '約16cm：メッセージなし', 'price' => 1700],
             ['name' => 'フルーツロール', 'size' => 'なし', 'details' => '約16cm：HappyBirthday金プレート(+100円)', 'price' => 1800],
@@ -164,6 +171,11 @@ class ProductSeeder extends Seeder
             ['name' => '【来店用】ロイヤルチーズと濃厚ショコラのセット', 'size' => 'なし', 'details' => '6個入／冷蔵', 'price' => 1190],
             ['name' => '【来店用】ロイヤルチーズと濃厚ショコラのセット', 'size' => 'なし', 'details' => '14個入／冷凍', 'price' => 2740],
             ['name' => '【来店用】ロイヤルチーズと濃厚ショコラのセット', 'size' => 'なし', 'details' => '14個入／冷蔵', 'price' => 2740],
+            
+            // キャンドル
+            ['name' => 'ストライプキャンドル５本入', 'size' => 'なし', 'details' => '小：約12cm', 'price' => 30],
+            ['name' => 'ストライプキャンドル５本入', 'size' => 'なし', 'details' => '大：約18cm', 'price' => 50],
+            ['name' => 'ナンバーキャンドル', 'size' => 'なし', 'details' => '備考欄にご希望のナンバーをご記入ください', 'price' => 120],
         ];
 
         foreach ($westernProducts as $product) {
@@ -174,39 +186,9 @@ class ProductSeeder extends Seeder
                 'details' => $product['details'],
                 'price' => $product['price'],
                 'department_id' => $westernDept->id,
-                'sales_status' => 'on_sale',
+                'status' => 'on_sale',
                 'requires_packaging' => true,
                 'decoration' => 'available',
-            ]);
-        }
-
-        // アクセサリー部門の商品
-        $accessoryProducts = [
-            // クッキーメダル
-            ['name' => 'クッキーメダル', 'size' => 'なし', 'details' => 'がんばったね', 'price' => 430],
-            ['name' => 'クッキーメダル', 'size' => 'なし', 'details' => 'おつかれさま', 'price' => 430],
-            ['name' => 'クッキーメダル', 'size' => 'なし', 'details' => 'おめでとう', 'price' => 430],
-            ['name' => 'クッキーメダル', 'size' => 'なし', 'details' => 'ありがとう', 'price' => 430],
-            ['name' => 'クッキーメダル', 'size' => 'なし', 'details' => 'だいすき', 'price' => 430],
-            ['name' => 'クッキーメダル', 'size' => 'なし', 'details' => 'スマイル', 'price' => 430],
-            
-            // キャンドル
-            ['name' => 'ストライプキャンドル５本入', 'size' => 'なし', 'details' => '小：約12cm', 'price' => 30],
-            ['name' => 'ストライプキャンドル５本入', 'size' => 'なし', 'details' => '大：約18cm', 'price' => 50],
-            ['name' => 'ナンバーキャンドル', 'size' => 'なし', 'details' => '備考欄にご希望のナンバーをご記入ください', 'price' => 120],
-        ];
-
-        foreach ($accessoryProducts as $product) {
-            Product::create([
-                'name' => $product['name'],
-                'name_kana' => $product['name'],
-                'size' => $product['size'],
-                'details' => $product['details'],
-                'price' => $product['price'],
-                'department_id' => $accessoryDept->id,
-                'sales_status' => 'on_sale',
-                'requires_packaging' => false,
-                'decoration' => 'unavailable',
             ]);
         }
     }
