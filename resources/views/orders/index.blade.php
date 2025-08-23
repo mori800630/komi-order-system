@@ -46,10 +46,11 @@
                 <select class="form-select" id="order_source" name="order_source">
                     <option value="">すべて</option>
                     <option value="phone" {{ request('order_source') == 'phone' ? 'selected' : '' }}>電話注文</option>
+                    <option value="store" {{ request('order_source') == 'store' ? 'selected' : '' }}>来店注文</option>
+                    <option value="pickup_site" {{ request('order_source') == 'pickup_site' ? 'selected' : '' }}>店頭受け取り予約サイト</option>
+                    <option value="delivery_site" {{ request('order_source') == 'delivery_site' ? 'selected' : '' }}>お取り寄せ専用サイト</option>
                     <option value="email" {{ request('order_source') == 'email' ? 'selected' : '' }}>メール注文</option>
-                    <option value="website" {{ request('order_source') == 'website' ? 'selected' : '' }}>ウェブサイト</option>
-                    <option value="store" {{ request('order_source') == 'store' ? 'selected' : '' }}>店舗</option>
-                    <option value="event" {{ request('order_source') == 'event' ? 'selected' : '' }}>イベント</option>
+                    <option value="event" {{ request('order_source') == 'event' ? 'selected' : '' }}>催事・イベント</option>
                     <option value="other" {{ request('order_source') == 'other' ? 'selected' : '' }}>その他</option>
                 </select>
             </div>
@@ -103,20 +104,26 @@
                                     @case('phone')
                                         <span class="badge bg-primary">電話注文</span>
                                         @break
+                                    @case('store')
+                                        <span class="badge bg-warning">来店注文</span>
+                                        @break
+                                    @case('pickup_site')
+                                        <span class="badge bg-info">店頭受け取り予約サイト</span>
+                                        @break
+                                    @case('delivery_site')
+                                        <span class="badge bg-success">お取り寄せ専用サイト</span>
+                                        @break
                                     @case('email')
                                         <span class="badge bg-info">メール注文</span>
                                         @break
-                                    @case('website')
-                                        <span class="badge bg-success">ウェブサイト</span>
-                                        @break
-                                    @case('store')
-                                        <span class="badge bg-warning">店舗</span>
-                                        @break
                                     @case('event')
-                                        <span class="badge bg-secondary">イベント</span>
+                                        <span class="badge bg-secondary">催事・イベント</span>
+                                        @break
+                                    @case('other')
+                                        <span class="badge bg-dark">その他</span>
                                         @break
                                     @default
-                                        <span class="badge bg-dark">その他</span>
+                                        <span class="badge bg-light text-dark">未選択</span>
                                 @endswitch
                             </td>
                             <td>
@@ -136,15 +143,67 @@
                                     <span class="status-badge status-{{ $order->orderStatus->code }}">
                                         {{ $order->orderStatus->name }}
                                     </span>
-                                    @if($order->orderStatus->sort_order < 5)
-                                        <i class="fas fa-arrow-right ms-2 text-muted"></i>
-                                    @endif
                                 </div>
+                                
+                                <!-- ステータス遷移ボタン -->
+                                @php
+                                    $availableTransitions = $order->getAvailableTransitions(auth()->user());
+                                @endphp
+                                @if($availableTransitions->count() > 0)
+                                    <div class="mt-1">
+                                        @foreach($availableTransitions as $transition)
+                                            <form action="{{ route('orders.update-status', $order) }}" method="POST" class="d-inline me-1">
+                                                @csrf
+                                                <input type="hidden" name="new_status_id" value="{{ $transition->to_status_id }}">
+                                                <button type="submit" class="btn btn-xs btn-outline-primary" 
+                                                        onclick="return confirm('ステータスを「{{ $transition->toStatus->name }}」に変更しますか？')"
+                                                        title="{{ $transition->toStatus->name }}へ変更">
+                                                    <i class="fas fa-arrow-right"></i>
+                                                </button>
+                                            </form>
+                                        @endforeach
+                                    </div>
+                                @endif
                             </td>
                             <td>¥{{ number_format($order->total_amount) }}</td>
                             <td>
                                 @foreach($order->orderItems->pluck('product.department')->unique() as $department)
-                                    <span class="department-tag">{{ $department->name }}</span>
+                                    @php
+                                        $deptStatus = $order->departmentStatuses()->where('department_id', $department->id)->first();
+                                        $currentStatus = $deptStatus ? $deptStatus->status : 'not_started';
+                                    @endphp
+                                    
+                                    <div class="mb-1">
+                                        <span class="department-tag">{{ $department->name }}</span>
+                                        <span class="badge {{ $deptStatus ? $deptStatus->status_badge_class : 'bg-secondary' }} ms-1">
+                                            {{ $deptStatus ? $deptStatus->status_text : '未開始' }}
+                                        </span>
+                                        
+                                        <!-- 部門別ステータス更新ボタン -->
+                                        @if(auth()->user()->isAdmin() || (auth()->user()->isManufacturing() && auth()->user()->department_id == $department->id))
+                                            <div class="mt-1">
+                                                @if($currentStatus === 'not_started')
+                                                    <form action="{{ route('orders.update-department-status', $order) }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        <input type="hidden" name="department_id" value="{{ $department->id }}">
+                                                        <input type="hidden" name="status" value="in_progress">
+                                                        <button type="submit" class="btn btn-xs btn-warning" title="製造開始">
+                                                            <i class="fas fa-play"></i>
+                                                        </button>
+                                                    </form>
+                                                @elseif($currentStatus === 'in_progress')
+                                                    <form action="{{ route('orders.update-department-status', $order) }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        <input type="hidden" name="department_id" value="{{ $department->id }}">
+                                                        <input type="hidden" name="status" value="completed">
+                                                        <button type="submit" class="btn btn-xs btn-success" title="製造完了">
+                                                            <i class="fas fa-check"></i>
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                            </div>
+                                        @endif
+                                    </div>
                                 @endforeach
                             </td>
                             <td>

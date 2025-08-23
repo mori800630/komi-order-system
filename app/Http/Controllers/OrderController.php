@@ -18,7 +18,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Order::with(['customer', 'orderStatus', 'orderItems.product.department']);
+        $query = Order::with(['customer', 'orderStatus', 'orderItems.product.department', 'departmentStatuses']);
 
         // 権限によるフィルタリング
         if (auth()->user()->isManufacturing()) {

@@ -97,6 +97,12 @@
             margin: 0.125rem;
         }
 
+        .btn-xs {
+            padding: 0.125rem 0.25rem;
+            font-size: 0.75rem;
+            line-height: 1.2;
+        }
+
         .order-summary {
             background-color: #f8f9fa;
             border-radius: 0.5rem;
