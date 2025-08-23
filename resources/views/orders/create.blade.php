@@ -329,9 +329,7 @@ document.addEventListener('DOMContentLoaded', function() {
             deliveryInfo.style.display = 'none';
         }
         
-        // 表示更新
-        document.getElementById('delivery-method-display').textContent = this.value === 'pickup' ? '店頭受け取り' : 
-                                                                       this.value === 'delivery' ? 'お取り寄せ' : '未選択';
+
     });
 
     // 注文ソースの変更
@@ -347,17 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
-        // 表示更新
-        const sourceText = {
-            'phone': '電話注文',
-            'store': '来店注文',
-            'pickup_site': '店頭受け取り予約サイト',
-            'delivery_site': 'お取り寄せ専用サイト',
-            'email': 'メール注文',
-            'event': '催事・イベント',
-            'other': 'その他'
-        };
-        document.getElementById('order-source-display').textContent = sourceText[this.value] || '未選択';
+
     });
 
     // 顧客選択時の処理

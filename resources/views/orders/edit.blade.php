@@ -92,7 +92,7 @@
                                     <option value="">選択してください</option>
                                     @for($hour = 7; $hour <= 19; $hour++)
                                         <option value="{{ sprintf('%02d:00', $hour) }}" 
-                                                {{ old('pickup_time', $order->pickup_time) == sprintf('%02d:00', $hour) ? 'selected' : '' }}>
+                                                {{ old('pickup_time', $order->pickup_time ? $order->pickup_time->format('H:i') : '') == sprintf('%02d:00', $hour) ? 'selected' : '' }}>
                                             {{ $hour }}:00
                                         </option>
                                     @endfor
