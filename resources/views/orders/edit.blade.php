@@ -11,7 +11,7 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-12">
         <form method="POST" action="{{ route('orders.update', $order) }}">
             @csrf
             @method('PUT')
@@ -243,18 +243,6 @@
                     </button>
                 </div>
                 <div class="card-body">
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="department_filter" class="form-label">部門フィルター</label>
-                            <select class="form-select" id="department_filter">
-                                <option value="">全部門</option>
-                                @foreach($departments as $department)
-                                    <option value="{{ $department->id }}">{{ $department->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                <div class="card-body">
                     <div id="order-items">
                         @foreach($order->orderItems as $index => $item)
                         <div class="order-item border rounded p-3 mb-3" data-item-id="{{ $item->id }}">
@@ -308,95 +296,6 @@
                 </button>
             </div>
         </form>
-    </div>
-
-    <!-- 現在の注文情報 -->
-    <div class="col-lg-4">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">現在の注文情報</h5>
-            </div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label class="form-label fw-bold">注文番号</label>
-                    <p class="mb-0">{{ $order->order_number }}</p>
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label fw-bold">注文ステータス</label>
-                    <p class="mb-0">
-                        <span class="status-badge status-{{ $order->orderStatus->code }}">
-                            {{ $order->orderStatus->name }}
-                        </span>
-                    </p>
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label fw-bold">注文日</label>
-                    <p class="mb-0">{{ $order->created_at->format('Y年m月d日 H:i') }}</p>
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label fw-bold">注文元</label>
-                    <p class="mb-0">
-                        @switch($order->order_source)
-                            @case('phone')
-                                電話注文
-                                @break
-                            @case('store')
-                                来店注文
-                                @break
-                            @case('pickup_site')
-                                店頭受け取り予約サイト
-                                @break
-                            @case('delivery_site')
-                                お取り寄せ専用サイト
-                                @break
-                            @case('email')
-                                メール注文
-                                @break
-                            @case('event')
-                                催事・イベント
-                                @break
-                            @default
-                                その他
-                        @endswitch
-                    </p>
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label fw-bold">受け取り方法</label>
-                    <p class="mb-0">
-                        @if($order->delivery_method == 'pickup')
-                            店頭受け取り
-                        @else
-                            お取り寄せ
-                        @endif
-                    </p>
-                </div>
-                
-                @if($order->pickup_date)
-                <div class="mb-3">
-                    <label class="form-label fw-bold">受け取り日</label>
-                    <p class="mb-0">{{ $order->pickup_date->format('Y年m月d日') }}</p>
-                </div>
-                @endif
-                
-                @if($order->pickup_time)
-                <div class="mb-3">
-                    <label class="form-label fw-bold">受け取り時間</label>
-                    <p class="mb-0">{{ $order->pickup_time }}</p>
-                </div>
-                @endif
-                
-                @if($order->notes)
-                <div class="mb-3">
-                    <label class="form-label fw-bold">備考</label>
-                    <p class="mb-0">{{ $order->notes }}</p>
-                </div>
-                @endif
-            </div>
-        </div>
     </div>
 </div>
 

@@ -11,7 +11,7 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-12">
         <form method="POST" action="{{ route('orders.store') }}" id="orderForm">
             @csrf
             
@@ -231,18 +231,6 @@
                     </button>
                 </div>
                 <div class="card-body">
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="department_filter" class="form-label">部門フィルター</label>
-                            <select class="form-select" id="department_filter">
-                                <option value="">全部門</option>
-                                @foreach($departments as $department)
-                                    <option value="{{ $department->id }}">{{ $department->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                <div class="card-body">
                     <div id="order-items">
                         <!-- 商品が選択されるとここに追加される -->
                     </div>
@@ -259,43 +247,6 @@
                 </button>
             </div>
         </form>
-    </div>
-
-    <!-- 現在の注文情報 -->
-    <div class="col-lg-4">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">現在の注文情報</h5>
-            </div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label class="form-label fw-bold">注文番号</label>
-                    <p class="mb-0">自動採番</p>
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label fw-bold">注文ステータス</label>
-                    <p class="mb-0">
-                        <span class="badge bg-primary">注文受付</span>
-                    </p>
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label fw-bold">注文日</label>
-                    <p class="mb-0">{{ now()->format('Y年m月d日 H:i') }}</p>
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label fw-bold">注文元</label>
-                    <p class="mb-0" id="order-source-display">未選択</p>
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label fw-bold">受け取り方法</label>
-                    <p class="mb-0" id="delivery-method-display">未選択</p>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
