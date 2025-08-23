@@ -36,6 +36,25 @@
                                     {{ $order->orderStatus->name }}
                                 </span>
                             </p>
+                            
+                            <!-- ステータス遷移ボタン -->
+                            @php
+                                $availableTransitions = $order->getAvailableTransitions(auth()->user());
+                            @endphp
+                            @if($availableTransitions->count() > 0)
+                                <div class="mt-2">
+                                    @foreach($availableTransitions as $transition)
+                                        <form action="{{ route('orders.update-status', $order) }}" method="POST" class="d-inline me-2">
+                                            @csrf
+                                            <input type="hidden" name="new_status_id" value="{{ $transition->to_status_id }}">
+                                            <button type="submit" class="btn btn-sm btn-outline-primary" 
+                                                    onclick="return confirm('ステータスを「{{ $transition->toStatus->name }}」に変更しますか？')">
+                                                <i class="fas fa-arrow-right me-1"></i>{{ $transition->toStatus->name }}へ
+                                            </button>
+                                        </form>
+                                    @endforeach
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -231,42 +250,67 @@
             </div>
         </div>
 
-        <!-- ステータス更新 -->
-        <div class="card">
+        <!-- 部門別製造ステータス -->
+        <div class="card mb-4">
             <div class="card-header">
-                <h5 class="mb-0">ステータス更新</h5>
+                <h5 class="mb-0">部門別製造ステータス</h5>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('orders.update-status', $order) }}">
-                    @csrf
-                    @method('PATCH')
+                @php
+                    $orderDepartments = $order->orderItems->pluck('product.department')->unique();
+                @endphp
+                
+                @foreach($orderDepartments as $department)
+                    @php
+                        $deptStatus = $order->departmentStatuses()->where('department_id', $department->id)->first();
+                        $currentStatus = $deptStatus ? $deptStatus->status : 'not_started';
+                    @endphp
                     
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="mb-3">
-                                <label for="order_status_id" class="form-label">新しいステータス</label>
-                                <select class="form-select @error('order_status_id') is-invalid @enderror" id="order_status_id" name="order_status_id" required>
-                                    @foreach($orderStatuses as $status)
-                                        <option value="{{ $status->id }}" {{ $order->order_status_id == $status->id ? 'selected' : '' }}>
-                                            {{ $status->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('order_status_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                    <div class="border rounded p-3 mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="mb-0">{{ $department->name }}</h6>
+                            <span class="badge {{ $deptStatus ? $deptStatus->status_badge_class : 'bg-secondary' }}">
+                                {{ $deptStatus ? $deptStatus->status_text : '未開始' }}
+                            </span>
                         </div>
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label class="form-label">&nbsp;</label>
-                                <button type="submit" class="btn btn-primary w-100">
-                                    <i class="fas fa-save me-2"></i>ステータス更新
-                                </button>
+                        
+                        @if($deptStatus)
+                            <div class="small text-muted mb-2">
+                                @if($deptStatus->started_at)
+                                    開始: {{ $deptStatus->started_at->format('Y-m-d H:i') }}
+                                @endif
+                                @if($deptStatus->completed_at)
+                                    <br>完了: {{ $deptStatus->completed_at->format('Y-m-d H:i') }}
+                                @endif
                             </div>
-                        </div>
+                        @endif
+                        
+                        <!-- 製造ステータス更新ボタン -->
+                        @if(auth()->user()->isAdmin() || (auth()->user()->isManufacturing() && auth()->user()->department_id == $department->id))
+                            <div class="btn-group btn-group-sm" role="group">
+                                @if($currentStatus === 'not_started')
+                                    <form action="{{ route('orders.update-department-status', $order) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <input type="hidden" name="department_id" value="{{ $department->id }}">
+                                        <input type="hidden" name="status" value="in_progress">
+                                        <button type="submit" class="btn btn-warning btn-sm">
+                                            <i class="fas fa-play me-1"></i>製造開始
+                                        </button>
+                                    </form>
+                                @elseif($currentStatus === 'in_progress')
+                                    <form action="{{ route('orders.update-department-status', $order) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <input type="hidden" name="department_id" value="{{ $department->id }}">
+                                        <input type="hidden" name="status" value="completed">
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            <i class="fas fa-check me-1"></i>製造完了
+                                        </button>
+                                    </form>
+                                @endif
+                            </div>
+                        @endif
                     </div>
-                </form>
+                @endforeach
             </div>
         </div>
     </div>

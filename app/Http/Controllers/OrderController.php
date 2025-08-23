@@ -211,29 +211,69 @@ class OrderController extends Controller
     public function updateStatus(Request $request, Order $order)
     {
         $request->validate([
-            'order_status_id' => 'required|exists:order_statuses,id',
+            'new_status_id' => 'required|exists:order_statuses,id',
             'notes' => 'nullable|string',
         ]);
 
-        $oldStatus = $order->orderStatus;
-        $newStatus = OrderStatus::find($request->order_status_id);
+        $newStatus = OrderStatus::find($request->new_status_id);
 
-        // ステータスの順序チェック（一方通行）
-        if ($newStatus->sort_order <= $oldStatus->sort_order) {
-            return back()->with('error', 'ステータスは前進のみ可能です。');
+        // 遷移可能かチェック
+        if (!$order->canTransitionTo($newStatus->id, auth()->user())) {
+            return back()->with('error', 'このステータスへの変更は許可されていません。');
         }
 
-        $order->update(['order_status_id' => $request->order_status_id]);
+        $oldStatus = $order->orderStatus;
+        $order->update(['order_status_id' => $request->new_status_id]);
 
         // ステータス変更履歴を記録
         $order->orderStatusHistories()->create([
-            'order_status_id' => $request->order_status_id,
+            'order_status_id' => $request->new_status_id,
             'user_id' => auth()->id(),
             'notes' => $request->notes,
         ]);
 
         return redirect()->route('orders.show', $order)
             ->with('success', 'ステータスが正常に更新されました。');
+    }
+
+    /**
+     * Update department status
+     */
+    public function updateDepartmentStatus(Request $request, Order $order)
+    {
+        $request->validate([
+            'department_id' => 'required|exists:departments,id',
+            'status' => 'required|in:not_started,in_progress,completed',
+            'notes' => 'nullable|string',
+        ]);
+
+        $department = Department::find($request->department_id);
+        $user = auth()->user();
+
+        // 権限チェック
+        if (!$user->isAdmin() && !($user->isManufacturing() && $user->department_id == $department->id)) {
+            return back()->with('error', 'この操作を実行する権限がありません。');
+        }
+
+        // 部門別ステータスを更新または作成
+        $deptStatus = $order->departmentStatuses()->updateOrCreate(
+            ['department_id' => $request->department_id],
+            [
+                'status' => $request->status,
+                'user_id' => $user->id,
+                'notes' => $request->notes,
+            ]
+        );
+
+        // 開始・完了日時を更新
+        if ($request->status === 'in_progress' && !$deptStatus->started_at) {
+            $deptStatus->update(['started_at' => now()]);
+        } elseif ($request->status === 'completed' && !$deptStatus->completed_at) {
+            $deptStatus->update(['completed_at' => now()]);
+        }
+
+        return redirect()->route('orders.show', $order)
+            ->with('success', '部門ステータスが正常に更新されました。');
     }
 
     /**

@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function () {
     // 注文管理
     Route::resource('orders', OrderController::class);
     Route::post('/orders/{order}/update-status', [OrderController::class, 'updateStatus'])->name('orders.update-status');
+    Route::post('/orders/{order}/update-department-status', [OrderController::class, 'updateDepartmentStatus'])->name('orders.update-department-status');
     
     // 顧客管理
     Route::resource('customers', CustomerController::class);
