@@ -57,7 +57,12 @@
             <div class="col-md-6 col-lg-4">
                 <div class="login-container">
                     <div class="login-header">
-                        <img src="{{ asset('images/komi-bakery-logo.svg') }}" alt="コミベーカリー" class="img-fluid mb-2" style="max-width: 200px; filter: brightness(0) invert(1);">
+                        <div class="mb-3">
+                            <div style="width: 120px; height: 60px; background-color: white; border-radius: 30px; margin: 0 auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                <img src="{{ asset('images/komi-bakery-logo.svg') }}" alt="コミベーカリー" style="max-width: 100px; max-height: 50px;">
+                            </div>
+                        </div>
+                        <h3 class="mb-1">コミベーカリー</h3>
                         <p class="mb-0">注文管理システム</p>
                     </div>
                     
