@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 // 認証ルート
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -43,3 +44,12 @@ Route::middleware(['auth'])->group(function () {
     // 部門別注文表示（製造部門用）
     Route::get('/department/{department}/orders', [OrderController::class, 'departmentOrders'])->name('department.orders');
 });
+
+Route::get('/debug/form', function () {
+    return view('debug.form');
+})->name('debug.form');
+
+Route::post('/debug/test', function (Request $request) {
+    \Log::info('Debug form submitted:', $request->all());
+    return response()->json(['success' => true, 'data' => $request->all()]);
+})->name('debug.test');
