@@ -26,6 +26,16 @@ class Order extends Model
         'requires_packaging' => 'boolean',
     ];
 
+    protected static $rules = [
+        'order_source' => 'in:phone,store,pickup_site,delivery_site,email,event,other',
+        'delivery_method' => 'in:pickup,delivery',
+    ];
+
+    protected $attributes = [
+        'order_source' => 'phone',
+        'delivery_method' => 'pickup',
+    ];
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);
@@ -87,6 +97,18 @@ class Order extends Model
                 $lastOrder = self::orderBy('id', 'desc')->first();
                 $lastNumber = $lastOrder ? intval(substr($lastOrder->order_number, 1)) : 0;
                 $order->order_number = 'O' . str_pad($lastNumber + 1, 6, '0', STR_PAD_LEFT);
+            }
+
+            // order_sourceの値を検証
+            $validOrderSources = ['phone', 'store', 'pickup_site', 'delivery_site', 'email', 'event', 'other'];
+            if (!in_array($order->order_source, $validOrderSources)) {
+                throw new \InvalidArgumentException('Invalid order_source value: ' . $order->order_source);
+            }
+
+            // delivery_methodの値を検証
+            $validDeliveryMethods = ['pickup', 'delivery'];
+            if (!in_array($order->delivery_method, $validDeliveryMethods)) {
+                throw new \InvalidArgumentException('Invalid delivery_method value: ' . $order->delivery_method);
             }
         });
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('order_number')->unique(); // 注文番号（自動採番）
             $table->foreignId('customer_id')->nullable()->constrained()->onDelete('set null'); // 顧客ID
             $table->foreignId('order_status_id')->constrained(); // 注文ステータスID
-            $table->enum('order_source', ['phone', 'email', 'website', 'store', 'event', 'other'])->default('phone'); // 注文ソース
+            $table->enum('order_source', ['phone', 'store', 'pickup_site', 'delivery_site', 'email', 'event', 'other'])->default('phone'); // 注文ソース
             $table->enum('delivery_method', ['pickup', 'delivery'])->default('pickup'); // 受け取り方法
             $table->decimal('total_amount', 10, 2)->default(0); // 合計金額
             $table->date('pickup_date')->nullable(); // 受け取り日
