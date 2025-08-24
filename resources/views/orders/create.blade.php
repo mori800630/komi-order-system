@@ -302,8 +302,8 @@
 </div>
 
 <!-- 商品選択モーダル -->
-<div class="modal fade" id="productModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade" id="productModal" tabindex="-1" style="z-index: 1060;">
+    <div class="modal-dialog modal-lg" style="z-index: 1070;">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">商品選択</h5>
@@ -351,7 +351,8 @@
                                             data-product-id="{{ $product->id }}" 
                                             data-product-name="{{ $product->name }}" 
                                             data-product-price="{{ $product->price }}"
-                                            data-requires-packaging="{{ $product->requires_packaging ? '1' : '0' }}">
+                                            data-requires-packaging="{{ $product->requires_packaging ? '1' : '0' }}"
+                                            style="z-index: 1080; position: relative;">
                                         選択
                                     </button>
                                 </td>
@@ -378,9 +379,21 @@ function openProductModal() {
     
     try {
         // Bootstrap 5のモーダルインスタンスを作成
-        const modal = new bootstrap.Modal(modalElement);
+        const modal = new bootstrap.Modal(modalElement, {
+            backdrop: 'static', // バックドロップをクリックしても閉じない
+            keyboard: false     // ESCキーで閉じない
+        });
         modal.show();
         console.log('Modal opened successfully');
+        
+        // バックドロップのz-indexを調整
+        setTimeout(() => {
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.style.zIndex = '1050';
+            }
+        }, 100);
+        
     } catch (error) {
         console.error('Bootstrap modal failed:', error);
         
@@ -394,6 +407,7 @@ function openProductModal() {
         if (!backdrop) {
             backdrop = document.createElement('div');
             backdrop.className = 'modal-backdrop fade show';
+            backdrop.style.zIndex = '1050';
             document.body.appendChild(backdrop);
         }
         
