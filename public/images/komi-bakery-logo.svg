@@ -1,0 +1,16 @@
+<svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景の円 -->
+  <circle cx="40" cy="40" r="35" fill="#8B4513" stroke="#D2B48C" stroke-width="2"/>
+  
+  <!-- パンのアイコン -->
+  <ellipse cx="40" cy="40" rx="20" ry="12" fill="#F4A460" stroke="#8B4513" stroke-width="1"/>
+  <ellipse cx="40" cy="38" rx="18" ry="10" fill="#DEB887"/>
+  
+  <!-- パンの質感 -->
+  <ellipse cx="35" cy="35" rx="3" ry="2" fill="#CD853F" opacity="0.6"/>
+  <ellipse cx="45" cy="42" rx="2" ry="1.5" fill="#CD853F" opacity="0.6"/>
+  
+  <!-- 会社名テキスト -->
+  <text x="90" y="30" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif" font-size="18" font-weight="bold" fill="#8B4513">コミベーカリー</text>
+  <text x="90" y="50" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif" font-size="12" fill="#8B4513">Komi Bakery</text>
+</svg>

@@ -57,7 +57,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="login-container">
                     <div class="login-header">
-                        <h3 class="mb-1">コミベーカリー</h3>
+                        <img src="{{ asset('images/komi-bakery-logo.svg') }}" alt="コミベーカリー" class="img-fluid mb-2" style="max-width: 200px; filter: brightness(0) invert(1);">
                         <p class="mb-0">注文管理システム</p>
                     </div>
                     
