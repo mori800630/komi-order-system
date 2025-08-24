@@ -475,13 +475,23 @@
     z-index: 1070 !important;
 }
 
+/* バックドロップの設定（モーダルが開いている時のみ） */
 .modal-backdrop {
     z-index: 1050 !important;
+}
+
+/* モーダルが開いている時のみpointer-eventsを無効化 */
+.modal-open .modal-backdrop {
     pointer-events: none !important;
 }
 
 /* モーダル内のボタンはクリック可能にする */
 #packagingModal .btn {
+    pointer-events: auto !important;
+}
+
+/* モーダル以外の要素は通常通りクリック可能 */
+body:not(.modal-open) * {
     pointer-events: auto !important;
 }
 
@@ -520,6 +530,11 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // ページ読み込み時にpointer-eventsを正常に設定
+    document.querySelectorAll('*').forEach(element => {
+        element.style.pointerEvents = '';
+    });
+    
     // 梱包物流設定モーダルの処理
     const packagingModal = document.getElementById('packagingModal');
     if (packagingModal) {
@@ -559,6 +574,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 
                 document.body.style.overflow = '';
+                
+                // モーダルが閉じられた後、すべての要素のpointer-eventsを復活
+                document.querySelectorAll('*').forEach(element => {
+                    if (!element.classList.contains('modal-backdrop')) {
+                        element.style.pointerEvents = '';
+                    }
+                });
+                
             } catch (error) {
                 console.error('Error closing packaging modal:', error);
             }
