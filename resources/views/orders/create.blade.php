@@ -368,18 +368,36 @@
 <script>
 // モーダルを開く関数
 function openProductModal() {
+    console.log('Opening product modal...');
+    
+    const modalElement = document.getElementById('productModal');
+    if (!modalElement) {
+        console.error('Modal element not found');
+        return;
+    }
+    
     try {
-        const modal = new bootstrap.Modal(document.getElementById('productModal'));
+        // Bootstrap 5のモーダルインスタンスを作成
+        const modal = new bootstrap.Modal(modalElement);
         modal.show();
+        console.log('Modal opened successfully');
     } catch (error) {
-        console.error('モーダルを開けませんでした:', error);
+        console.error('Bootstrap modal failed:', error);
+        
         // フォールバック: モーダルを直接表示
-        document.getElementById('productModal').style.display = 'block';
-        document.getElementById('productModal').classList.add('show');
+        modalElement.style.display = 'block';
+        modalElement.classList.add('show');
         document.body.classList.add('modal-open');
-        const backdrop = document.createElement('div');
-        backdrop.className = 'modal-backdrop fade show';
-        document.body.appendChild(backdrop);
+        
+        // バックドロップを作成
+        let backdrop = document.querySelector('.modal-backdrop');
+        if (!backdrop) {
+            backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop fade show';
+            document.body.appendChild(backdrop);
+        }
+        
+        console.log('Modal opened with fallback method');
     }
 }
 
@@ -532,12 +550,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 商品選択（イベント委譲を使用）
     document.addEventListener('click', function(e) {
+        console.log('Click event detected:', e.target);
+        
         if (e.target.classList.contains('select-product') || e.target.closest('.select-product')) {
+            console.log('Product selection button clicked');
+            
             const button = e.target.classList.contains('select-product') ? e.target : e.target.closest('.select-product');
             const productId = button.dataset.productId;
             const productName = button.dataset.productName;
             const productPrice = button.dataset.productPrice;
             const requiresPackaging = button.dataset.requiresPackaging;
+            
+            console.log('Product data:', { productId, productName, productPrice, requiresPackaging });
             
             addOrderItem(productId, productName, productPrice);
             
@@ -553,8 +577,26 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // モーダルを閉じる
-            const modal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
-            modal.hide();
+            try {
+                const modal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
+                if (modal) {
+                    modal.hide();
+                } else {
+                    // フォールバック: モーダルを直接非表示
+                    const modalElement = document.getElementById('productModal');
+                    modalElement.style.display = 'none';
+                    modalElement.classList.remove('show');
+                    document.body.classList.remove('modal-open');
+                    
+                    const backdrop = document.querySelector('.modal-backdrop');
+                    if (backdrop) {
+                        backdrop.remove();
+                    }
+                }
+                console.log('Modal closed successfully');
+            } catch (error) {
+                console.error('Error closing modal:', error);
+            }
         }
     });
     
