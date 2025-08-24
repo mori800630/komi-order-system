@@ -428,8 +428,8 @@
 </div>
 
 <!-- 梱包物流変更モーダル -->
-<div class="modal fade" id="packagingModal" tabindex="-1">
-    <div class="modal-dialog">
+<div class="modal fade" id="packagingModal" tabindex="-1" style="z-index: 1060;">
+    <div class="modal-dialog" style="z-index: 1070;">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">梱包物流設定</h5>
@@ -466,6 +466,25 @@
 </div>
 
 <style>
+/* モーダルのz-index設定 */
+#packagingModal {
+    z-index: 1060 !important;
+}
+
+#packagingModal .modal-dialog {
+    z-index: 1070 !important;
+}
+
+.modal-backdrop {
+    z-index: 1050 !important;
+    pointer-events: none !important;
+}
+
+/* モーダル内のボタンはクリック可能にする */
+#packagingModal .btn {
+    pointer-events: auto !important;
+}
+
 .timeline {
     position: relative;
     padding-left: 30px;
@@ -501,6 +520,71 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // 梱包物流設定モーダルの処理
+    const packagingModal = document.getElementById('packagingModal');
+    if (packagingModal) {
+        // モーダルを開く際の処理
+        const openPackagingModal = () => {
+            const modal = new bootstrap.Modal(packagingModal, {
+                backdrop: false, // バックドロップを無効化
+                keyboard: false  // ESCキーで閉じない
+            });
+            modal.show();
+            
+            // バックドロップのz-indexを調整
+            setTimeout(() => {
+                const backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop) {
+                    backdrop.style.zIndex = '1050';
+                    backdrop.style.pointerEvents = 'none';
+                }
+            }, 100);
+        };
+        
+        // モーダルを閉じる関数
+        const closePackagingModal = () => {
+            try {
+                const modal = bootstrap.Modal.getInstance(packagingModal);
+                if (modal) {
+                    modal.hide();
+                } else {
+                    packagingModal.style.display = 'none';
+                    packagingModal.classList.remove('show');
+                    document.body.classList.remove('modal-open');
+                }
+                
+                const backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop) {
+                    backdrop.remove();
+                }
+                
+                document.body.style.overflow = '';
+            } catch (error) {
+                console.error('Error closing packaging modal:', error);
+            }
+        };
+        
+        // キャンセルボタンの処理
+        const cancelButton = packagingModal.querySelector('.btn-secondary');
+        if (cancelButton) {
+            cancelButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                closePackagingModal();
+            });
+        }
+        
+        // フォーム送信後の処理
+        const packagingForm = packagingModal.querySelector('form');
+        if (packagingForm) {
+            packagingForm.addEventListener('submit', function() {
+                // フォーム送信後にモーダルを閉じる
+                setTimeout(() => {
+                    closePackagingModal();
+                }, 100);
+            });
+        }
+    }
+    
     // 梱包中への遷移ボタンを制御
     const packagingButtons = document.querySelectorAll('form[action*="update-status"] button[type="submit"]');
     
