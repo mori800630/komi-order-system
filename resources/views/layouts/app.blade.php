@@ -141,9 +141,23 @@
                     </div>
 
                     @auth
-                    <div class="mb-3">
-                        <p class="mb-1 small">管理者アカウント</p>
-                        <p class="mb-0 small"><i class="fas fa-user"></i> {{ auth()->user()->name }}</p>
+                    <div class="mb-3 p-2" style="background-color: rgba(255, 255, 255, 0.1); border-radius: 0.375rem; border: 1px solid rgba(255, 255, 255, 0.2);">
+                        <p class="mb-1 small text-warning"><i class="fas fa-user-circle"></i> ログインユーザー</p>
+                        <p class="mb-1 small"><i class="fas fa-user"></i> {{ auth()->user()->name }}</p>
+                        <p class="mb-0 small">
+                            <i class="fas fa-user-tag"></i> 
+                            @if(auth()->user()->isAdmin())
+                                システム管理者
+                            @elseif(auth()->user()->isStore())
+                                店舗スタッフ
+                            @elseif(auth()->user()->isManufacturing())
+                                製造部門
+                            @elseif(auth()->user()->isLogistics())
+                                物流部門
+                            @else
+                                一般ユーザー
+                            @endif
+                        </p>
                     </div>
                     @endauth
 
