@@ -266,7 +266,7 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">商品情報</h5>
-                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal" style="pointer-events: auto;">
+                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal" style="pointer-events: auto !important; cursor: pointer !important;">
                         <i class="fas fa-plus me-1"></i>商品追加
                     </button>
                 </div>
@@ -333,9 +333,9 @@
 </div>
 
 <!-- 商品選択モーダル -->
-<div class="modal fade" id="productModal" tabindex="-1" style="z-index: 1050;">
-    <div class="modal-dialog modal-lg" style="z-index: 1051;">
-        <div class="modal-content" style="pointer-events: auto;">
+<div class="modal fade" id="productModal" tabindex="-1" style="z-index: 9999 !important;">
+    <div class="modal-dialog modal-lg" style="z-index: 10000 !important;">
+        <div class="modal-content" style="pointer-events: auto !important;">
             <div class="modal-header">
                 <h5 class="modal-title">商品選択</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -383,7 +383,7 @@
                                             data-product-name="{{ $product->name }}" 
                                             data-product-price="{{ $product->price }}"
                                             data-requires-packaging="{{ $product->requires_packaging ? '1' : '0' }}"
-                                            style="pointer-events: auto; cursor: pointer;">
+                                            style="pointer-events: auto !important; cursor: pointer !important; position: relative; z-index: 10001;">
                                         選択
                                     </button>
                                 </td>
@@ -642,6 +642,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         document.getElementById('total-amount').textContent = `¥${total.toLocaleString()}`;
+    }
+    
+    // モーダルの初期化
+    const productModal = document.getElementById('productModal');
+    if (productModal) {
+        // モーダルの背景オーバーレイのz-indexを設定
+        productModal.addEventListener('shown.bs.modal', function () {
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.style.zIndex = '9998';
+            }
+        });
     }
     
     // ページ読み込み時の初期化
