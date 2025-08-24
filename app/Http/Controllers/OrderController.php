@@ -72,7 +72,7 @@ class OrderController extends Controller
         // デバッグ情報をログに出力
         \Log::info('Order store request data:', $request->all());
         
-        $request->validate([
+        $validator = \Validator::make($request->all(), [
             'customer_id' => 'nullable|exists:customers,id',
             'customer_name' => 'required|string|max:255',
             'customer_phone' => 'nullable|string|max:20',
@@ -96,10 +96,12 @@ class OrderController extends Controller
             'quantities' => 'required|array|min:1',
         ]);
 
-        // バリデーションエラーが発生した場合のデバッグ情報
-        if ($request->validator && $request->validator->fails()) {
-            \Log::error('Validation errors:', $request->validator->errors()->toArray());
+        if ($validator->fails()) {
+            \Log::error('Validation errors:', $validator->errors()->toArray());
+            return back()->withErrors($validator)->withInput();
         }
+
+
 
         DB::beginTransaction();
         try {
