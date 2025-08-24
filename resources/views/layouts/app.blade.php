@@ -9,24 +9,49 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #8B4513;
-            --secondary-color: #D2B48C;
-            --accent-color: #FF6B35;
-            --success-color: #28a745;
-            --light-bg: #F5F5DC;
+            --primary-color: #D4A574;
+            --secondary-color: #F5E6D3;
+            --accent-color: #B8860B;
+            --text-color: #5D4E37;
+            --light-bg: rgba(255, 255, 255, 0.95);
+            --border-color: #E8D5B7;
+            --sidebar-bg: #8B4513;
+            --sidebar-hover: #A0522D;
         }
 
         body {
-            background-color: var(--light-bg);
-            font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+            background: linear-gradient(135deg, #F5E6D3 0%, #E8D5B7 100%);
+            font-family: 'Yu Gothic', 'Hiragino Kaku Gothic ProN', sans-serif;
             position: relative;
             overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 背景のパンくずパターン */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(212, 165, 116, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 80% 40%, rgba(212, 165, 116, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 40% 80%, rgba(212, 165, 116, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 90% 90%, rgba(212, 165, 116, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 10% 60%, rgba(212, 165, 116, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 70% 10%, rgba(212, 165, 116, 0.1) 1px, transparent 1px);
+            background-size: 100px 100px, 150px 150px, 120px 120px, 80px 80px, 200px 200px, 180px 180px;
+            pointer-events: none;
+            z-index: 1;
         }
 
         /* フローティングアイコン */
         .floating-icon {
             position: fixed;
-            color: rgba(139, 69, 19, 0.1);
+            color: rgba(212, 165, 116, 0.1);
             font-size: 1.5rem;
             animation: float 8s ease-in-out infinite;
             z-index: 1;
@@ -100,22 +125,25 @@
         }
 
         .sidebar {
-            background-color: var(--primary-color);
+            background-color: var(--sidebar-bg);
             min-height: 100vh;
             color: white;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .sidebar .nav-link {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.9);
             padding: 0.75rem 1rem;
-            border-radius: 0.375rem;
+            border-radius: 8px;
             margin: 0.25rem 0;
+            transition: all 0.3s ease;
         }
 
         .sidebar .nav-link:hover,
         .sidebar .nav-link.active {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: var(--sidebar-hover);
             color: white;
+            transform: translateX(5px);
         }
 
         .sidebar .nav-link i {
@@ -124,39 +152,61 @@
         }
 
         .main-content {
-            background-color: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            background-color: var(--light-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
         }
 
         .btn-primary {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
-            background-color: #6B3410;
-            border-color: #6B3410;
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
         }
 
         .btn-success {
-            background-color: var(--success-color);
-            border-color: var(--success-color);
+            background-color: #28a745;
+            border-color: #28a745;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #218838;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
         }
 
         .card {
-            border: none;
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            background-color: var(--light-bg);
         }
 
         .table th {
-            background-color: #f8f9fa;
+            background-color: var(--secondary-color);
             border-top: none;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .table td {
+            color: var(--text-color);
         }
 
         .status-badge {
             padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
+            border-radius: 8px;
             font-size: 0.875rem;
             font-weight: 500;
         }
@@ -202,24 +252,20 @@
                 transform: scale(1);
             }
         }
+        
         .status-manufacturing { background-color: #fff3e0; color: #f57c00; }
         .status-packaging { background-color: #f3e5f5; color: #7b1fa2; }
         .status-in-transit { background-color: #e8f5e8; color: #388e3c; }
         .status-delivered { background-color: #e8f5e8; color: #2e7d32; }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(244, 67, 54, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0); }
-        }
-
         .department-tag {
             background-color: var(--secondary-color);
-            color: var(--primary-color);
+            color: var(--text-color);
             padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
+            border-radius: 8px;
             font-size: 0.75rem;
             margin: 0.125rem;
+            border: 1px solid var(--border-color);
         }
 
         .btn-xs {
@@ -229,9 +275,26 @@
         }
 
         .order-summary {
-            background-color: #f8f9fa;
-            border-radius: 0.5rem;
+            background-color: var(--secondary-color);
+            border-radius: 12px;
             padding: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .alert {
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
         }
 
         @media (max-width: 768px) {
@@ -320,7 +383,7 @@
                     </div>
 
                     @auth
-                    <div class="mb-3 p-2" style="background-color: rgba(255, 255, 255, 0.1); border-radius: 0.375rem; border: 1px solid rgba(255, 255, 255, 0.2);">
+                    <div class="mb-3 p-2" style="background-color: rgba(255, 255, 255, 0.1); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2);">
                         <p class="mb-1 small text-warning"><i class="fas fa-user-circle"></i> ログインユーザー</p>
                         <p class="mb-1 small"><i class="fas fa-user"></i> {{ auth()->user()->name }}</p>
                         <p class="mb-0 small">
