@@ -100,7 +100,7 @@ class Order extends Model
             }
 
             // order_sourceの値を検証
-            $validOrderSources = ['phone', 'store', 'pickup_site', 'delivery_site', 'email', 'event', 'other'];
+            $validOrderSources = ['phone', 'store', 'pickup_site', 'delivery_site', 'email', 'event', 'other', 'website'];
             if (!in_array($order->order_source, $validOrderSources)) {
                 throw new \InvalidArgumentException('Invalid order_source value: ' . $order->order_source);
             }

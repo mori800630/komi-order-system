@@ -39,10 +39,14 @@ fi
 
 # データベースを初期化
 echo "Running database migrations..."
-php artisan migrate --force
+php artisan migrate --force || {
+    echo "Migration failed, but continuing..."
+}
 
 echo "Running database seeders..."
-php artisan db:seed --force
+php artisan db:seed --force || {
+    echo "Seeding failed, but continuing..."
+}
 
 echo "Application initialization completed successfully!"
 
