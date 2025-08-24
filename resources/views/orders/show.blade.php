@@ -63,9 +63,10 @@
                                         <form action="{{ route('orders.update-status', $order) }}" method="POST" class="d-inline me-2">
                                             @csrf
                                             <input type="hidden" name="new_status_id" value="{{ $transition->to_status_id }}">
-                                            <button type="submit" class="btn btn-sm btn-outline-primary" 
+                                            <button type="submit" class="btn btn-sm btn-outline-primary status-transition-btn" 
                                                     onclick="return confirm('ステータスを「{{ $transition->toStatus->name }}」に変更しますか？')"
-                                                    title="{{ $transition->description }}">
+                                                    title="{{ $transition->description }}"
+                                                    style="z-index: 1000; position: relative; pointer-events: auto;">
                                                 <i class="fas fa-arrow-right me-1"></i>{{ $transition->toStatus->name }}へ
                                             </button>
                                         </form>
@@ -495,6 +496,23 @@ body:not(.modal-open) * {
     pointer-events: auto !important;
 }
 
+/* ステータス遷移ボタンのスタイル */
+.status-transition-btn {
+    z-index: 1000 !important;
+    position: relative !important;
+    pointer-events: auto !important;
+}
+
+/* フォーム要素のスタイル */
+form {
+    pointer-events: auto !important;
+}
+
+/* ボタン要素のスタイル */
+.btn {
+    pointer-events: auto !important;
+}
+
 .timeline {
     position: relative;
     padding-left: 30px;
@@ -533,6 +551,32 @@ document.addEventListener('DOMContentLoaded', function() {
     // ページ読み込み時にpointer-eventsを正常に設定
     document.querySelectorAll('*').forEach(element => {
         element.style.pointerEvents = '';
+    });
+    
+    console.log('Page loaded, setting up status transition buttons...');
+    
+    // ステータス遷移ボタンの処理
+    const statusTransitionButtons = document.querySelectorAll('.status-transition-btn');
+    console.log('Found status transition buttons:', statusTransitionButtons.length);
+    
+    statusTransitionButtons.forEach(button => {
+        // 既存のイベントリスナーを削除
+        button.replaceWith(button.cloneNode(true));
+    });
+    
+    // 新しいボタンにイベントリスナーを追加
+    document.querySelectorAll('.status-transition-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            console.log('Status transition button clicked');
+            // デフォルトの動作を許可
+        });
+        
+        // pointer-eventsを確実に有効化
+        button.style.pointerEvents = 'auto';
+        button.style.zIndex = '1000';
+        button.style.position = 'relative';
+        
+        console.log('Button setup completed:', button.textContent.trim());
     });
     
     // 梱包物流設定モーダルの処理
