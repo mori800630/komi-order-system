@@ -11,7 +11,7 @@
         :root {
             --primary-color: #8B4513;
             --secondary-color: #D2B48C;
-            --accent-color: #FF6B35;
+            --accent-color: #A0522D;
             --success-color: #28a745;
             --light-bg: #F5F5DC;
             --glass-bg: rgba(255, 255, 255, 0.25);
@@ -19,7 +19,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #FF8C42 0%, #FF6B35 25%, #FF5722 50%, #E64A19 75%, #D84315 100%);
+            background: linear-gradient(135deg, #D2B48C 0%, #CD853F 25%, #A0522D 50%, #8B4513 75%, #654321 100%);
             min-height: 100vh;
             font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
             position: relative;
@@ -94,7 +94,7 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #FF8C42, #FF6B35, #FF5722, #E64A19);
+            background: linear-gradient(90deg, #D2B48C, #CD853F, #A0522D, #8B4513);
         }
 
         .logo-section {
@@ -155,7 +155,7 @@
         .form-floating .form-control:focus {
             background: rgba(255, 255, 255, 0.95);
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+            box-shadow: 0 0 0 0.2rem rgba(160, 82, 45, 0.25);
             transform: translateY(-2px);
         }
 
@@ -203,7 +203,7 @@
 
         /* ログインボタン */
         .btn-login {
-            background: linear-gradient(135deg, #FF8C42 0%, #FF6B35 50%, #FF5722 100%);
+            background: linear-gradient(135deg, #D2B48C 0%, #CD853F 50%, #A0522D 100%);
             border: none;
             border-radius: 1rem;
             padding: 1rem 2rem;
@@ -236,7 +236,7 @@
 
         .btn-login:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+            box-shadow: 0 8px 25px rgba(160, 82, 45, 0.4);
         }
 
         .btn-login:active {
