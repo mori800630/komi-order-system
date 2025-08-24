@@ -61,13 +61,29 @@ class TestOrderSeeder extends Seeder
                 $orderStatus = $orderReceived;
             }
 
+            // 受け取り方法を決定
+            $deliveryMethod = ['pickup', 'delivery'][rand(0, 1)];
+            
+            // 店頭受け取りの場合は受け取り日時を設定
+            $pickupDate = null;
+            $pickupTime = null;
+            
+            if ($deliveryMethod === 'pickup') {
+                // 注文日から1-7日後の日付を設定
+                $pickupDate = $orderDate->copy()->addDays(rand(1, 7))->format('Y-m-d');
+                // 7:00-19:00の間で時間を設定
+                $pickupTime = sprintf('%02d:00', rand(7, 19));
+            }
+            
             // 注文を作成
             $order = Order::create([
                 'order_number' => 'O' . str_pad($i + 1, 6, '0', STR_PAD_LEFT),
                 'customer_id' => $customers->random()->id,
                 'order_status_id' => $orderStatus->id,
                 'order_source' => ['phone', 'store', 'email', 'website'][rand(0, 3)],
-                'delivery_method' => ['pickup', 'delivery'][rand(0, 1)],
+                'delivery_method' => $deliveryMethod,
+                'pickup_date' => $pickupDate,
+                'pickup_time' => $pickupTime,
                 'total_amount' => 0,
                 'requires_packaging' => rand(0, 1),
                 'created_at' => $orderDate,

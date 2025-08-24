@@ -437,7 +437,7 @@
 </div>
 
 <!-- 梱包物流変更モーダル -->
-<div class="modal fade" id="packagingModal" tabindex="-1" style="z-index: 1060;">
+<div class="modal fade" id="packagingModal" tabindex="-1" style="z-index: 1060;" data-bs-backdrop="false">
     <div class="modal-dialog" style="z-index: 1070;">
         <div class="modal-content">
             <div class="modal-header">
@@ -591,14 +591,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             modal.show();
             
-            // バックドロップのz-indexを調整
+            // バックドロップを完全に無効化
             setTimeout(() => {
                 const backdrop = document.querySelector('.modal-backdrop');
                 if (backdrop) {
-                    backdrop.style.zIndex = '1050';
-                    backdrop.style.pointerEvents = 'none';
+                    backdrop.style.display = 'none';
                 }
-            }, 100);
+            }, 50);
         };
         
         // モーダルを閉じる関数
