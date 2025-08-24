@@ -250,7 +250,12 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label">商品名</label>
-                                        <input type="text" class="form-control" value="{{ $item->product->name }}" readonly>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="{{ $item->product->name }}" readonly>
+                                            @if($item->product->status === 'discontinued')
+                                                <span class="input-group-text bg-secondary text-white">販売終了</span>
+                                            @endif
+                                        </div>
                                         <input type="hidden" name="items[{{ $index }}][product_id]" value="{{ $item->product_id }}">
                                     </div>
                                 </div>
@@ -333,8 +338,15 @@
                         </thead>
                         <tbody id="productList">
                             @foreach($products as $product)
-                            <tr data-department-id="{{ $product->department_id }}">
-                                <td>{{ $product->name }}</td>
+                            <tr data-department-id="{{ $product->department_id }}" @if($product->status === 'discontinued') class="table-secondary" @endif>
+                                <td>
+                                    @if($product->status === 'discontinued')
+                                        <span class="text-decoration-line-through text-muted">{{ $product->name }}</span>
+                                        <span class="badge bg-secondary ms-1">販売終了</span>
+                                    @else
+                                        {{ $product->name }}
+                                    @endif
+                                </td>
                                 <td>{{ $product->department->name }}</td>
                                 <td>¥{{ number_format($product->price) }}</td>
                                 <td>

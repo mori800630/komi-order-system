@@ -235,7 +235,14 @@
                         <tbody>
                             @foreach($order->orderItems as $item)
                             <tr>
-                                <td>{{ $item->product->name }}</td>
+                                <td>
+                                    @if($item->product->status === 'discontinued')
+                                        <span class="text-decoration-line-through text-muted">{{ $item->product->name }}</span>
+                                        <span class="badge bg-secondary ms-1">販売終了</span>
+                                    @else
+                                        {{ $item->product->name }}
+                                    @endif
+                                </td>
                                 <td>
                                     <span class="department-tag">{{ $item->product->department->name }}</span>
                                 </td>

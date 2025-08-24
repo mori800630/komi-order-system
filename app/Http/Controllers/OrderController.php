@@ -57,7 +57,8 @@ class OrderController extends Controller
     public function create()
     {
         $customers = Customer::where('is_active', true)->get();
-        $products = Product::active()->with('department')->get();
+        // 販売中の商品のみを取得
+        $products = Product::where('status', 'on_sale')->where('is_active', true)->with('department')->get();
         $departments = Department::where('is_active', true)->get();
         $orderStatuses = OrderStatus::active()->ordered()->get();
 
@@ -169,7 +170,12 @@ class OrderController extends Controller
     {
         $order->load(['customer', 'orderStatus', 'orderItems.product.department']);
         $customers = Customer::where('is_active', true)->get();
-        $products = Product::active()->with('department')->get();
+        // 販売中の商品のみを取得（既存の注文商品は含める）
+        $existingProductIds = $order->orderItems->pluck('product_id')->toArray();
+        $products = Product::where(function($query) use ($existingProductIds) {
+            $query->where('status', 'on_sale')
+                  ->orWhereIn('id', $existingProductIds);
+        })->where('is_active', true)->with('department')->get();
         $departments = Department::where('is_active', true)->get();
         $orderStatuses = OrderStatus::active()->ordered()->get();
 

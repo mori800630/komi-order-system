@@ -284,8 +284,15 @@
                         </thead>
                         <tbody id="productList">
                             @foreach($products as $product)
-                            <tr data-department-id="{{ $product->department_id }}">
-                                <td>{{ $product->name }}</td>
+                            <tr data-department-id="{{ $product->department_id }}" @if($product->status === 'discontinued') class="table-secondary" @endif>
+                                <td>
+                                    @if($product->status === 'discontinued')
+                                        <span class="text-decoration-line-through text-muted">{{ $product->name }}</span>
+                                        <span class="badge bg-secondary ms-1">販売終了</span>
+                                    @else
+                                        {{ $product->name }}
+                                    @endif
+                                </td>
                                 <td>{{ $product->department->name }}</td>
                                 <td>¥{{ number_format($product->price) }}</td>
                                 <td>
