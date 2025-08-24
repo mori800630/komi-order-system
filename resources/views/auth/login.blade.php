@@ -19,7 +19,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #D2B48C 0%, #CD853F 25%, #A0522D 50%, #8B4513 75%, #654321 100%);
+            background: linear-gradient(135deg, #D2B48C 0%, #CD853F 30%, #A0522D 60%, #8B4513 85%, #8B4513 100%);
             min-height: 100vh;
             font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
             position: relative;
