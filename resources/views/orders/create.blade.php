@@ -619,9 +619,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // フォーム送信時のバリデーション
     document.getElementById('orderForm').addEventListener('submit', function(e) {
+        console.log('Form submission started');
+        
         const orderItems = document.querySelectorAll('.order-item');
+        console.log('Order items count:', orderItems.length);
+        
         if (orderItems.length === 0) {
             e.preventDefault();
+            console.log('No order items found, preventing submission');
             alert('商品を少なくとも1つ選択してください。');
             return false;
         }
@@ -635,8 +640,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         for (const field of requiredFields) {
             const element = document.getElementById(field.id);
+            console.log(`Checking field ${field.id}:`, element.value);
             if (!element.value.trim()) {
                 e.preventDefault();
+                console.log(`Field ${field.id} is empty, preventing submission`);
                 alert(`${field.name}を入力してください。`);
                 element.focus();
                 return false;
@@ -645,22 +652,30 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 受け取り方法に応じた必須フィールドチェック
         const deliveryMethod = document.getElementById('delivery_method').value;
+        console.log('Delivery method:', deliveryMethod);
+        
         if (deliveryMethod === 'pickup') {
             const pickupDate = document.getElementById('pickup_date').value;
             const pickupTime = document.getElementById('pickup_time').value;
+            console.log('Pickup date:', pickupDate, 'Pickup time:', pickupTime);
             if (!pickupDate || !pickupTime) {
                 e.preventDefault();
+                console.log('Pickup date/time missing, preventing submission');
                 alert('店頭受け取りの場合は、受け取り日時を入力してください。');
                 return false;
             }
         } else if (deliveryMethod === 'delivery') {
             const deliveryName = document.getElementById('delivery_name').value;
+            console.log('Delivery name:', deliveryName);
             if (!deliveryName.trim()) {
                 e.preventDefault();
+                console.log('Delivery name missing, preventing submission');
                 alert('お取り寄せの場合は、送付先のお名前を入力してください。');
                 return false;
             }
         }
+        
+        console.log('Form validation passed, allowing submission');
     });
     
     // ページ読み込み時の初期化
