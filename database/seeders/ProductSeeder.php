@@ -13,6 +13,8 @@ class ProductSeeder extends Seeder
         // 部門を取得
         $cheesecakeDept = Department::where('name', 'チーズケーキ製造部(本店)')->first();
         $westernDept = Department::where('name', '洋菓子製造部')->first();
+        $sandwichDept = Department::where('name', 'サンドイッチ製造部')->first();
+        $breadDept = Department::where('name', 'パン製造部')->first();
 
         // チーズケーキ部門の商品
         $cheesecakeProducts = [
@@ -189,6 +191,105 @@ class ProductSeeder extends Seeder
                 'status' => 'on_sale',
                 'requires_packaging' => true,
                 'decoration' => 'available',
+            ]);
+        }
+
+        // サンドイッチ製造部の商品
+        $sandwichProducts = [
+            // 基本サンドイッチシリーズ
+            ['name' => 'ミックスサンド（3個入）', 'size' => 'なし', 'details' => '定番の組み合わせ', 'price' => 330],
+            ['name' => 'ミックス特盛サンド（3個入）', 'size' => 'なし', 'details' => 'ボリュームアップ版', 'price' => 350],
+            ['name' => 'ハムサンド', 'size' => 'なし', 'details' => 'シンプルなハムサンド', 'price' => 350],
+            ['name' => 'たまごサンド', 'size' => 'なし', 'details' => 'ふわふわ卵サンド', 'price' => 190],
+            ['name' => 'ツナサンド', 'size' => 'なし', 'details' => 'ツナマヨサンド', 'price' => 190],
+            
+            // 特製サンドイッチ
+            ['name' => 'うずまん', 'size' => 'なし', 'details' => 'こみベーカリー特製', 'price' => 380],
+            ['name' => 'カツサンド（3個入）', 'size' => 'なし', 'details' => 'サクサクカツサンド', 'price' => 380],
+            ['name' => 'ポークサンド', 'size' => 'なし', 'details' => 'ジューシーポーク', 'price' => 380],
+            ['name' => 'ソフトビーフサンド', 'size' => 'なし', 'details' => '柔らかビーフ', 'price' => 400],
+            ['name' => 'プレミアムサンド', 'size' => 'なし', 'details' => '上質な食材使用', 'price' => 450],
+            
+            // コッペパンシリーズ
+            ['name' => 'きなこ揚げパン', 'size' => 'なし', 'details' => '懐かしい味', 'price' => 160],
+            ['name' => 'ココクリーム', 'size' => 'なし', 'details' => 'チョコクリーム', 'price' => 180],
+            ['name' => 'いちごジャム', 'size' => 'なし', 'details' => '甘酸っぱいジャム', 'price' => 180],
+            ['name' => 'ピーナッツクリーム', 'size' => 'なし', 'details' => '香ばしいピーナッツ', 'price' => 180],
+            ['name' => 'カレーパン風コッペ', 'size' => 'なし', 'details' => 'スパイシー', 'price' => 200],
+            
+            // ロールサンドシリーズ
+            ['name' => '京風ロールサンド', 'size' => 'なし', 'details' => '上品な味付け', 'price' => 380],
+            ['name' => 'ハーブロールサンド', 'size' => 'なし', 'details' => 'ハーブ香る', 'price' => 350],
+            ['name' => 'ビーフロールサンド', 'size' => 'なし', 'details' => 'ボリューム満点', 'price' => 400],
+        ];
+
+        foreach ($sandwichProducts as $product) {
+            Product::create([
+                'name' => $product['name'],
+                'name_kana' => $product['name'],
+                'size' => $product['size'],
+                'details' => $product['details'],
+                'price' => $product['price'],
+                'department_id' => $sandwichDept->id,
+                'status' => 'on_sale',
+                'requires_packaging' => true,
+                'decoration' => 'unavailable',
+            ]);
+        }
+
+        // パン製造部の商品
+        $breadProducts = [
+            // 食パンシリーズ
+            ['name' => 'みんなで美味しい食パン', 'size' => 'なし', 'details' => '定番の食パン', 'price' => 190],
+            ['name' => '特上食パン', 'size' => 'なし', 'details' => '高級食パン', 'price' => 200],
+            ['name' => 'クリーム食パン', 'size' => 'なし', 'details' => 'なめらかクリーム入り', 'price' => 200],
+            ['name' => '玄米食パン', 'size' => 'なし', 'details' => '健康志向', 'price' => 230],
+            
+            // 手作りパン基本シリーズ
+            ['name' => 'クロワッサン', 'size' => 'なし', 'details' => 'バターたっぷり', 'price' => 100],
+            ['name' => '食パン', 'size' => 'なし', 'details' => 'シンプルな食パン', 'price' => 100],
+            ['name' => 'あんぱん', 'size' => 'なし', 'details' => '粒あん入り', 'price' => 120],
+            ['name' => 'ケーキドーナツ', 'size' => 'なし', 'details' => 'ふわふわドーナツ', 'price' => 120],
+            ['name' => 'ソフトフランス', 'size' => 'なし', 'details' => '柔らかフランスパン', 'price' => 100],
+            
+            // 菓子パンシリーズ
+            ['name' => 'メロンパン', 'size' => 'なし', 'details' => 'クッキー生地がサクサク', 'price' => 190],
+            ['name' => 'カレーパン', 'size' => 'なし', 'details' => 'スパイシーカレー', 'price' => 160],
+            ['name' => 'チョコロールワッサン', 'size' => 'なし', 'details' => 'チョコたっぷり', 'price' => 200],
+            ['name' => 'あずきクロワッサン', 'size' => 'なし', 'details' => '和洋折衷', 'price' => 200],
+            ['name' => 'クリームパン', 'size' => 'なし', 'details' => 'なめらかカスタード', 'price' => 200],
+            
+            // 惣菜パンシリーズ
+            ['name' => 'ピザパン', 'size' => 'なし', 'details' => 'チーズとトマト', 'price' => 180],
+            ['name' => 'ハムロール', 'size' => 'なし', 'details' => 'ハム巻きパン', 'price' => 140],
+            ['name' => 'チーズフランス', 'size' => 'なし', 'details' => 'チーズがとろ〜り', 'price' => 220],
+            ['name' => 'ウインナーパン', 'size' => 'なし', 'details' => 'ジューシーウインナー', 'price' => 200],
+            ['name' => 'コーンパン', 'size' => 'なし', 'details' => '甘いコーン', 'price' => 180],
+            
+            // 高級パンシリーズ
+            ['name' => 'デニッシュ系各種', 'size' => 'なし', 'details' => 'バター層がサクサク', 'price' => 300],
+            ['name' => 'ブリオッシュ', 'size' => 'なし', 'details' => 'リッチな味わい', 'price' => 250],
+            ['name' => 'フォカッチャ', 'size' => 'なし', 'details' => 'イタリアンスタイル', 'price' => 300],
+            ['name' => 'ベーグル', 'size' => 'なし', 'details' => 'もちもち食感', 'price' => 200],
+            
+            // 季節・限定商品
+            ['name' => '季節のパンお任せセット', 'size' => 'なし', 'details' => '通年', 'price' => 1350],
+            ['name' => 'シェフのこだわり食事パンセット', 'size' => 'なし', 'details' => '通年', 'price' => 1350],
+            ['name' => '桜パン', 'size' => 'なし', 'details' => '春限定', 'price' => 220],
+            ['name' => 'カボチャパン', 'size' => 'なし', 'details' => '秋限定', 'price' => 200],
+        ];
+
+        foreach ($breadProducts as $product) {
+            Product::create([
+                'name' => $product['name'],
+                'name_kana' => $product['name'],
+                'size' => $product['size'],
+                'details' => $product['details'],
+                'price' => $product['price'],
+                'department_id' => $breadDept->id,
+                'status' => 'on_sale',
+                'requires_packaging' => true,
+                'decoration' => 'unavailable',
             ]);
         }
     }
