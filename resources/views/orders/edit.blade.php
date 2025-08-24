@@ -266,7 +266,7 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">商品情報</h5>
-                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal">
+                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal" style="pointer-events: auto;">
                         <i class="fas fa-plus me-1"></i>商品追加
                     </button>
                 </div>
@@ -333,9 +333,9 @@
 </div>
 
 <!-- 商品選択モーダル -->
-<div class="modal fade" id="productModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+<div class="modal fade" id="productModal" tabindex="-1" style="z-index: 1050;">
+    <div class="modal-dialog modal-lg" style="z-index: 1051;">
+        <div class="modal-content" style="pointer-events: auto;">
             <div class="modal-header">
                 <h5 class="modal-title">商品選択</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -382,7 +382,8 @@
                                             data-product-id="{{ $product->id }}" 
                                             data-product-name="{{ $product->name }}" 
                                             data-product-price="{{ $product->price }}"
-                                            data-requires-packaging="{{ $product->requires_packaging ? '1' : '0' }}">
+                                            data-requires-packaging="{{ $product->requires_packaging ? '1' : '0' }}"
+                                            style="pointer-events: auto; cursor: pointer;">
                                         選択
                                     </button>
                                 </td>
