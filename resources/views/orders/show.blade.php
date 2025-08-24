@@ -55,7 +55,7 @@
                             
                             <!-- ステータス遷移ボタン -->
                             @php
-                                $availableTransitions = $order->getAllAvailableTransitions();
+                                $availableTransitions = $order->getAvailableTransitions(auth()->user());
                             @endphp
                             @if($availableTransitions->count() > 0)
                                 <div class="mt-2">
@@ -64,10 +64,29 @@
                                             @csrf
                                             <input type="hidden" name="new_status_id" value="{{ $transition->to_status_id }}">
                                             <button type="submit" class="btn btn-sm btn-outline-primary" 
-                                                    onclick="return confirm('ステータスを「{{ $transition->toStatus->name }}」に変更しますか？')">
+                                                    onclick="return confirm('ステータスを「{{ $transition->toStatus->name }}」に変更しますか？')"
+                                                    title="{{ $transition->description }}">
                                                 <i class="fas fa-arrow-right me-1"></i>{{ $transition->toStatus->name }}へ
                                             </button>
                                         </form>
+                                        @if($transition->requires_all_departments_completed)
+                                            @php
+                                                $incompleteDepartments = $transition->getIncompleteDepartments($order);
+                                            @endphp
+                                            <div class="mt-1">
+                                                @if($incompleteDepartments->count() > 0)
+                                                    <small class="text-danger">
+                                                        <i class="fas fa-exclamation-triangle me-1"></i>
+                                                        未完了の部門: {{ $incompleteDepartments->pluck('name')->implode(', ') }}
+                                                    </small>
+                                                @else
+                                                    <small class="text-success">
+                                                        <i class="fas fa-check-circle me-1"></i>
+                                                        全製造部門の作業が完了しています
+                                                    </small>
+                                                @endif
+                                            </div>
+                                        @endif
                                     @endforeach
                                 </div>
                             @endif

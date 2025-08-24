@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\OrderStatus;
+use App\Models\OrderStatusTransition;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -281,8 +282,18 @@ class OrderController extends Controller
         ]);
 
         $newStatus = OrderStatus::find($request->new_status_id);
+        $user = auth()->user();
 
-        // 権限チェックを削除 - 全てのユーザーがステータス変更可能
+        // 遷移の権限チェック
+        $transition = OrderStatusTransition::where('from_status_id', $order->order_status_id)
+            ->where('to_status_id', $request->new_status_id)
+            ->where('is_active', true)
+            ->first();
+
+        if (!$transition || !$transition->canTransition($user, $order)) {
+            return back()->with('error', 'このステータス変更は許可されていません。');
+        }
+
         $oldStatus = $order->orderStatus;
         $order->update(['order_status_id' => $request->new_status_id]);
 

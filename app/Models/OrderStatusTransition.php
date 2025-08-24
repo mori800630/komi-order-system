@@ -44,8 +44,10 @@ class OrderStatusTransition extends Model
 
         // 全部門完了が必要な場合のチェック
         if ($this->requires_all_departments_completed && $order) {
-            $orderItems = $order->orderItems;
-            $departments = $orderItems->pluck('product.department_id')->unique();
+            // orderItemsとproduct.departmentを確実にロード
+            $order->load('orderItems.product.department');
+            
+            $departments = $order->orderItems->pluck('product.department_id')->unique();
             
             foreach ($departments as $departmentId) {
                 $deptStatus = $order->departmentStatuses()
@@ -59,5 +61,28 @@ class OrderStatusTransition extends Model
         }
 
         return true;
+    }
+
+    public function getIncompleteDepartments($order)
+    {
+        if (!$this->requires_all_departments_completed || !$order) {
+            return collect();
+        }
+
+        $order->load('orderItems.product.department');
+        $departments = $order->orderItems->pluck('product.department')->unique();
+        $incomplete = collect();
+
+        foreach ($departments as $department) {
+            $deptStatus = $order->departmentStatuses()
+                ->where('department_id', $department->id)
+                ->first();
+            
+            if (!$deptStatus || $deptStatus->status !== 'completed') {
+                $incomplete->push($department);
+            }
+        }
+
+        return $incomplete;
     }
 }

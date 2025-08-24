@@ -155,9 +155,9 @@
                                 </div>
                                 
                                 <!-- ステータス遷移ボタン -->
-                                @php
-                                    $availableTransitions = $order->getAllAvailableTransitions();
-                                @endphp
+                                                            @php
+                                $availableTransitions = $order->getAvailableTransitions(auth()->user());
+                            @endphp
                                 @if($availableTransitions->count() > 0)
                                     <div class="mt-1">
                                         @foreach($availableTransitions as $transition)
@@ -166,7 +166,7 @@
                                                 <input type="hidden" name="new_status_id" value="{{ $transition->to_status_id }}">
                                                 <button type="submit" class="btn btn-xs btn-outline-primary" 
                                                         onclick="event.stopPropagation(); return confirm('ステータスを「{{ $transition->toStatus->name }}」に変更しますか？')"
-                                                        title="{{ $transition->toStatus->name }}へ変更">
+                                                        title="{{ $transition->description }}">
                                                     <i class="fas fa-arrow-right"></i>
                                                 </button>
                                             </form>
