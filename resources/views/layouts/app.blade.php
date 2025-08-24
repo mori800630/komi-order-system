@@ -19,6 +19,32 @@
         body {
             background-color: var(--light-bg);
             font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* フローティングアイコン */
+        .floating-icon {
+            position: fixed;
+            color: rgba(139, 69, 19, 0.1);
+            font-size: 1.5rem;
+            animation: float 8s ease-in-out infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .floating-icon:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { top: 25%; right: 12%; animation-delay: 1.5s; }
+        .floating-icon:nth-child(3) { bottom: 35%; left: 3%; animation-delay: 3s; }
+        .floating-icon:nth-child(4) { bottom: 25%; right: 8%; animation-delay: 4.5s; }
+        .floating-icon:nth-child(5) { top: 55%; left: 2%; animation-delay: 6s; }
+        .floating-icon:nth-child(6) { top: 65%; right: 3%; animation-delay: 7.5s; }
+        .floating-icon:nth-child(7) { top: 40%; left: 15%; animation-delay: 2s; }
+        .floating-icon:nth-child(8) { top: 70%; right: 18%; animation-delay: 5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
         }
 
         .sidebar {
@@ -172,15 +198,28 @@
             .no-print {
                 display: none;
             }
+            .floating-icon {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- フローティングアイコン -->
+    <i class="fas fa-bread-slice floating-icon"></i>
+    <i class="fas fa-cake floating-icon"></i>
+    <i class="fas fa-cookie floating-icon"></i>
+    <i class="fas fa-muffin floating-icon"></i>
+    <i class="fas fa-croissant floating-icon"></i>
+    <i class="fas fa-birthday-cake floating-icon"></i>
+    <i class="fas fa-cookie-bite floating-icon"></i>
+    <i class="fas fa-cheese floating-icon"></i>
+
     <div class="container-fluid">
         <div class="row">
             <!-- サイドバー -->
             <div class="col-md-3 col-lg-2 px-0">
-                <div class="sidebar p-3">
+                <div class="sidebar p-3" style="position: relative; z-index: 10;">
                     <div class="mb-4 text-center">
                         <img src="{{ asset('images/komi-bakery-logo.svg') }}" alt="コミベーカリー" class="img-fluid mb-2" style="max-width: 180px;">
                         <p class="mb-0 small text-white">注文管理システム</p>
@@ -257,7 +296,7 @@
 
             <!-- メインコンテンツ -->
             <div class="col-md-9 col-lg-10">
-                <div class="p-4">
+                <div class="p-4" style="position: relative; z-index: 10;">
                     @if(session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ session('success') }}
