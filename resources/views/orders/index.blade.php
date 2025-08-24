@@ -194,31 +194,6 @@
                                         <span class="badge {{ $deptStatus ? $deptStatus->status_badge_class : 'bg-secondary' }} ms-1">
                                             {{ $deptStatus ? $deptStatus->status_text : '未開始' }}
                                         </span>
-                                        
-                                        <!-- 部門別ステータス更新ボタン -->
-                                        @if(auth()->user()->isAdmin() || (auth()->user()->isManufacturing() && auth()->user()->department_id == $department->id))
-                                            <div class="mt-1">
-                                                @if($currentStatus === 'not_started')
-                                                    <form action="{{ route('orders.update-department-status', $order) }}" method="POST" class="d-inline">
-                                                        @csrf
-                                                        <input type="hidden" name="department_id" value="{{ $department->id }}">
-                                                        <input type="hidden" name="status" value="in_progress">
-                                                        <button type="submit" class="btn btn-xs btn-warning" title="製造開始" onclick="event.stopPropagation();">
-                                                            <i class="fas fa-play"></i>
-                                                        </button>
-                                                    </form>
-                                                @elseif($currentStatus === 'in_progress')
-                                                    <form action="{{ route('orders.update-department-status', $order) }}" method="POST" class="d-inline">
-                                                        @csrf
-                                                        <input type="hidden" name="department_id" value="{{ $department->id }}">
-                                                        <input type="hidden" name="status" value="completed">
-                                                        <button type="submit" class="btn btn-xs btn-success" title="製造完了" onclick="event.stopPropagation();">
-                                                            <i class="fas fa-check"></i>
-                                                        </button>
-                                                    </form>
-                                                @endif
-                                            </div>
-                                        @endif
                                     </div>
                                 @endforeach
                             </td>
