@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
+        $users = User::with('department')->paginate(10);
         return view('users.index', compact('users'));
     }
 
@@ -23,7 +23,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $departments = \App\Models\Department::where('is_active', true)->get();
+        return view('users.create', compact('departments'));
     }
 
     /**
@@ -36,6 +37,7 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|in:admin,store,manufacturing,logistics',
+            'department_id' => 'nullable|required_if:role,manufacturing|exists:departments,id',
         ]);
 
         User::create([
@@ -43,6 +45,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
+            'department_id' => $request->role === 'manufacturing' ? $request->department_id : null,
         ]);
 
         return redirect()->route('users.index')->with('success', 'ユーザーが正常に作成されました。');
@@ -53,6 +56,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $user->load('department');
         return view('users.show', compact('user'));
     }
 
@@ -61,7 +65,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $departments = \App\Models\Department::where('is_active', true)->get();
+        return view('users.edit', compact('user', 'departments'));
     }
 
     /**
@@ -74,12 +79,14 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'password' => 'nullable|string|min:8|confirmed',
             'role' => 'required|in:admin,store,manufacturing,logistics',
+            'department_id' => 'nullable|required_if:role,manufacturing|exists:departments,id',
         ]);
 
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
+            'department_id' => $request->role === 'manufacturing' ? $request->department_id : null,
         ]);
 
         if ($request->filled('password')) {

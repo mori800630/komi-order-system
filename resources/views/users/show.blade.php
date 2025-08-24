@@ -41,6 +41,14 @@
                                         </span>
                                     </td>
                                 </tr>
+                                @if($user->role === 'manufacturing' && $user->department)
+                                <tr>
+                                    <th>所属部門:</th>
+                                    <td>
+                                        <span class="badge bg-secondary">{{ $user->department->name }}</span>
+                                    </td>
+                                </tr>
+                                @endif
                             </table>
                         </div>
                         <div class="col-md-6">

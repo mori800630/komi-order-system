@@ -32,6 +32,7 @@
                                     <th>名前</th>
                                     <th>メールアドレス</th>
                                     <th>ロール</th>
+                                    <th>部門</th>
                                     <th>作成日</th>
                                     <th>操作</th>
                                 </tr>
@@ -46,6 +47,13 @@
                                         <span class="badge bg-{{ $user->role === 'admin' ? 'danger' : ($user->role === 'store' ? 'primary' : ($user->role === 'manufacturing' ? 'warning' : 'info')) }}">
                                             {{ $user->role === 'admin' ? '管理者' : ($user->role === 'store' ? '店舗スタッフ' : ($user->role === 'manufacturing' ? '製造部門' : '物流部門')) }}
                                         </span>
+                                    </td>
+                                    <td>
+                                        @if($user->role === 'manufacturing' && $user->department)
+                                            <span class="badge bg-secondary">{{ $user->department->name }}</span>
+                                        @else
+                                            <span class="text-muted">-</span>
+                                        @endif
                                     </td>
                                     <td>{{ $user->created_at->format('Y-m-d H:i') }}</td>
                                     <td>

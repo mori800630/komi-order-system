@@ -55,6 +55,21 @@
                             @enderror
                         </div>
 
+                        <div class="mb-3" id="department_field" style="display: none;">
+                            <label for="department_id" class="form-label">部門 <span class="text-danger">*</span></label>
+                            <select class="form-select @error('department_id') is-invalid @enderror" id="department_id" name="department_id">
+                                <option value="">選択してください</option>
+                                @foreach($departments as $department)
+                                    <option value="{{ $department->id }}" {{ old('department_id') == $department->id ? 'selected' : '' }}>
+                                        {{ $department->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('department_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <div class="d-flex justify-content-between">
                             <a href="{{ route('users.index') }}" class="btn btn-secondary">
                                 <i class="fas fa-arrow-left"></i> 戻る
@@ -69,4 +84,28 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const roleSelect = document.getElementById('role');
+    const departmentField = document.getElementById('department_field');
+    const departmentSelect = document.getElementById('department_id');
+
+    function toggleDepartmentField() {
+        if (roleSelect.value === 'manufacturing') {
+            departmentField.style.display = 'block';
+            departmentSelect.required = true;
+        } else {
+            departmentField.style.display = 'none';
+            departmentSelect.required = false;
+            departmentSelect.value = '';
+        }
+    }
+
+    roleSelect.addEventListener('change', toggleDepartmentField);
+    
+    // 初期状態を設定
+    toggleDepartmentField();
+});
+</script>
 @endsection
