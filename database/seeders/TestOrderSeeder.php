@@ -95,24 +95,31 @@ class TestOrderSeeder extends Seeder
                 // 製造ステータスを設定
                 $department = $product->department;
                 if ($department) {
-                    $deptStatus = 'not_started';
+                    // 既存の製造ステータスをチェック
+                    $existingStatus = OrderDepartmentStatus::where('order_id', $order->id)
+                        ->where('department_id', $department->id)
+                        ->first();
                     
-                    // 注文ステータスに応じて製造ステータスを設定
-                    if ($orderStatus->code === 'order_received') {
+                    if (!$existingStatus) {
                         $deptStatus = 'not_started';
-                    } elseif ($orderStatus->code === 'manufacturing') {
-                        $deptStatus = rand(0, 1) ? 'in_progress' : 'completed';
-                    } elseif (in_array($orderStatus->code, ['packaging', 'in_transit', 'delivered'])) {
-                        $deptStatus = 'completed';
-                    }
+                        
+                        // 注文ステータスに応じて製造ステータスを設定
+                        if ($orderStatus->code === 'order_received') {
+                            $deptStatus = 'not_started';
+                        } elseif ($orderStatus->code === 'manufacturing') {
+                            $deptStatus = rand(0, 1) ? 'in_progress' : 'completed';
+                        } elseif (in_array($orderStatus->code, ['packaging', 'in_transit', 'delivered'])) {
+                            $deptStatus = 'completed';
+                        }
 
-                    OrderDepartmentStatus::create([
-                        'order_id' => $order->id,
-                        'department_id' => $department->id,
-                        'status' => $deptStatus,
-                        'started_at' => $deptStatus !== 'not_started' ? $orderDate->copy()->addMinutes(rand(10, 60)) : null,
-                        'completed_at' => $deptStatus === 'completed' ? $orderDate->copy()->addHours(rand(1, 4)) : null,
-                    ]);
+                        OrderDepartmentStatus::create([
+                            'order_id' => $order->id,
+                            'department_id' => $department->id,
+                            'status' => $deptStatus,
+                            'started_at' => $deptStatus !== 'not_started' ? $orderDate->copy()->addMinutes(rand(10, 60)) : null,
+                            'completed_at' => $deptStatus === 'completed' ? $orderDate->copy()->addHours(rand(1, 4)) : null,
+                        ]);
+                    }
                 }
             }
 

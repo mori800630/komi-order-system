@@ -1,11 +1,8 @@
 #!/bin/bash
 
-# エラー時に停止
-set -e
+echo "=== Bootstrap Environment ==="
 
-echo "Starting application initialization..."
-
-# 環境変数を設定
+# 必要な環境変数を設定
 export APP_ENV=${APP_ENV:-production}
 export APP_DEBUG=${APP_DEBUG:-false}
 export APP_KEY=${APP_KEY:-base64:$(openssl rand -base64 32)}
@@ -21,31 +18,15 @@ export SESSION_LIFETIME=${SESSION_LIFETIME:-480}
 export SESSION_SECURE_COOKIE=${SESSION_SECURE_COOKIE:-true}
 export SESSION_SAME_SITE=${SESSION_SAME_SITE:-none}
 
-echo "Environment variables set:"
 echo "APP_ENV: $APP_ENV"
 echo "APP_KEY: $APP_KEY"
 echo "DB_CONNECTION: $DB_CONNECTION"
 echo "DB_DATABASE: $DB_DATABASE"
 
 # データベースディレクトリを作成
-echo "Creating database directory..."
 mkdir -p /app/database
 
-# データベースファイルの存在確認
-if [ ! -f "/app/database/database.sqlite" ]; then
-    echo "Creating SQLite database file..."
-    touch /app/database/database.sqlite
-fi
+# データベースファイルを作成
+touch /app/database/database.sqlite
 
-# データベースを初期化
-echo "Running database migrations..."
-php artisan migrate --force
-
-echo "Running database seeders..."
-php artisan db:seed --force
-
-echo "Application initialization completed successfully!"
-
-# アプリケーションを起動
-echo "Starting Laravel application..."
-php artisan serve --host=0.0.0.0 --port=$PORT
+echo "Environment setup completed"
