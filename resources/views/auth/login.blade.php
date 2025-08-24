@@ -19,12 +19,14 @@
         }
 
         body {
-            background: linear-gradient(135deg, #D2B48C 0%, #CD853F 30%, #A0522D 60%, #8B4513 85%, #8B4513 100%);
-            min-height: 100vh;
-            font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
-            position: relative;
-            overflow-x: hidden;
-        }
+    background: linear-gradient(135deg, #D2B48C 0%, #CD853F 30%, #A0522D 60%, #8B4513 85%, #8B4513 100%);
+    min-height: 100vh;
+    font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+    position: relative;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
 
         /* 背景装飾 */
         body::before {
@@ -70,7 +72,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem 1rem;
+            padding: 0;
         }
 
         .login-card {
