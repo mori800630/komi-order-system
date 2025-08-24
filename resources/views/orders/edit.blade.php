@@ -543,74 +543,106 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 商品選択（イベント委譲を使用）
     document.addEventListener('click', function(e) {
+        console.log('クリックイベントが発生:', e.target);
+        console.log('クリックされた要素のクラス:', e.target.className);
+        
         if (e.target.classList.contains('select-product') || e.target.closest('.select-product')) {
+            console.log('商品選択ボタンが検出されました');
             const button = e.target.classList.contains('select-product') ? e.target : e.target.closest('.select-product');
+            console.log('選択されたボタン:', button);
+            
             const productId = button.dataset.productId;
             const productName = button.dataset.productName;
             const productPrice = button.dataset.productPrice;
             const requiresPackaging = button.dataset.requiresPackaging;
             
-            console.log('商品選択ボタンがクリックされました:', { productId, productName, productPrice, requiresPackaging });
+            console.log('商品データ:', { productId, productName, productPrice, requiresPackaging });
             
-            addOrderItem(productId, productName, productPrice);
-            
-            // 注文編集画面では梱包物流の初期値設定は行わない
-            // 既存の注文の梱包物流設定を維持する
-            
-            // モーダルを閉じる
-            const modal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
-            modal.hide();
+            try {
+                addOrderItem(productId, productName, productPrice);
+                console.log('商品追加が完了しました');
+                
+                // 注文編集画面では梱包物流の初期値設定は行わない
+                // 既存の注文の梱包物流設定を維持する
+                
+                // モーダルを閉じる
+                const modal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
+                if (modal) {
+                    modal.hide();
+                    console.log('モーダルを閉じました');
+                } else {
+                    console.log('モーダルが見つかりません');
+                }
+            } catch (error) {
+                console.error('商品追加中にエラーが発生:', error);
+            }
+        } else {
+            console.log('商品選択ボタンではありません');
         }
     });
     
     // 商品追加
     function addOrderItem(productId, productName, productPrice) {
         console.log('addOrderItem関数が呼び出されました:', { productId, productName, productPrice });
-        const orderItems = document.getElementById('order-items');
-        const itemCount = orderItems.children.length;
-        console.log('現在の商品アイテム数:', itemCount);
         
-        const itemHtml = `
-            <div class="order-item border rounded p-3 mb-3">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label class="form-label">商品名</label>
-                            <input type="text" class="form-control" value="${productName}" readonly>
-                            <input type="hidden" name="items[${itemCount}][product_id]" value="${productId}">
+        try {
+            const orderItems = document.getElementById('order-items');
+            if (!orderItems) {
+                throw new Error('order-items要素が見つかりません');
+            }
+            
+            const itemCount = orderItems.children.length;
+            console.log('現在の商品アイテム数:', itemCount);
+            
+            const itemHtml = `
+                <div class="order-item border rounded p-3 mb-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">商品名</label>
+                                <input type="text" class="form-control" value="${productName}" readonly>
+                                <input type="hidden" name="items[${itemCount}][product_id]" value="${productId}">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="mb-3">
+                                <label class="form-label">単価</label>
+                                <input type="number" class="form-control unit-price" name="items[${itemCount}][unit_price]" 
+                                       value="${productPrice}" min="0" step="1" required>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="mb-3">
+                                <label class="form-label">数量</label>
+                                <input type="number" class="form-control quantity" name="items[${itemCount}][quantity]" 
+                                       value="1" min="1" required>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="mb-3">
+                                <label class="form-label">小計</label>
+                                <input type="text" class="form-control subtotal" value="¥${Number(productPrice).toLocaleString()}" readonly>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <div class="mb-3">
-                            <label class="form-label">単価</label>
-                            <input type="number" class="form-control unit-price" name="items[${itemCount}][unit_price]" 
-                                   value="${productPrice}" min="0" step="1" required>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="mb-3">
-                            <label class="form-label">数量</label>
-                            <input type="number" class="form-control quantity" name="items[${itemCount}][quantity]" 
-                                   value="1" min="1" required>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="mb-3">
-                            <label class="form-label">小計</label>
-                            <input type="text" class="form-control subtotal" value="¥${Number(productPrice).toLocaleString()}" readonly>
-                        </div>
+                    <div class="text-end">
+                        <button type="button" class="btn btn-sm btn-outline-danger remove-item">
+                            <i class="fas fa-trash me-1"></i>削除
+                        </button>
                     </div>
                 </div>
-                <div class="text-end">
-                    <button type="button" class="btn btn-sm btn-outline-danger remove-item">
-                        <i class="fas fa-trash me-1"></i>削除
-                    </button>
-                </div>
-            </div>
-        `;
-        
-        orderItems.insertAdjacentHTML('beforeend', itemHtml);
-        updateTotalAmount();
+            `;
+            
+            console.log('HTMLを挿入します');
+            orderItems.insertAdjacentHTML('beforeend', itemHtml);
+            console.log('HTMLの挿入が完了しました');
+            
+            updateTotalAmount();
+            console.log('合計金額の更新が完了しました');
+        } catch (error) {
+            console.error('addOrderItem関数でエラーが発生:', error);
+            throw error;
+        }
     }
     
     // 商品削除
