@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Models\Product; // Added this import for the new API route
 
 // 認証ルート
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -35,6 +36,16 @@ Route::middleware(['auth'])->group(function () {
     
     // 商品管理
     Route::resource('products', ProductController::class);
+    
+    // 商品ページネーション用API
+    Route::get('/api/products', function (Request $request) {
+        $products = Product::where('status', 'on_sale')
+            ->where('is_active', true)
+            ->with('department')
+            ->paginate(20);
+        
+        return response()->json($products);
+    })->name('api.products');
     
     // ユーザー管理（管理者のみ）
     Route::middleware(['auth', 'role:admin'])->group(function () {
