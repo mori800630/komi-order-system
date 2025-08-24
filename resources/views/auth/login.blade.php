@@ -357,8 +357,8 @@
                             <i class="fas fa-user-shield"></i>
                         </div>
                         <div class="demo-role">管理者</div>
-                        <div class="demo-email">tanaka.masayoshi@komi-bakery.com</div>
-                        <div class="demo-password">password123</div>
+                        <div class="demo-email">admin@komi-bakery.com</div>
+                        <div class="demo-password">password</div>
                     </div>
                     
                     <div class="demo-card">
@@ -367,16 +367,16 @@
                         </div>
                         <div class="demo-role">店舗担当</div>
                         <div class="demo-email">sato.misaki@komi-bakery.com</div>
-                        <div class="demo-password">password123</div>
+                        <div class="demo-password">password</div>
                     </div>
                     
                     <div class="demo-card">
                         <div class="demo-icon">
                             <i class="fas fa-industry"></i>
                         </div>
-                        <div class="demo-role">洋菓子製造担当</div>
+                        <div class="demo-role">製造担当</div>
                         <div class="demo-email">yamada.ichiro@komi-bakery.com</div>
-                        <div class="demo-password">password123</div>
+                        <div class="demo-password">password</div>
                     </div>
                     
                     <div class="demo-card">
@@ -384,8 +384,8 @@
                             <i class="fas fa-truck"></i>
                         </div>
                         <div class="demo-role">物流担当</div>
-                        <div class="demo-email">ogawa.juichiro@komi-bakery.com</div>
-                        <div class="demo-password">password123</div>
+                        <div class="demo-email">ishikawa.kuro@komi-bakery.com</div>
+                        <div class="demo-password">password</div>
                     </div>
                 </div>
             </div>
