@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # データベースディレクトリを作成
-mkdir -p /var/www/database
+mkdir -p /app/database
 
 # データベースを初期化
 php artisan migrate --force
