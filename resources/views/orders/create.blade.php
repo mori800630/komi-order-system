@@ -127,13 +127,19 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="customer_name" class="form-label">お名前 *</label>
-                                    <input type="text" class="form-control" id="customer_name" name="customer_name" value="{{ old('customer_name') }}" required>
+                                    <input type="text" class="form-control @error('customer_name') is-invalid @enderror" id="customer_name" name="customer_name" value="{{ old('customer_name') }}" required>
+                                    @error('customer_name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="customer_phone" class="form-label">電話番号</label>
-                                    <input type="text" class="form-control" id="customer_phone" name="customer_phone" value="{{ old('customer_phone') }}">
+                                    <input type="text" class="form-control @error('customer_phone') is-invalid @enderror" id="customer_phone" name="customer_phone" value="{{ old('customer_phone') }}">
+                                    @error('customer_phone')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -141,7 +147,10 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="customer_email" class="form-label">メールアドレス</label>
-                                    <input type="email" class="form-control" id="customer_email" name="customer_email" value="{{ old('customer_email') }}">
+                                    <input type="email" class="form-control @error('customer_email') is-invalid @enderror" id="customer_email" name="customer_email" value="{{ old('customer_email') }}">
+                                    @error('customer_email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -190,13 +199,19 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="delivery_name" class="form-label">お名前 *</label>
-                                    <input type="text" class="form-control" id="delivery_name" name="delivery_name" value="{{ old('delivery_name') }}">
+                                    <input type="text" class="form-control @error('delivery_name') is-invalid @enderror" id="delivery_name" name="delivery_name" value="{{ old('delivery_name') }}">
+                                    @error('delivery_name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="delivery_phone" class="form-label">電話番号 *</label>
-                                    <input type="text" class="form-control" id="delivery_phone" name="delivery_phone" value="{{ old('delivery_phone') }}">
+                                    <input type="text" class="form-control @error('delivery_phone') is-invalid @enderror" id="delivery_phone" name="delivery_phone" value="{{ old('delivery_phone') }}">
+                                    @error('delivery_phone')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -204,19 +219,28 @@
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="delivery_postal_code" class="form-label">郵便番号 *</label>
-                                    <input type="text" class="form-control" id="delivery_postal_code" name="delivery_postal_code" value="{{ old('delivery_postal_code') }}">
+                                    <input type="text" class="form-control @error('delivery_postal_code') is-invalid @enderror" id="delivery_postal_code" name="delivery_postal_code" value="{{ old('delivery_postal_code') }}">
+                                    @error('delivery_postal_code')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="mb-3">
                                     <label for="delivery_prefecture" class="form-label">都道府県 *</label>
-                                    <input type="text" class="form-control" id="delivery_prefecture" name="delivery_prefecture" value="{{ old('delivery_prefecture') }}">
+                                    <input type="text" class="form-control @error('delivery_prefecture') is-invalid @enderror" id="delivery_prefecture" name="delivery_prefecture" value="{{ old('delivery_prefecture') }}">
+                                    @error('delivery_prefecture')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="delivery_address" class="form-label">住所 *</label>
-                            <input type="text" class="form-control" id="delivery_address" name="delivery_address" value="{{ old('delivery_address') }}">
+                            <input type="text" class="form-control @error('delivery_address') is-invalid @enderror" id="delivery_address" name="delivery_address" value="{{ old('delivery_address') }}">
+                            @error('delivery_address')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
