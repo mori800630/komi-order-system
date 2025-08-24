@@ -58,19 +58,6 @@
                                 $availableTransitions = $order->getAvailableTransitions(auth()->user());
                             @endphp
                             
-                            <!-- デバッグ情報 -->
-                            <div class="alert alert-info mt-2">
-                                <strong>デバッグ情報:</strong><br>
-                                現在のステータス: {{ $order->orderStatus->name }} (ID: {{ $order->orderStatus->id }})<br>
-                                利用可能な遷移数: {{ $availableTransitions->count() }}<br>
-                                現在のユーザー: {{ auth()->user()->name }} (ロール: {{ auth()->user()->role }})<br>
-                                注文ID: {{ $order->id }}<br>
-                                全遷移データ: {{ $order->getAllAvailableTransitions()->count() }}<br>
-                                @foreach($order->getAllAvailableTransitions() as $transition)
-                                    - {{ $transition->fromStatus->name }} → {{ $transition->toStatus->name }} (ロール: {{ $transition->required_role }}, アクティブ: {{ $transition->is_active ? 'Yes' : 'No' }})<br>
-                                @endforeach
-                            </div>
-                            
                             @if($availableTransitions->count() > 0)
                                 <div class="mt-2">
                                     @foreach($availableTransitions as $transition)
@@ -109,7 +96,6 @@
                                     <div class="alert alert-warning">
                                         <i class="fas fa-exclamation-triangle me-2"></i>
                                         現在のステータス「{{ $order->orderStatus->name }}」から遷移可能なステータスがありません。
-                                        <br><small>デバッグ: 利用可能な遷移数 = {{ $availableTransitions->count() }}, 全遷移データ = {{ $order->getAllAvailableTransitions()->count() }}</small>
                                     </div>
                                 </div>
                             @endif
@@ -575,12 +561,8 @@ document.addEventListener('DOMContentLoaded', function() {
         element.style.pointerEvents = '';
     });
     
-    console.log('Page loaded, setting up status transition buttons...');
-    
     // ステータス遷移ボタンの処理
     const statusTransitionButtons = document.querySelectorAll('.status-transition-btn');
-    console.log('Found status transition buttons:', statusTransitionButtons.length);
-    
     statusTransitionButtons.forEach(button => {
         // 既存のイベントリスナーを削除
         button.replaceWith(button.cloneNode(true));
@@ -589,7 +571,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // 新しいボタンにイベントリスナーを追加
     document.querySelectorAll('.status-transition-btn').forEach(button => {
         button.addEventListener('click', function(e) {
-            console.log('Status transition button clicked');
             // デフォルトの動作を許可
         });
         
@@ -597,8 +578,6 @@ document.addEventListener('DOMContentLoaded', function() {
         button.style.pointerEvents = 'auto';
         button.style.zIndex = '1000';
         button.style.position = 'relative';
-        
-        console.log('Button setup completed:', button.textContent.trim());
     });
     
     // 梱包物流設定モーダルの処理
