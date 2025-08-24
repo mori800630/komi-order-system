@@ -182,8 +182,7 @@
             <div class="col-md-3 col-lg-2 px-0">
                 <div class="sidebar p-3">
                     <div class="mb-4 text-center">
-                        <h4 class="mb-1 text-white">Komi BAKERY</h4>
-                        <p class="mb-1 small text-white">コミベーカリー</p>
+                        <h4 class="mb-1 text-white">コミベーカリー</h4>
                         <p class="mb-0 small text-white">注文管理システム</p>
                     </div>
 

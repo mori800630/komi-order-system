@@ -57,8 +57,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="login-container">
                     <div class="login-header">
-                        <h3 class="mb-1">Komi BAKERY</h3>
-                        <p class="mb-1">コミベーカリー</p>
+                        <h3 class="mb-1">コミベーカリー</h3>
                         <p class="mb-0">注文管理システム</p>
                     </div>
                     
