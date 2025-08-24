@@ -25,7 +25,7 @@ class EmployeeUserSeeder extends Seeder
         $employees = [
             // システム管理者
             [
-                'name' => '田中 正義',
+                'name' => '田中 テスト正義',
                 'email' => 'tanaka.masayoshi@komi-bakery.com',
                 'role' => 'admin',
                 'department_id' => null,
@@ -33,31 +33,31 @@ class EmployeeUserSeeder extends Seeder
             
             // 店舗スタッフ
             [
-                'name' => '佐藤 美咲',
+                'name' => '佐藤 テスト美咲',
                 'email' => 'sato.misaki@komi-bakery.com',
                 'role' => 'store',
                 'department_id' => null,
             ],
             [
-                'name' => '鈴木 健太',
+                'name' => '鈴木 テスト健太',
                 'email' => 'suzuki.kenta@komi-bakery.com',
                 'role' => 'store',
                 'department_id' => null,
             ],
             [
-                'name' => '高橋 愛子',
+                'name' => '高橋 テスト愛子',
                 'email' => 'takahashi.aiko@komi-bakery.com',
                 'role' => 'store',
                 'department_id' => null,
             ],
             [
-                'name' => '渡辺 大輔',
+                'name' => '渡辺 テスト大輔',
                 'email' => 'watanabe.daisuke@komi-bakery.com',
                 'role' => 'store',
                 'department_id' => null,
             ],
             [
-                'name' => '伊藤 恵美',
+                'name' => '伊藤 テスト恵美',
                 'email' => 'ito.emiko@komi-bakery.com',
                 'role' => 'store',
                 'department_id' => null,
@@ -65,25 +65,25 @@ class EmployeeUserSeeder extends Seeder
             
             // 洋菓子製造部
             [
-                'name' => '山田 一郎',
+                'name' => '山田 テスト一郎',
                 'email' => 'yamada.ichiro@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $westernDept->id,
             ],
             [
-                'name' => '中村 花子',
+                'name' => '中村 テスト花子',
                 'email' => 'nakamura.hanako@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $westernDept->id,
             ],
             [
-                'name' => '小林 次郎',
+                'name' => '小林 テスト次郎',
                 'email' => 'kobayashi.jiro@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $westernDept->id,
             ],
             [
-                'name' => '加藤 由美',
+                'name' => '加藤 テスト由美',
                 'email' => 'kato.yumi@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $westernDept->id,
@@ -91,25 +91,25 @@ class EmployeeUserSeeder extends Seeder
             
             // サンドイッチ製造部
             [
-                'name' => '吉田 三郎',
+                'name' => '吉田 テスト三郎',
                 'email' => 'yoshida.saburo@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $sandwichDept->id,
             ],
             [
-                'name' => '山本 真由美',
+                'name' => '山本 テスト真由美',
                 'email' => 'yamamoto.mayumi@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $sandwichDept->id,
             ],
             [
-                'name' => '松本 四郎',
+                'name' => '松本 テスト四郎',
                 'email' => 'matsumoto.shiro@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $sandwichDept->id,
             ],
             [
-                'name' => '井上 美紀',
+                'name' => '井上 テスト美紀',
                 'email' => 'inoue.miki@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $sandwichDept->id,
@@ -117,25 +117,25 @@ class EmployeeUserSeeder extends Seeder
             
             // パン製造部
             [
-                'name' => '木村 五郎',
+                'name' => '木村 テスト五郎',
                 'email' => 'kimura.goro@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $breadDept->id,
             ],
             [
-                'name' => '林 香織',
+                'name' => '林 テスト香織',
                 'email' => 'hayashi.kaori@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $breadDept->id,
             ],
             [
-                'name' => '斎藤 六郎',
+                'name' => '斎藤 テスト六郎',
                 'email' => 'saito.rokuro@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $breadDept->id,
             ],
             [
-                'name' => '清水 美穂',
+                'name' => '清水 テスト美穂',
                 'email' => 'shimizu.miho@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $breadDept->id,
@@ -143,25 +143,25 @@ class EmployeeUserSeeder extends Seeder
             
             // チーズケーキ製造部(本店)
             [
-                'name' => '阿部 七郎',
+                'name' => '阿部 テスト七郎',
                 'email' => 'abe.shichiro@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $cheesecakeMainDept->id,
             ],
             [
-                'name' => '森 美奈子',
+                'name' => '森 テスト美奈子',
                 'email' => 'mori.minako@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $cheesecakeMainDept->id,
             ],
             [
-                'name' => '池田 八郎',
+                'name' => '池田 テスト八郎',
                 'email' => 'ikeda.hachiro@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $cheesecakeMainDept->id,
             ],
             [
-                'name' => '橋本 美香',
+                'name' => '橋本 テスト美香',
                 'email' => 'hashimoto.mika@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $cheesecakeMainDept->id,
@@ -169,25 +169,25 @@ class EmployeeUserSeeder extends Seeder
             
             // チーズケーキ製造部(南国店)
             [
-                'name' => '石川 九郎',
+                'name' => '石川 テスト九郎',
                 'email' => 'ishikawa.kuro@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $cheesecakeNangokuDept->id,
             ],
             [
-                'name' => '山下 美代',
+                'name' => '山下 テスト美代',
                 'email' => 'yamashita.miyo@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $cheesecakeNangokuDept->id,
             ],
             [
-                'name' => '中島 十郎',
+                'name' => '中島 テスト十郎',
                 'email' => 'nakajima.juro@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $cheesecakeNangokuDept->id,
             ],
             [
-                'name' => '石井 美和',
+                'name' => '石井 テスト美和',
                 'email' => 'ishii.miwa@komi-bakery.com',
                 'role' => 'manufacturing',
                 'department_id' => $cheesecakeNangokuDept->id,
@@ -195,25 +195,25 @@ class EmployeeUserSeeder extends Seeder
             
             // 物流部門
             [
-                'name' => '小川 十一郎',
+                'name' => '小川 テスト十一郎',
                 'email' => 'ogawa.juichiro@komi-bakery.com',
                 'role' => 'logistics',
                 'department_id' => null,
             ],
             [
-                'name' => '前田 美智子',
+                'name' => '前田 テスト美智子',
                 'email' => 'maeda.michiko@komi-bakery.com',
                 'role' => 'logistics',
                 'department_id' => null,
             ],
             [
-                'name' => '岡田 十二郎',
+                'name' => '岡田 テスト十二郎',
                 'email' => 'okada.juniro@komi-bakery.com',
                 'role' => 'logistics',
                 'department_id' => null,
             ],
             [
-                'name' => '長谷川 美樹',
+                'name' => '長谷川 テスト美樹',
                 'email' => 'hasegawa.miki@komi-bakery.com',
                 'role' => 'logistics',
                 'department_id' => null,
