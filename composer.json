@@ -72,5 +72,8 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "engines": {
+        "php": "^8.2"
+    }
 }
