@@ -17,13 +17,18 @@ class DashboardController extends Controller
         // 今日の注文数
         $todayOrders = Order::whereDate('created_at', $today)->count();
 
-        // 製造中の注文数
+        // 各ステータスの注文数を取得
+        $orderReceivedStatus = OrderStatus::where('code', 'order_received')->first();
         $manufacturingStatus = OrderStatus::where('code', 'manufacturing')->first();
-        $manufacturingOrders = $manufacturingStatus ? Order::where('order_status_id', $manufacturingStatus->id)->count() : 0;
-
-        // 梱包中の注文数
         $packagingStatus = OrderStatus::where('code', 'packaging')->first();
+        $inTransitStatus = OrderStatus::where('code', 'in_transit')->first();
+        $deliveredStatus = OrderStatus::where('code', 'delivered')->first();
+
+        $orderReceivedOrders = $orderReceivedStatus ? Order::where('order_status_id', $orderReceivedStatus->id)->count() : 0;
+        $manufacturingOrders = $manufacturingStatus ? Order::where('order_status_id', $manufacturingStatus->id)->count() : 0;
         $packagingOrders = $packagingStatus ? Order::where('order_status_id', $packagingStatus->id)->count() : 0;
+        $inTransitOrders = $inTransitStatus ? Order::where('order_status_id', $inTransitStatus->id)->count() : 0;
+        $deliveredOrders = $deliveredStatus ? Order::where('order_status_id', $deliveredStatus->id)->count() : 0;
 
         // 今日の売上
         $todaySales = Order::whereDate('created_at', $today)->sum('total_amount');
@@ -50,8 +55,11 @@ class DashboardController extends Controller
 
         return view('dashboard', compact(
             'todayOrders',
+            'orderReceivedOrders',
             'manufacturingOrders',
             'packagingOrders',
+            'inTransitOrders',
+            'deliveredOrders',
             'todaySales',
             'recentOrders',
             'departmentStats'

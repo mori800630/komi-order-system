@@ -14,7 +14,7 @@
 
 <div class="row">
     <!-- 統計カード -->
-    <div class="col-md-3 mb-4">
+    <div class="col-md-2 mb-4">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
@@ -30,7 +30,23 @@
         </div>
     </div>
 
-    <div class="col-md-3 mb-4">
+    <div class="col-md-2 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h6 class="card-title text-muted">注文受付</h6>
+                        <h3 class="mb-0">{{ $orderReceivedOrders }}</h3>
+                    </div>
+                    <div class="text-secondary">
+                        <i class="fas fa-clipboard-list fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2 mb-4">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
@@ -46,7 +62,7 @@
         </div>
     </div>
 
-    <div class="col-md-3 mb-4">
+    <div class="col-md-2 mb-4">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
@@ -62,7 +78,41 @@
         </div>
     </div>
 
-    <div class="col-md-3 mb-4">
+    <div class="col-md-2 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h6 class="card-title text-muted">輸送中</h6>
+                        <h3 class="mb-0">{{ $inTransitOrders }}</h3>
+                    </div>
+                    <div class="text-primary">
+                        <i class="fas fa-truck fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h6 class="card-title text-muted">受け渡し済み</h6>
+                        <h3 class="mb-0">{{ $deliveredOrders }}</h3>
+                    </div>
+                    <div class="text-success">
+                        <i class="fas fa-check-circle fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 mb-4">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
