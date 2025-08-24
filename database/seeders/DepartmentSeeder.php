@@ -13,8 +13,14 @@ class DepartmentSeeder extends Seeder
      */
     public function run(): void
     {
+        // 外部キー制約を無効化
+        \DB::statement('PRAGMA foreign_keys = OFF;');
+        
         // 既存の部門を削除
         Department::truncate();
+        
+        // 外部キー制約を再有効化
+        \DB::statement('PRAGMA foreign_keys = ON;');
 
         $departments = [
             [

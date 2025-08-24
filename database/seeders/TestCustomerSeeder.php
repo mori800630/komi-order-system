@@ -9,8 +9,14 @@ class TestCustomerSeeder extends Seeder
 {
     public function run(): void
     {
+        // 外部キー制約を無効化
+        \DB::statement('PRAGMA foreign_keys = OFF;');
+        
         // 既存の顧客を削除
         Customer::truncate();
+        
+        // 外部キー制約を再有効化
+        \DB::statement('PRAGMA foreign_keys = ON;');
 
         $prefectures = [
             '北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県',

@@ -16,10 +16,16 @@ class TestOrderSeeder extends Seeder
 {
     public function run(): void
     {
+        // 外部キー制約を無効化
+        \DB::statement('PRAGMA foreign_keys = OFF;');
+        
         // 既存の注文を削除
         Order::truncate();
         OrderItem::truncate();
         OrderDepartmentStatus::truncate();
+        
+        // 外部キー制約を再有効化
+        \DB::statement('PRAGMA foreign_keys = ON;');
 
         // ステータスIDを取得
         $orderReceived = OrderStatus::where('code', 'order_received')->first();

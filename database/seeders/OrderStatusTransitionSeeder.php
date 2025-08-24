@@ -10,8 +10,14 @@ class OrderStatusTransitionSeeder extends Seeder
 {
     public function run(): void
     {
+        // 外部キー制約を無効化
+        \DB::statement('PRAGMA foreign_keys = OFF;');
+        
         // 既存の遷移ルールを削除
         OrderStatusTransition::truncate();
+        
+        // 外部キー制約を再有効化
+        \DB::statement('PRAGMA foreign_keys = ON;');
 
         // ステータスIDを取得
         $orderReceived = OrderStatus::where('code', 'order_received')->first();

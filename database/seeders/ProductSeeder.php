@@ -10,8 +10,14 @@ class ProductSeeder extends Seeder
 {
     public function run(): void
     {
+        // 外部キー制約を無効化
+        \DB::statement('PRAGMA foreign_keys = OFF;');
+        
         // 既存の商品を削除
         Product::truncate();
+        
+        // 外部キー制約を再有効化
+        \DB::statement('PRAGMA foreign_keys = ON;');
 
         // 部門を取得
         $cheesecakeDept = Department::where('name', 'チーズケーキ製造部(本店)')->first();
