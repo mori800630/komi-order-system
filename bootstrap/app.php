@@ -14,6 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => \App\Http\Middleware\CheckRole::class,
         ]);
+        
+        // Basic認証ミドルウェアをグローバルに追加
+        $middleware->append(\App\Http\Middleware\BasicAuth::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

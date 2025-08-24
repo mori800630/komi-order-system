@@ -21,6 +21,10 @@ export SESSION_LIFETIME=${SESSION_LIFETIME:-480}
 export SESSION_SECURE_COOKIE=${SESSION_SECURE_COOKIE:-true}
 export SESSION_SAME_SITE=${SESSION_SAME_SITE:-none}
 
+# Basic認証の環境変数（設定されていない場合は無効）
+export BASIC_AUTH_USERNAME=${BASIC_AUTH_USERNAME:-}
+export BASIC_AUTH_PASSWORD=${BASIC_AUTH_PASSWORD:-}
+
 echo "Environment variables set:"
 echo "APP_ENV: $APP_ENV"
 echo "APP_KEY: $APP_KEY"
