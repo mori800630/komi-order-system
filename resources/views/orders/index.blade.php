@@ -232,11 +232,11 @@
 
             <!-- ページネーション -->
             <div class="d-flex justify-content-between align-items-center mt-4">
-                <div>
+                <div class="text-muted">
                     {{ $orders->firstItem() }}~{{ $orders->lastItem() }}件 / 全{{ $orders->total() }}件
                 </div>
                 <div>
-                    {{ $orders->links() }}
+                    {{ $orders->links('pagination::bootstrap-5') }}
                 </div>
             </div>
         @else

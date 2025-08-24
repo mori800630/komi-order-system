@@ -90,11 +90,11 @@
 
             <!-- ページネーション -->
             <div class="d-flex justify-content-between align-items-center mt-4">
-                <div>
+                <div class="text-muted">
                     {{ $customers->firstItem() }}~{{ $customers->lastItem() }}件 / 全{{ $customers->total() }}件
                 </div>
                 <div>
-                    {{ $customers->links() }}
+                    {{ $customers->links('pagination::bootstrap-5') }}
                 </div>
             </div>
         @else

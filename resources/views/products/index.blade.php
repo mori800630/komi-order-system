@@ -128,11 +128,11 @@
 
             <!-- ページネーション -->
             <div class="d-flex justify-content-between align-items-center mt-4">
-                <div>
+                <div class="text-muted">
                     {{ $products->firstItem() }}~{{ $products->lastItem() }}件 / 全{{ $products->total() }}件
                 </div>
                 <div>
-                    {{ $products->links() }}
+                    {{ $products->links('pagination::bootstrap-5') }}
                 </div>
             </div>
         @else
