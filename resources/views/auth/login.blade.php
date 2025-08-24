@@ -126,6 +126,15 @@
             transition: all 0.3s ease;
         }
 
+        /* 入力値の開始位置を調整 */
+        .form-floating .form-control {
+            padding-left: 3rem;
+        }
+
+        .form-floating .form-control:focus {
+            padding-left: 3rem;
+        }
+
         .form-control:focus {
             border-color: var(--primary-color);
             box-shadow: 0 0 0 0.2rem rgba(212, 165, 116, 0.25);
