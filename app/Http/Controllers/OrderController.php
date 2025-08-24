@@ -209,15 +209,55 @@ class OrderController extends Controller
             'delivery_address' => 'nullable|string|required_if:delivery_method,delivery',
             'notes' => 'nullable|string',
             'requires_packaging' => 'required|boolean',
+            'items' => 'required|array|min:1',
+            'items.*.product_id' => 'required|exists:products,id',
+            'items.*.unit_price' => 'required|integer|min:0',
+            'items.*.quantity' => 'required|integer|min:1',
         ]);
 
-        $order->update($request->only([
-            'customer_id', 'order_status_id', 'order_source', 'delivery_method',
-            'pickup_date', 'pickup_time', 'requires_packaging', 'notes'
-        ]));
+        DB::beginTransaction();
+        try {
+            // 注文の基本情報を更新
+            $order->update($request->only([
+                'customer_id', 'order_status_id', 'order_source', 'delivery_method',
+                'pickup_date', 'pickup_time', 'requires_packaging', 'notes'
+            ]));
 
-        return redirect()->route('orders.show', $order)
-            ->with('success', '注文が正常に更新されました。');
+            // 既存の注文アイテムを削除
+            $order->orderItems()->delete();
+
+            // 新しい注文アイテムを作成
+            $totalAmount = 0;
+            foreach ($request->items as $item) {
+                $subtotal = $item['unit_price'] * $item['quantity'];
+                $totalAmount += $subtotal;
+
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $item['product_id'],
+                    'quantity' => $item['quantity'],
+                    'unit_price' => $item['unit_price'],
+                    'subtotal' => $subtotal,
+                ]);
+            }
+
+            // 合計金額を更新
+            $order->update(['total_amount' => $totalAmount]);
+
+            DB::commit();
+
+            return redirect()->route('orders.show', $order)
+                ->with('success', '注文が正常に更新されました。');
+        } catch (\Exception $e) {
+            DB::rollback();
+            \Log::error('Order update failed:', [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return back()->with('error', '注文の更新に失敗しました。: ' . $e->getMessage());
+        }
     }
 
     /**
