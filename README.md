@@ -2,6 +2,8 @@
 
 コミベーカリーの注文管理システムです。店舗スタッフ、製造部門、物流部門が連携して注文を管理できるWebアプリケーションです。
 
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/new?template=https://github.com/mori800630/komi-order-system)
+
 ## 機能
 
 ### ユーザー管理
@@ -34,17 +36,22 @@
 
 ## Railwayでのデプロイ
 
-### 1. Railwayアカウントの準備
+### クイックデプロイ
+上記の「Deploy on Railway」ボタンをクリックして、ワンクリックでデプロイできます。
+
+### 手動デプロイ
+
+#### 1. Railwayアカウントの準備
 1. [Railway](https://railway.app/) にアクセス
 2. GitHubアカウントでログイン
 
-### 2. プロジェクトのデプロイ
+#### 2. プロジェクトのデプロイ
 1. Railwayダッシュボードで「New Project」をクリック
 2. 「Deploy from GitHub repo」を選択
-3. このリポジトリを選択
+3. リポジトリ名を入力: `mori800630/komi-order-system`
 4. デプロイが開始されます
 
-### 3. 環境変数の設定
+#### 3. 環境変数の設定
 Railwayダッシュボードで以下の環境変数を設定：
 
 ```
@@ -70,12 +77,12 @@ SESSION_DRIVER=file
 SESSION_LIFETIME=120
 ```
 
-### 4. データベースの設定
+#### 4. データベースの設定
 1. RailwayでPostgreSQLサービスを追加
 2. 環境変数でデータベース接続情報を設定
 3. デプロイ後にマイグレーションとシーダーが自動実行されます
 
-### 5. デモアカウント
+#### 5. デモアカウント
 デプロイ後、以下のアカウントでログインできます：
 
 - **管理者**: admin@komi-bakery.com / password
@@ -94,7 +101,7 @@ SESSION_LIFETIME=120
 
 1. リポジトリをクローン
 ```bash
-git clone https://github.com/your-username/komi-order-system.git
+git clone https://github.com/mori800630/komi-order-system.git
 cd komi-order-system
 ```
 
