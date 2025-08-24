@@ -9,26 +9,24 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #8B4513;
-            --secondary-color: #D2B48C;
-            --accent-color: #A0522D;
-            --success-color: #28a745;
-            --light-bg: #F5F5DC;
-            --glass-bg: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.18);
+            --primary-color: #D4A574;
+            --secondary-color: #F5E6D3;
+            --accent-color: #B8860B;
+            --text-color: #5D4E37;
+            --light-bg: rgba(255, 255, 255, 0.95);
+            --border-color: #E8D5B7;
         }
 
         body {
-    background: linear-gradient(135deg, #D2B48C 0%, #CD853F 30%, #A0522D 60%, #8B4513 85%, #8B4513 100%);
-    min-height: 100vh;
-    font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
-    position: relative;
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
-}
+            background: linear-gradient(135deg, #F5E6D3 0%, #E8D5B7 100%);
+            min-height: 100vh;
+            font-family: 'Yu Gothic', 'Hiragino Kaku Gothic ProN', sans-serif;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
 
-        /* 背景装飾 */
+        /* 背景のパンくずパターン */
         body::before {
             content: '';
             position: fixed;
@@ -36,138 +34,108 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(212, 165, 116, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 80% 40%, rgba(212, 165, 116, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 40% 80%, rgba(212, 165, 116, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 90% 90%, rgba(212, 165, 116, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 10% 60%, rgba(212, 165, 116, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 70% 10%, rgba(212, 165, 116, 0.1) 1px, transparent 1px);
+            background-size: 100px 100px, 150px 150px, 120px 120px, 80px 80px, 200px 200px, 180px 180px;
             pointer-events: none;
             z-index: 1;
         }
 
-        /* フローティングアイコン */
-        .floating-icon {
-            position: fixed;
-            color: rgba(255, 255, 255, 0.1);
-            font-size: 2rem;
-            animation: float 6s ease-in-out infinite;
-            z-index: 1;
-        }
-
-        .floating-icon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
-        .floating-icon:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
-        .floating-icon:nth-child(3) { bottom: 30%; left: 5%; animation-delay: 2s; }
-        .floating-icon:nth-child(4) { bottom: 20%; right: 10%; animation-delay: 3s; }
-        .floating-icon:nth-child(5) { top: 50%; left: 5%; animation-delay: 4s; }
-        .floating-icon:nth-child(6) { top: 60%; right: 5%; animation-delay: 5s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
-        }
-
         .login-container {
-            position: relative;
-            z-index: 10;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
         }
 
         .login-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            padding: 3rem 2rem;
+            background: var(--light-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 3rem 2.5rem;
             width: 100%;
-            max-width: 500px;
+            max-width: 480px;
             position: relative;
-            overflow: hidden;
         }
 
-        .login-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #D2B48C, #CD853F, #A0522D, #8B4513);
-        }
-
+        /* ロゴセクション */
         .logo-section {
             text-align: center;
             margin-bottom: 2.5rem;
         }
 
         .logo-container {
-            width: 150px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 40px;
-            margin: 0 auto 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .logo-container:hover {
-            transform: scale(1.05);
+            margin-bottom: 1rem;
         }
 
         .logo-container img {
-            max-width: 120px;
-            max-height: 60px;
+            width: 80px;
+            height: auto;
         }
 
         .brand-title {
-            color: white;
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: 'Georgia', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin: 0 0 0.5rem 0;
+            letter-spacing: 1px;
         }
 
         .brand-subtitle {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.1rem;
-            margin-bottom: 0;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.7;
+            margin: 0;
+            font-weight: 300;
         }
 
-        /* フォームスタイル */
+        /* エラーメッセージ */
+        .alert {
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        /* フォーム要素 */
         .form-floating {
             margin-bottom: 1.5rem;
+            position: relative;
         }
 
-        .form-floating .form-control {
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 1rem;
+        .form-control {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             padding: 1rem 1rem 1rem 3rem;
             font-size: 1rem;
+            background-color: white;
             transition: all 0.3s ease;
         }
 
-        .form-floating .form-control:focus {
-            background: rgba(255, 255, 255, 0.95);
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 0.2rem rgba(160, 82, 45, 0.25);
-            transform: translateY(-2px);
-        }
-
-        .form-floating .form-control:focus + label {
-            color: var(--accent-color);
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(212, 165, 116, 0.25);
+            outline: none;
         }
 
         .form-floating label {
-            padding-left: 3rem;
-            color: #666;
+            color: var(--text-color);
+            opacity: 0.8;
+            font-weight: 400;
         }
 
         .input-icon {
@@ -175,210 +143,152 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: #999;
-            z-index: 10;
-            transition: color 0.3s ease;
+            color: var(--text-color);
+            opacity: 0.6;
+            z-index: 3;
         }
 
-        .form-floating .form-control:focus ~ .input-icon {
-            color: var(--accent-color);
-        }
-
+        /* チェックボックス */
         .form-check {
             margin-bottom: 2rem;
         }
 
         .form-check-input {
-            background-color: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-color: var(--border-color);
         }
 
         .form-check-input:checked {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
         }
 
         .form-check-label {
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            opacity: 0.8;
         }
 
         /* ログインボタン */
         .btn-login {
-            background: linear-gradient(135deg, #D2B48C 0%, #CD853F 50%, #A0522D 100%);
+            background-color: var(--primary-color);
             border: none;
-            border-radius: 1rem;
+            border-radius: 8px;
             padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-weight: bold;
+            font-size: 1rem;
+            font-weight: 500;
             color: white;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            width: 100%;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            margin-bottom: 2rem;
-        }
-
-        .btn-login::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-login:hover::before {
-            left: 100%;
+            margin-bottom: 2.5rem;
         }
 
         .btn-login:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(160, 82, 45, 0.4);
-        }
-
-        .btn-login:active {
+            background-color: var(--accent-color);
             transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
         }
 
         /* デモアカウントセクション */
         .demo-section {
-            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
         }
 
         .demo-title {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-align: center;
+            font-size: 1rem;
+            color: var(--text-color);
             margin-bottom: 1.5rem;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            font-weight: 500;
         }
 
         .demo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 1rem;
-            margin-bottom: 1rem;
         }
 
         .demo-card {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 1rem;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             padding: 1rem;
             text-align: center;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
         }
 
         .demo-card:hover {
-            background: rgba(255, 255, 255, 0.15);
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-
-        .demo-card.admin { border-left: 4px solid #dc3545; }
-        .demo-card.store { border-left: 4px solid #28a745; }
-        .demo-card.manufacturing { border-left: 4px solid #ffc107; }
-        .demo-card.logistics { border-left: 4px solid #17a2b8; }
 
         .demo-icon {
-            font-size: 1.5rem;
             margin-bottom: 0.5rem;
         }
 
-        .demo-card.admin .demo-icon { color: #dc3545; }
-        .demo-card.store .demo-icon { color: #28a745; }
-        .demo-card.manufacturing .demo-icon { color: #ffc107; }
-        .demo-card.logistics .demo-icon { color: #17a2b8; }
+        .demo-icon i {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
 
         .demo-role {
-            color: white;
-            font-weight: bold;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 0.3rem;
         }
 
         .demo-email {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.8rem;
-            margin-bottom: 0.25rem;
+            font-size: 0.7rem;
+            color: var(--text-color);
+            opacity: 0.7;
+            margin-bottom: 0.2rem;
             word-break: break-all;
         }
 
         .demo-password {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.8rem;
-            font-family: monospace;
-        }
-
-        /* エラーメッセージ */
-        .alert {
-            background: rgba(220, 53, 69, 0.1);
-            border: 1px solid rgba(220, 53, 69, 0.3);
-            color: #fff;
-            border-radius: 1rem;
-            backdrop-filter: blur(10px);
+            font-size: 0.7rem;
+            color: var(--text-color);
+            opacity: 0.5;
+            font-family: 'Courier New', monospace;
         }
 
         /* レスポンシブ対応 */
-        @media (max-width: 768px) {
+        @media (max-width: 576px) {
+            .login-container {
+                padding: 1rem;
+            }
+            
             .login-card {
                 padding: 2rem 1.5rem;
-                margin: 1rem;
             }
-
-            .brand-title {
-                font-size: 1.5rem;
-            }
-
+            
             .demo-grid {
                 grid-template-columns: 1fr;
             }
-
-            .floating-icon {
-                font-size: 1.5rem;
+            
+            .brand-title {
+                font-size: 1.8rem;
             }
         }
 
-        @media (max-width: 480px) {
-            .login-card {
-                padding: 1.5rem 1rem;
-            }
-
-            .logo-container {
-                width: 120px;
-                height: 60px;
-            }
-
-            .logo-container img {
-                max-width: 90px;
-                max-height: 45px;
+        /* 印刷時の非表示 */
+        @media print {
+            .demo-section {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <!-- フローティングアイコン -->
-    <i class="fas fa-bread-slice floating-icon"></i>
-    <i class="fas fa-cake floating-icon"></i>
-    <i class="fas fa-cookie floating-icon"></i>
-    <i class="fas fa-muffin floating-icon"></i>
-    <i class="fas fa-croissant floating-icon"></i>
-    <i class="fas fa-birthday-cake floating-icon"></i>
-
     <div class="login-container">
         <div class="login-card">
             <!-- ロゴセクション -->
             <div class="logo-section">
                 <div class="logo-container">
-                    <img src="{{ asset('images/komi-bakery-logo.svg') }}" alt="コミベーカリー">
+                    <img src="{{ asset('images/komi-bakery-logo.svg') }}" alt="KOMI BAKERY">
                 </div>
-                <h1 class="brand-title">コミベーカリー</h1>
+                <h1 class="brand-title">KOMI BAKERY</h1>
                 <p class="brand-subtitle">注文管理システム</p>
             </div>
 
@@ -432,7 +342,7 @@
                     <i class="fas fa-users me-2"></i>デモ用アカウント
                 </h3>
                 <div class="demo-grid">
-                    <div class="demo-card admin">
+                    <div class="demo-card">
                         <div class="demo-icon">
                             <i class="fas fa-user-shield"></i>
                         </div>
@@ -441,7 +351,7 @@
                         <div class="demo-password">password123</div>
                     </div>
                     
-                    <div class="demo-card store">
+                    <div class="demo-card">
                         <div class="demo-icon">
                             <i class="fas fa-store"></i>
                         </div>
@@ -450,7 +360,7 @@
                         <div class="demo-password">password123</div>
                     </div>
                     
-                    <div class="demo-card manufacturing">
+                    <div class="demo-card">
                         <div class="demo-icon">
                             <i class="fas fa-industry"></i>
                         </div>
@@ -459,7 +369,7 @@
                         <div class="demo-password">password123</div>
                     </div>
                     
-                    <div class="demo-card logistics">
+                    <div class="demo-card">
                         <div class="demo-icon">
                             <i class="fas fa-truck"></i>
                         </div>
@@ -475,3 +385,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

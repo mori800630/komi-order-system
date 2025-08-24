@@ -1,45 +1,33 @@
 <svg width="200" height="120" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-  <!-- パンの本体（楕円形のローフ） -->
-  <ellipse cx="100" cy="60" rx="75" ry="30" fill="#D2691E" stroke="#8B4513" stroke-width="2"/>
+  <!-- パンの本体（シンプルな楕円形） -->
+  <ellipse cx="100" cy="60" rx="70" ry="25" fill="#D4A574" stroke="#B8860B" stroke-width="1.5"/>
   
   <!-- パンの上部（明るい部分） -->
-  <ellipse cx="100" cy="55" rx="70" ry="25" fill="#F4A460" stroke="#DEB887" stroke-width="1"/>
+  <ellipse cx="100" cy="55" rx="65" ry="20" fill="#F5E6D3" stroke="#D4A574" stroke-width="1"/>
   
-  <!-- パンのスコア（切り込み）5本 -->
-  <path d="M 35 50 Q 45 45 55 50" stroke="#FFF8DC" stroke-width="3" fill="none"/>
-  <path d="M 55 50 Q 65 45 75 50" stroke="#FFF8DC" stroke-width="3" fill="none"/>
-  <path d="M 75 50 Q 85 45 95 50" stroke="#FFF8DC" stroke-width="3" fill="none"/>
-  <path d="M 95 50 Q 105 45 115 50" stroke="#FFF8DC" stroke-width="3" fill="none"/>
-  <path d="M 115 50 Q 125 45 135 50" stroke="#FFF8DC" stroke-width="3" fill="none"/>
-  <path d="M 135 50 Q 145 45 155 50" stroke="#FFF8DC" stroke-width="3" fill="none"/>
-  <path d="M 155 50 Q 165 45 175 50" stroke="#FFF8DC" stroke-width="3" fill="none"/>
+  <!-- パンのスコア（シンプルな切り込み）3本 -->
+  <path d="M 45 50 Q 55 45 65 50" stroke="#B8860B" stroke-width="2" fill="none" opacity="0.7"/>
+  <path d="M 75 50 Q 85 45 95 50" stroke="#B8860B" stroke-width="2" fill="none" opacity="0.7"/>
+  <path d="M 105 50 Q 115 45 125 50" stroke="#B8860B" stroke-width="2" fill="none" opacity="0.7"/>
+  <path d="M 135 50 Q 145 45 155 50" stroke="#B8860B" stroke-width="2" fill="none" opacity="0.7"/>
   
-  <!-- パンの影（立体感） -->
-  <ellipse cx="95" cy="68" rx="70" ry="25" fill="#CD853F" opacity="0.4"/>
+  <!-- パンの影（控えめ） -->
+  <ellipse cx="95" cy="65" rx="65" ry="20" fill="#B8860B" opacity="0.2"/>
   
-  <!-- パンの表面のテクスチャ（小さな点） -->
-  <circle cx="40" cy="45" r="1" fill="#8B4513" opacity="0.7"/>
-  <circle cx="70" cy="42" r="0.8" fill="#8B4513" opacity="0.7"/>
-  <circle cx="100" cy="44" r="0.9" fill="#8B4513" opacity="0.7"/>
-  <circle cx="130" cy="46" r="0.7" fill="#8B4513" opacity="0.7"/>
-  <circle cx="160" cy="48" r="0.8" fill="#8B4513" opacity="0.7"/>
+  <!-- パンの表面のテクスチャ（控えめな点） -->
+  <circle cx="50" cy="45" r="0.8" fill="#B8860B" opacity="0.5"/>
+  <circle cx="80" cy="43" r="0.6" fill="#B8860B" opacity="0.5"/>
+  <circle cx="110" cy="45" r="0.7" fill="#B8860B" opacity="0.5"/>
+  <circle cx="140" cy="47" r="0.5" fill="#B8860B" opacity="0.5"/>
   
-  <circle cx="55" cy="55" r="0.7" fill="#8B4513" opacity="0.7"/>
-  <circle cx="85" cy="52" r="0.9" fill="#8B4513" opacity="0.7"/>
-  <circle cx="115" cy="54" r="0.8" fill="#8B4513" opacity="0.7"/>
-  <circle cx="145" cy="56" r="0.6" fill="#8B4513" opacity="0.7"/>
+  <circle cx="65" cy="55" r="0.6" fill="#B8860B" opacity="0.5"/>
+  <circle cx="95" cy="53" r="0.7" fill="#B8860B" opacity="0.5"/>
+  <circle cx="125" cy="55" r="0.5" fill="#B8860B" opacity="0.5"/>
   
-  <circle cx="70" cy="58" r="0.8" fill="#8B4513" opacity="0.7"/>
-  <circle cx="100" cy="60" r="0.7" fill="#8B4513" opacity="0.7"/>
-  <circle cx="130" cy="62" r="0.9" fill="#8B4513" opacity="0.7"/>
+  <!-- パンの端の立体感（控えめ） -->
+  <ellipse cx="35" cy="60" rx="8" ry="18" fill="#B8860B" opacity="0.3"/>
+  <ellipse cx="165" cy="60" rx="8" ry="18" fill="#B8860B" opacity="0.3"/>
   
-  <!-- パンの端の立体感 -->
-  <ellipse cx="30" cy="60" rx="10" ry="20" fill="#CD853F" opacity="0.5"/>
-  <ellipse cx="170" cy="60" rx="10" ry="20" fill="#CD853F" opacity="0.5"/>
-  
-  <!-- 光沢効果 -->
-  <ellipse cx="80" cy="40" rx="25" ry="10" fill="#FFD700" opacity="0.3"/>
-  
-  <!-- パンの底の影 -->
-  <ellipse cx="100" cy="85" rx="70" ry="8" fill="#8B4513" opacity="0.2"/>
+  <!-- 光沢効果（控えめ） -->
+  <ellipse cx="80" cy="40" rx="20" ry="8" fill="#FFFFFF" opacity="0.3"/>
 </svg>
