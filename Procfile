@@ -1,1 +1,1 @@
-web: chmod +x ./start.sh && ./start.sh
+web: chmod +x ./debug-minimal.sh && ./debug-minimal.sh
