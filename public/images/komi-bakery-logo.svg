@@ -1,16 +1,37 @@
-<svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
-  <!-- 背景の円 -->
-  <circle cx="40" cy="40" r="35" fill="#8B4513" stroke="#D2B48C" stroke-width="2"/>
+<svg width="200" height="120" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- チーズケーキの土台（クラッカー） -->
+  <ellipse cx="100" cy="100" rx="60" ry="15" fill="#D2691E" stroke="#8B4513" stroke-width="1"/>
   
-  <!-- パンのアイコン -->
-  <ellipse cx="40" cy="40" rx="20" ry="12" fill="#F4A460" stroke="#8B4513" stroke-width="1"/>
-  <ellipse cx="40" cy="38" rx="18" ry="10" fill="#DEB887"/>
+  <!-- チーズケーキの本体 -->
+  <ellipse cx="100" cy="85" rx="55" ry="12" fill="#FFF8DC" stroke="#DEB887" stroke-width="1"/>
   
-  <!-- パンの質感 -->
-  <ellipse cx="35" cy="35" rx="3" ry="2" fill="#CD853F" opacity="0.6"/>
-  <ellipse cx="45" cy="42" rx="2" ry="1.5" fill="#CD853F" opacity="0.6"/>
+  <!-- チーズケーキの上部（クリーム部分） -->
+  <ellipse cx="100" cy="75" rx="50" ry="8" fill="#FFEFD5" stroke="#F5DEB3" stroke-width="0.5"/>
+  
+  <!-- チーズケーキの表面の質感 -->
+  <ellipse cx="85" cy="70" rx="8" ry="3" fill="#F0E68C" opacity="0.7"/>
+  <ellipse cx="115" cy="72" rx="6" ry="2" fill="#F0E68C" opacity="0.7"/>
+  <ellipse cx="95" cy="68" rx="4" ry="1.5" fill="#F0E68C" opacity="0.7"/>
+  
+  <!-- イチゴのデコレーション -->
+  <circle cx="80" cy="65" r="4" fill="#FF6B6B" stroke="#DC143C" stroke-width="0.5"/>
+  <ellipse cx="80" cy="61" rx="2" ry="1" fill="#228B22"/>
+  
+  <circle cx="120" cy="67" r="3" fill="#FF6B6B" stroke="#DC143C" stroke-width="0.5"/>
+  <ellipse cx="120" cy="64" rx="1.5" ry="0.8" fill="#228B22"/>
+  
+  <!-- ブルーベリーのデコレーション -->
+  <circle cx="90" cy="70" r="2" fill="#4169E1" stroke="#000080" stroke-width="0.3"/>
+  <circle cx="110" cy="69" r="2" fill="#4169E1" stroke="#000080" stroke-width="0.3"/>
+  <circle cx="100" cy="66" r="2" fill="#4169E1" stroke="#000080" stroke-width="0.3"/>
+  
+  <!-- 粉糖の装飾 -->
+  <circle cx="75" cy="60" r="0.5" fill="white" opacity="0.8"/>
+  <circle cx="125" cy="62" r="0.5" fill="white" opacity="0.8"/>
+  <circle cx="85" cy="58" r="0.5" fill="white" opacity="0.8"/>
+  <circle cx="115" cy="60" r="0.5" fill="white" opacity="0.8"/>
   
   <!-- 会社名テキスト -->
-  <text x="90" y="30" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif" font-size="18" font-weight="bold" fill="#8B4513">コミベーカリー</text>
-  <text x="90" y="50" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif" font-size="12" fill="#8B4513">Komi Bakery</text>
+  <text x="100" y="110" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif" font-size="14" font-weight="bold" fill="#8B4513" text-anchor="middle">コミベーカリー</text>
+  <text x="100" y="125" font-family="'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif" font-size="10" fill="#8B4513" text-anchor="middle">Komi Bakery</text>
 </svg>
