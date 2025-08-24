@@ -37,7 +37,7 @@ class OrderStatusTransition extends Model
             return true;
         }
 
-        // ロールチェック
+        // ロールチェック（管理者以外の場合のみ）
         if ($this->required_role && $user->role !== $this->required_role) {
             return false;
         }

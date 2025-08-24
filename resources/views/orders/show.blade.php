@@ -59,15 +59,17 @@
                             @endphp
                             
                             <!-- デバッグ情報 -->
-                            @if(config('app.debug'))
-                                <div class="alert alert-info mt-2">
-                                    <strong>デバッグ情報:</strong><br>
-                                    現在のステータス: {{ $order->orderStatus->name }} (ID: {{ $order->orderStatus->id }})<br>
-                                    利用可能な遷移数: {{ $availableTransitions->count() }}<br>
-                                    現在のユーザー: {{ auth()->user()->name }} (ロール: {{ auth()->user()->role }})<br>
-                                    注文ID: {{ $order->id }}
-                                </div>
-                            @endif
+                            <div class="alert alert-info mt-2">
+                                <strong>デバッグ情報:</strong><br>
+                                現在のステータス: {{ $order->orderStatus->name }} (ID: {{ $order->orderStatus->id }})<br>
+                                利用可能な遷移数: {{ $availableTransitions->count() }}<br>
+                                現在のユーザー: {{ auth()->user()->name }} (ロール: {{ auth()->user()->role }})<br>
+                                注文ID: {{ $order->id }}<br>
+                                全遷移データ: {{ $order->getAllAvailableTransitions()->count() }}<br>
+                                @foreach($order->getAllAvailableTransitions() as $transition)
+                                    - {{ $transition->fromStatus->name }} → {{ $transition->toStatus->name }} (ロール: {{ $transition->required_role }}, アクティブ: {{ $transition->is_active ? 'Yes' : 'No' }})<br>
+                                @endforeach
+                            </div>
                             
                             @if($availableTransitions->count() > 0)
                                 <div class="mt-2">
@@ -107,9 +109,7 @@
                                     <div class="alert alert-warning">
                                         <i class="fas fa-exclamation-triangle me-2"></i>
                                         現在のステータス「{{ $order->orderStatus->name }}」から遷移可能なステータスがありません。
-                                        @if(config('app.debug'))
-                                            <br><small>デバッグ: 利用可能な遷移数 = {{ $availableTransitions->count() }}</small>
-                                        @endif
+                                        <br><small>デバッグ: 利用可能な遷移数 = {{ $availableTransitions->count() }}, 全遷移データ = {{ $order->getAllAvailableTransitions()->count() }}</small>
                                     </div>
                                 </div>
                             @endif
