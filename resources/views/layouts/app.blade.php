@@ -33,14 +33,26 @@
             pointer-events: none;
         }
 
-        .floating-icon:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; }
-        .floating-icon:nth-child(2) { top: 25%; right: 12%; animation-delay: 1.5s; }
-        .floating-icon:nth-child(3) { bottom: 35%; left: 3%; animation-delay: 3s; }
-        .floating-icon:nth-child(4) { bottom: 25%; right: 8%; animation-delay: 4.5s; }
-        .floating-icon:nth-child(5) { top: 55%; left: 2%; animation-delay: 6s; }
-        .floating-icon:nth-child(6) { top: 65%; right: 3%; animation-delay: 7.5s; }
-        .floating-icon:nth-child(7) { top: 40%; left: 15%; animation-delay: 2s; }
-        .floating-icon:nth-child(8) { top: 70%; right: 18%; animation-delay: 5s; }
+        .floating-icon:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { top: 20%; right: 8%; animation-delay: 1s; }
+        .floating-icon:nth-child(3) { bottom: 40%; left: 2%; animation-delay: 2s; }
+        .floating-icon:nth-child(4) { bottom: 30%; right: 5%; animation-delay: 3s; }
+        .floating-icon:nth-child(5) { top: 50%; left: 1%; animation-delay: 4s; }
+        .floating-icon:nth-child(6) { top: 60%; right: 2%; animation-delay: 5s; }
+        .floating-icon:nth-child(7) { top: 35%; left: 12%; animation-delay: 1.5s; }
+        .floating-icon:nth-child(8) { top: 75%; right: 15%; animation-delay: 2.5s; }
+        .floating-icon:nth-child(9) { top: 15%; left: 20%; animation-delay: 3.5s; }
+        .floating-icon:nth-child(10) { top: 45%; right: 25%; animation-delay: 4.5s; }
+        .floating-icon:nth-child(11) { bottom: 20%; left: 18%; animation-delay: 5.5s; }
+        .floating-icon:nth-child(12) { top: 80%; left: 8%; animation-delay: 6.5s; }
+        .floating-icon:nth-child(13) { top: 30%; right: 30%; animation-delay: 0.5s; }
+        .floating-icon:nth-child(14) { bottom: 15%; right: 22%; animation-delay: 1.8s; }
+        .floating-icon:nth-child(15) { top: 70%; left: 25%; animation-delay: 3.2s; }
+        .floating-icon:nth-child(16) { top: 25%; left: 35%; animation-delay: 4.8s; }
+        .floating-icon:nth-child(17) { bottom: 45%; right: 35%; animation-delay: 6.2s; }
+        .floating-icon:nth-child(18) { top: 85%; right: 8%; animation-delay: 0.8s; }
+        .floating-icon:nth-child(19) { top: 40%; left: 40%; animation-delay: 2.2s; }
+        .floating-icon:nth-child(20) { bottom: 10%; left: 30%; animation-delay: 3.8s; }
 
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
@@ -214,6 +226,19 @@
     <i class="fas fa-birthday-cake floating-icon"></i>
     <i class="fas fa-cookie-bite floating-icon"></i>
     <i class="fas fa-cheese floating-icon"></i>
+    <i class="fas fa-ice-cream floating-icon"></i>
+    <i class="fas fa-candy-cane floating-icon"></i>
+    <i class="fas fa-cookie-bite floating-icon"></i>
+    <i class="fas fa-birthday-cake floating-icon"></i>
+    <i class="fas fa-bread-slice floating-icon"></i>
+    <i class="fas fa-cake floating-icon"></i>
+    <i class="fas fa-cookie floating-icon"></i>
+    <i class="fas fa-muffin floating-icon"></i>
+    <i class="fas fa-croissant floating-icon"></i>
+    <i class="fas fa-birthday-cake floating-icon"></i>
+    <i class="fas fa-cheese floating-icon"></i>
+    <i class="fas fa-ice-cream floating-icon"></i>
+    <i class="fas fa-candy-cane floating-icon"></i>
 
     <div class="container-fluid">
         <div class="row">
