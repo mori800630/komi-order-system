@@ -10,6 +10,9 @@ class ProductSeeder extends Seeder
 {
     public function run(): void
     {
+        // 既存の商品を削除
+        Product::truncate();
+
         // 部門を取得
         $cheesecakeDept = Department::where('name', 'チーズケーキ製造部(本店)')->first();
         $westernDept = Department::where('name', '洋菓子製造部')->first();

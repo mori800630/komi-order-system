@@ -10,6 +10,9 @@ class OrderStatusTransitionSeeder extends Seeder
 {
     public function run(): void
     {
+        // 既存の遷移ルールを削除
+        OrderStatusTransition::truncate();
+
         // ステータスIDを取得
         $orderReceived = OrderStatus::where('code', 'order_received')->first();
         $manufacturing = OrderStatus::where('code', 'manufacturing')->first();

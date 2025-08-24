@@ -13,6 +13,9 @@ class OrderStatusSeeder extends Seeder
      */
     public function run(): void
     {
+        // 既存のステータスを削除
+        OrderStatus::truncate();
+
         $statuses = [
             [
                 'name' => '注文受付',

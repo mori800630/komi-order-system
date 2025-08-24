@@ -13,6 +13,9 @@ class DepartmentSeeder extends Seeder
      */
     public function run(): void
     {
+        // 既存の部門を削除
+        Department::truncate();
+
         $departments = [
             [
                 'name' => '洋菓子製造部',
