@@ -132,6 +132,9 @@
                                     @case('other')
                                         <span class="badge bg-dark">その他</span>
                                         @break
+                                    @case('website')
+                                        <span class="badge bg-primary">ウェブサイト</span>
+                                        @break
                                     @default
                                         <span class="badge bg-light text-dark">未選択</span>
                                 @endswitch
