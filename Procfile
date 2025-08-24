@@ -1,1 +1,1 @@
-web: chmod +x ./debug-minimal.sh && ./debug-minimal.sh
+web: chmod +x ./start-no-seed.sh && ./start-no-seed.sh
