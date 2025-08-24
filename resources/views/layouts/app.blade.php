@@ -83,11 +83,45 @@
         }
 
         .status-order-received { 
-            background-color: #ffebee; 
-            color: #c62828; 
-            border: 2px solid #f44336;
+            background: linear-gradient(45deg, #ff1744, #d50000);
+            color: white; 
+            border: 3px solid #ff1744;
             font-weight: bold;
-            animation: pulse 2s infinite;
+            font-size: 1.1em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            animation: urgent-pulse 1.5s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .status-order-received::before {
+            content: "⚠️ 製造開始待ち";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            background: linear-gradient(45deg, #ff1744, #ff5722);
+            color: white;
+            font-size: 0.7em;
+            padding: 2px 4px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 0.25rem 0.25rem 0 0;
+        }
+        
+        @keyframes urgent-pulse {
+            0% { 
+                box-shadow: 0 0 0 0 rgba(255, 23, 68, 0.8);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 0 15px rgba(255, 23, 68, 0.3);
+                transform: scale(1.05);
+            }
+            100% { 
+                box-shadow: 0 0 0 0 rgba(255, 23, 68, 0.8);
+                transform: scale(1);
+            }
         }
         .status-manufacturing { background-color: #fff3e0; color: #f57c00; }
         .status-packaging { background-color: #f3e5f5; color: #7b1fa2; }

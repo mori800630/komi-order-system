@@ -16,9 +16,17 @@
 <div class="row">
     <div class="col-lg-8">
         <!-- 注文情報 -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="mb-0">注文情報</h5>
+        <div class="card mb-4 @if($order->orderStatus->code === 'order_received') border-danger @endif">
+            <div class="card-header @if($order->orderStatus->code === 'order_received') bg-danger text-white @endif">
+                <h5 class="mb-0">
+                    @if($order->orderStatus->code === 'order_received')
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                    @endif
+                    注文情報
+                    @if($order->orderStatus->code === 'order_received')
+                        <span class="badge bg-warning text-dark ms-2">製造開始待ち</span>
+                    @endif
+                </h5>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -29,8 +37,16 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">注文ステータス</label>
+                        <div class="mb-3 @if($order->orderStatus->code === 'order_received') border border-danger rounded p-3 bg-light @endif">
+                            <label class="form-label fw-bold">
+                                @if($order->orderStatus->code === 'order_received')
+                                    <i class="fas fa-exclamation-triangle text-danger me-2"></i>
+                                @endif
+                                注文ステータス
+                                @if($order->orderStatus->code === 'order_received')
+                                    <span class="badge bg-danger ms-2">製造開始待ち</span>
+                                @endif
+                            </label>
                             <p class="mb-0">
                                 <span class="status-badge status-{{ $order->orderStatus->code }}">
                                     {{ $order->orderStatus->name }}

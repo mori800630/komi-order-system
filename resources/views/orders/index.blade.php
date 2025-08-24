@@ -96,8 +96,13 @@
                     </thead>
                     <tbody>
                         @foreach($orders as $order)
-                        <tr>
-                            <td>{{ $order->order_number }}</td>
+                        <tr @if($order->orderStatus->code === 'order_received') class="table-danger" style="background: linear-gradient(45deg, #ffebee, #ffcdd2);" @endif>
+                            <td>
+                                @if($order->orderStatus->code === 'order_received')
+                                    <i class="fas fa-exclamation-triangle text-danger me-1" title="製造開始待ち"></i>
+                                @endif
+                                {{ $order->order_number }}
+                            </td>
                             <td>{{ $order->created_at->format('Y/m/d H:i') }}</td>
                             <td>{{ $order->customer->name ?? '未登録' }}</td>
                             <td>
