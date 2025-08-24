@@ -242,7 +242,7 @@
             </div>
 
             <div class="text-end">
-                <button type="submit" class="btn btn-success">
+                <button type="submit" class="btn btn-success" id="submitBtn">
                     <i class="fas fa-save me-2"></i>注文を登録
                 </button>
             </div>
@@ -552,6 +552,52 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('total-amount').textContent = `¥${total.toLocaleString()}`;
     }
 
+    // フォーム送信時のバリデーション
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+        const orderItems = document.querySelectorAll('.order-item');
+        if (orderItems.length === 0) {
+            e.preventDefault();
+            alert('商品を少なくとも1つ選択してください。');
+            return false;
+        }
+        
+        // 必須フィールドのチェック
+        const requiredFields = [
+            { id: 'order_source', name: '注文ソース' },
+            { id: 'delivery_method', name: '受け取り方法' },
+            { id: 'customer_name', name: 'お名前' }
+        ];
+        
+        for (const field of requiredFields) {
+            const element = document.getElementById(field.id);
+            if (!element.value.trim()) {
+                e.preventDefault();
+                alert(`${field.name}を入力してください。`);
+                element.focus();
+                return false;
+            }
+        }
+        
+        // 受け取り方法に応じた必須フィールドチェック
+        const deliveryMethod = document.getElementById('delivery_method').value;
+        if (deliveryMethod === 'pickup') {
+            const pickupDate = document.getElementById('pickup_date').value;
+            const pickupTime = document.getElementById('pickup_time').value;
+            if (!pickupDate || !pickupTime) {
+                e.preventDefault();
+                alert('店頭受け取りの場合は、受け取り日時を入力してください。');
+                return false;
+            }
+        } else if (deliveryMethod === 'delivery') {
+            const deliveryName = document.getElementById('delivery_name').value;
+            if (!deliveryName.trim()) {
+                e.preventDefault();
+                alert('お取り寄せの場合は、送付先のお名前を入力してください。');
+                return false;
+            }
+        }
+    });
+    
     // ページ読み込み時の初期化
     // 送付先情報フォームの初期状態を設定
     if (sameAsCustomer.checked) {

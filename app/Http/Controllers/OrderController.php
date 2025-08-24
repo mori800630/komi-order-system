@@ -69,6 +69,9 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        // デバッグ情報をログに出力
+        \Log::info('Order store request data:', $request->all());
+        
         $request->validate([
             'customer_id' => 'nullable|exists:customers,id',
             'customer_name' => 'required|string|max:255',
@@ -92,6 +95,11 @@ class OrderController extends Controller
             'prices' => 'required|array|min:1',
             'quantities' => 'required|array|min:1',
         ]);
+
+        // バリデーションエラーが発生した場合のデバッグ情報
+        if ($request->validator && $request->validator->fails()) {
+            \Log::error('Validation errors:', $request->validator->errors()->toArray());
+        }
 
         DB::beginTransaction();
         try {
@@ -131,7 +139,13 @@ class OrderController extends Controller
                 ->with('success', '注文が正常に登録されました。');
         } catch (\Exception $e) {
             DB::rollback();
-            return back()->with('error', '注文の登録に失敗しました。');
+            \Log::error('Order creation failed:', [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return back()->with('error', '注文の登録に失敗しました。: ' . $e->getMessage());
         }
     }
 
