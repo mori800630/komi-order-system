@@ -33,26 +33,66 @@
             pointer-events: none;
         }
 
-        .floating-icon:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
-        .floating-icon:nth-child(2) { top: 20%; right: 8%; animation-delay: 1s; }
-        .floating-icon:nth-child(3) { bottom: 40%; left: 2%; animation-delay: 2s; }
-        .floating-icon:nth-child(4) { bottom: 30%; right: 5%; animation-delay: 3s; }
-        .floating-icon:nth-child(5) { top: 50%; left: 1%; animation-delay: 4s; }
-        .floating-icon:nth-child(6) { top: 60%; right: 2%; animation-delay: 5s; }
-        .floating-icon:nth-child(7) { top: 35%; left: 12%; animation-delay: 1.5s; }
-        .floating-icon:nth-child(8) { top: 75%; right: 15%; animation-delay: 2.5s; }
-        .floating-icon:nth-child(9) { top: 15%; left: 20%; animation-delay: 3.5s; }
-        .floating-icon:nth-child(10) { top: 45%; right: 25%; animation-delay: 4.5s; }
-        .floating-icon:nth-child(11) { bottom: 20%; left: 18%; animation-delay: 5.5s; }
-        .floating-icon:nth-child(12) { top: 80%; left: 8%; animation-delay: 6.5s; }
-        .floating-icon:nth-child(13) { top: 30%; right: 30%; animation-delay: 0.5s; }
-        .floating-icon:nth-child(14) { bottom: 15%; right: 22%; animation-delay: 1.8s; }
-        .floating-icon:nth-child(15) { top: 70%; left: 25%; animation-delay: 3.2s; }
-        .floating-icon:nth-child(16) { top: 25%; left: 35%; animation-delay: 4.8s; }
-        .floating-icon:nth-child(17) { bottom: 45%; right: 35%; animation-delay: 6.2s; }
-        .floating-icon:nth-child(18) { top: 85%; right: 8%; animation-delay: 0.8s; }
-        .floating-icon:nth-child(19) { top: 40%; left: 40%; animation-delay: 2.2s; }
-        .floating-icon:nth-child(20) { bottom: 10%; left: 30%; animation-delay: 3.8s; }
+        .floating-icon:nth-child(1) { top: 5%; left: 3%; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { top: 12%; right: 4%; animation-delay: 0.3s; }
+        .floating-icon:nth-child(3) { bottom: 45%; left: 1%; animation-delay: 0.6s; }
+        .floating-icon:nth-child(4) { bottom: 35%; right: 3%; animation-delay: 0.9s; }
+        .floating-icon:nth-child(5) { top: 55%; left: 0.5%; animation-delay: 1.2s; }
+        .floating-icon:nth-child(6) { top: 65%; right: 1%; animation-delay: 1.5s; }
+        .floating-icon:nth-child(7) { top: 38%; left: 8%; animation-delay: 1.8s; }
+        .floating-icon:nth-child(8) { top: 78%; right: 12%; animation-delay: 2.1s; }
+        .floating-icon:nth-child(9) { top: 18%; left: 15%; animation-delay: 2.4s; }
+        .floating-icon:nth-child(10) { top: 48%; right: 20%; animation-delay: 2.7s; }
+        .floating-icon:nth-child(11) { bottom: 25%; left: 12%; animation-delay: 3s; }
+        .floating-icon:nth-child(12) { top: 82%; left: 6%; animation-delay: 3.3s; }
+        .floating-icon:nth-child(13) { top: 32%; right: 25%; animation-delay: 3.6s; }
+        .floating-icon:nth-child(14) { bottom: 18%; right: 18%; animation-delay: 3.9s; }
+        .floating-icon:nth-child(15) { top: 72%; left: 20%; animation-delay: 4.2s; }
+        .floating-icon:nth-child(16) { top: 28%; left: 30%; animation-delay: 4.5s; }
+        .floating-icon:nth-child(17) { bottom: 48%; right: 30%; animation-delay: 4.8s; }
+        .floating-icon:nth-child(18) { top: 88%; right: 6%; animation-delay: 5.1s; }
+        .floating-icon:nth-child(19) { top: 42%; left: 35%; animation-delay: 5.4s; }
+        .floating-icon:nth-child(20) { bottom: 12%; left: 25%; animation-delay: 5.7s; }
+        .floating-icon:nth-child(21) { top: 8%; left: 7%; animation-delay: 6s; }
+        .floating-icon:nth-child(22) { top: 22%; right: 6%; animation-delay: 6.3s; }
+        .floating-icon:nth-child(23) { bottom: 42%; left: 4%; animation-delay: 6.6s; }
+        .floating-icon:nth-child(24) { bottom: 32%; right: 7%; animation-delay: 6.9s; }
+        .floating-icon:nth-child(25) { top: 52%; left: 2%; animation-delay: 7.2s; }
+        .floating-icon:nth-child(26) { top: 62%; right: 3%; animation-delay: 7.5s; }
+        .floating-icon:nth-child(27) { top: 36%; left: 10%; animation-delay: 7.8s; }
+        .floating-icon:nth-child(28) { top: 76%; right: 14%; animation-delay: 0.2s; }
+        .floating-icon:nth-child(29) { top: 16%; left: 18%; animation-delay: 0.5s; }
+        .floating-icon:nth-child(30) { top: 46%; right: 22%; animation-delay: 0.8s; }
+        .floating-icon:nth-child(31) { bottom: 22%; left: 15%; animation-delay: 1.1s; }
+        .floating-icon:nth-child(32) { top: 84%; left: 9%; animation-delay: 1.4s; }
+        .floating-icon:nth-child(33) { top: 34%; right: 28%; animation-delay: 1.7s; }
+        .floating-icon:nth-child(34) { bottom: 16%; right: 20%; animation-delay: 2s; }
+        .floating-icon:nth-child(35) { top: 74%; left: 22%; animation-delay: 2.3s; }
+        .floating-icon:nth-child(36) { top: 26%; left: 32%; animation-delay: 2.6s; }
+        .floating-icon:nth-child(37) { bottom: 46%; right: 32%; animation-delay: 2.9s; }
+        .floating-icon:nth-child(38) { top: 86%; right: 10%; animation-delay: 3.2s; }
+        .floating-icon:nth-child(39) { top: 44%; left: 38%; animation-delay: 3.5s; }
+        .floating-icon:nth-child(40) { bottom: 14%; left: 28%; animation-delay: 3.8s; }
+        .floating-icon:nth-child(41) { top: 6%; left: 11%; animation-delay: 4.1s; }
+        .floating-icon:nth-child(42) { top: 24%; right: 9%; animation-delay: 4.4s; }
+        .floating-icon:nth-child(43) { bottom: 44%; left: 6%; animation-delay: 4.7s; }
+        .floating-icon:nth-child(44) { bottom: 34%; right: 11%; animation-delay: 5s; }
+        .floating-icon:nth-child(45) { top: 54%; left: 3%; animation-delay: 5.3s; }
+        .floating-icon:nth-child(46) { top: 64%; right: 5%; animation-delay: 5.6s; }
+        .floating-icon:nth-child(47) { top: 37%; left: 14%; animation-delay: 5.9s; }
+        .floating-icon:nth-child(48) { top: 77%; right: 16%; animation-delay: 6.2s; }
+        .floating-icon:nth-child(49) { top: 17%; left: 22%; animation-delay: 6.5s; }
+        .floating-icon:nth-child(50) { top: 47%; right: 26%; animation-delay: 6.8s; }
+        .floating-icon:nth-child(51) { bottom: 24%; left: 18%; animation-delay: 7.1s; }
+        .floating-icon:nth-child(52) { top: 83%; left: 12%; animation-delay: 7.4s; }
+        .floating-icon:nth-child(53) { top: 33%; right: 32%; animation-delay: 7.7s; }
+        .floating-icon:nth-child(54) { bottom: 19%; right: 24%; animation-delay: 0.1s; }
+        .floating-icon:nth-child(55) { top: 73%; left: 26%; animation-delay: 0.4s; }
+        .floating-icon:nth-child(56) { top: 27%; left: 36%; animation-delay: 0.7s; }
+        .floating-icon:nth-child(57) { bottom: 47%; right: 36%; animation-delay: 1s; }
+        .floating-icon:nth-child(58) { top: 87%; right: 12%; animation-delay: 1.3s; }
+        .floating-icon:nth-child(59) { top: 43%; left: 42%; animation-delay: 1.6s; }
+        .floating-icon:nth-child(60) { bottom: 13%; left: 32%; animation-delay: 1.9s; }
 
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
@@ -228,14 +268,43 @@
     <i class="fas fa-cheese floating-icon"></i>
     <i class="fas fa-ice-cream floating-icon"></i>
     <i class="fas fa-candy-cane floating-icon"></i>
-    <i class="fas fa-cookie-bite floating-icon"></i>
-    <i class="fas fa-birthday-cake floating-icon"></i>
     <i class="fas fa-bread-slice floating-icon"></i>
     <i class="fas fa-cake floating-icon"></i>
     <i class="fas fa-cookie floating-icon"></i>
     <i class="fas fa-muffin floating-icon"></i>
     <i class="fas fa-croissant floating-icon"></i>
     <i class="fas fa-birthday-cake floating-icon"></i>
+    <i class="fas fa-cookie-bite floating-icon"></i>
+    <i class="fas fa-cheese floating-icon"></i>
+    <i class="fas fa-ice-cream floating-icon"></i>
+    <i class="fas fa-candy-cane floating-icon"></i>
+    <i class="fas fa-bread-slice floating-icon"></i>
+    <i class="fas fa-cake floating-icon"></i>
+    <i class="fas fa-cookie floating-icon"></i>
+    <i class="fas fa-muffin floating-icon"></i>
+    <i class="fas fa-croissant floating-icon"></i>
+    <i class="fas fa-birthday-cake floating-icon"></i>
+    <i class="fas fa-cookie-bite floating-icon"></i>
+    <i class="fas fa-cheese floating-icon"></i>
+    <i class="fas fa-ice-cream floating-icon"></i>
+    <i class="fas fa-candy-cane floating-icon"></i>
+    <i class="fas fa-bread-slice floating-icon"></i>
+    <i class="fas fa-cake floating-icon"></i>
+    <i class="fas fa-cookie floating-icon"></i>
+    <i class="fas fa-muffin floating-icon"></i>
+    <i class="fas fa-croissant floating-icon"></i>
+    <i class="fas fa-birthday-cake floating-icon"></i>
+    <i class="fas fa-cookie-bite floating-icon"></i>
+    <i class="fas fa-cheese floating-icon"></i>
+    <i class="fas fa-ice-cream floating-icon"></i>
+    <i class="fas fa-candy-cane floating-icon"></i>
+    <i class="fas fa-bread-slice floating-icon"></i>
+    <i class="fas fa-cake floating-icon"></i>
+    <i class="fas fa-cookie floating-icon"></i>
+    <i class="fas fa-muffin floating-icon"></i>
+    <i class="fas fa-croissant floating-icon"></i>
+    <i class="fas fa-birthday-cake floating-icon"></i>
+    <i class="fas fa-cookie-bite floating-icon"></i>
     <i class="fas fa-cheese floating-icon"></i>
     <i class="fas fa-ice-cream floating-icon"></i>
     <i class="fas fa-candy-cane floating-icon"></i>
