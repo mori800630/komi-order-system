@@ -9,7 +9,7 @@
                     <h4 class="mb-0">ユーザー編集</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('users.update', $user) }}" method="POST">
+                    <form action="{{ secure_url(route('users.update', $user, false)) }}" method="POST">
                         @csrf
                         @method('PUT')
 

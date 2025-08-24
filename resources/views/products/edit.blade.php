@@ -12,7 +12,7 @@
 
 <div class="row">
     <div class="col-lg-8">
-        <form method="POST" action="{{ route('products.update', $product) }}">
+        <form method="POST" action="{{ secure_url(route('products.update', $product, false)) }}">
             @csrf
             @method('PUT')
             

@@ -12,7 +12,7 @@
 
 <div class="row">
     <div class="col-lg-8">
-        <form method="POST" action="{{ route('products.store') }}">
+        <form method="POST" action="{{ secure_url(route('products.store', [], false)) }}">
             @csrf
             
             <!-- 商品情報 -->

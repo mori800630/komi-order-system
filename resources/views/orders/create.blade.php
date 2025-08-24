@@ -12,7 +12,7 @@
 
 <div class="row">
     <div class="col-12">
-        <form method="POST" action="{{ route('orders.store') }}" id="orderForm">
+        <form method="POST" action="{{ secure_url(route('orders.store', [], false)) }}" id="orderForm">
             @csrf
             
             <!-- 注文ステータス -->

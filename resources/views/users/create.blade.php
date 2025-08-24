@@ -9,7 +9,7 @@
                     <h4 class="mb-0">新規ユーザー作成</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('users.store') }}" method="POST">
+                    <form action="{{ secure_url(route('users.store', [], false)) }}" method="POST">
                         @csrf
 
                         <div class="mb-3">
