@@ -41,6 +41,9 @@ RUN npm run build
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
+# Create .env file from .env.example
+RUN cp .env.example .env
+
 # Generate application key
 RUN php artisan key:generate --force
 
