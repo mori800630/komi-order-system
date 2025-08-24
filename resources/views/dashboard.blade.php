@@ -3,7 +3,6 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div class="d-flex align-items-center">
-        <img src="{{ asset('images/komi-bakery-logo.svg') }}" alt="Komi BAKERY" class="me-3" style="max-width: 150px;">
         <h2 class="mb-0">ダッシュボード</h2>
     </div>
     <div>

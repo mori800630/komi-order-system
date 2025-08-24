@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ config('app.name') }}</title>
-    <link rel="icon" type="image/svg+xml" href="{{ asset('images/favicon.svg') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -182,8 +182,9 @@
             <div class="col-md-3 col-lg-2 px-0">
                 <div class="sidebar p-3">
                     <div class="mb-4 text-center">
-                        <img src="{{ asset('images/komi-bakery-logo.svg') }}" alt="Komi BAKERY" class="img-fluid mb-2" style="max-width: 200px;">
-                        <p class="mb-0 small">注文管理システム</p>
+                        <h4 class="mb-1 text-white">Komi BAKERY</h4>
+                        <p class="mb-1 small text-white">コミベーカリー</p>
+                        <p class="mb-0 small text-white">注文管理システム</p>
                     </div>
 
                     @auth
