@@ -558,52 +558,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // 商品選択（イベント委譲を使用）
     document.addEventListener('click', function(e) {
         console.log('Click event detected:', e.target);
-        
         if (e.target.classList.contains('select-product') || e.target.closest('.select-product')) {
             console.log('Product selection button clicked');
-            
             const button = e.target.classList.contains('select-product') ? e.target : e.target.closest('.select-product');
             const productId = button.dataset.productId;
             const productName = button.dataset.productName;
             const productPrice = button.dataset.productPrice;
             const requiresPackaging = button.dataset.requiresPackaging;
-            
             console.log('Product data:', { productId, productName, productPrice, requiresPackaging });
             
-            addOrderItem(productId, productName, productPrice);
+            // 商品を追加
+            addOrderItem(productId, productName, productPrice, requiresPackaging);
             
-            // 梱包物流の初期値を設定（最初の商品の場合のみ）
-            const orderItems = document.getElementById('order-items');
-            const existingItems = orderItems.querySelectorAll('.order-item');
-            if (existingItems.length === 1) {
-                if (requiresPackaging === '1') {
-                    document.getElementById('packaging_required').checked = true;
-                } else {
-                    document.getElementById('packaging_not_required').checked = true;
-                }
-            }
-            
-            // モーダルを閉じる
-            try {
-                const modal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
-                if (modal) {
-                    modal.hide();
-                } else {
-                    // フォールバック: モーダルを直接非表示
-                    const modalElement = document.getElementById('productModal');
-                    modalElement.style.display = 'none';
-                    modalElement.classList.remove('show');
-                    document.body.classList.remove('modal-open');
-                    
-                    const backdrop = document.querySelector('.modal-backdrop');
-                    if (backdrop) {
-                        backdrop.remove();
-                    }
-                }
-                console.log('Modal closed successfully');
-            } catch (error) {
-                console.error('Error closing modal:', error);
-            }
+            // モーダルを確実に閉じる
+            closeModal();
         }
     });
     
@@ -624,27 +592,71 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 console.log('Product data (direct):', { productId, productName, productPrice, requiresPackaging });
                 
-                addOrderItem(productId, productName, productPrice);
+                // 商品を追加
+                addOrderItem(productId, productName, productPrice, requiresPackaging);
                 
-                // モーダルを閉じる
-                const modalElement = document.getElementById('productModal');
+                // モーダルを確実に閉じる
+                closeModal();
+            });
+        });
+    }
+    
+    // モーダルを閉じる関数
+    function closeModal() {
+        console.log('Closing modal...');
+        
+        try {
+            // Bootstrap 5のモーダルインスタンスを取得して閉じる
+            const modalElement = document.getElementById('productModal');
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            
+            if (modal) {
+                modal.hide();
+                console.log('Modal closed via Bootstrap');
+            } else {
+                // フォールバック: 直接スタイルを変更
                 modalElement.style.display = 'none';
                 modalElement.classList.remove('show');
                 document.body.classList.remove('modal-open');
-                
-                const backdrop = document.querySelector('.modal-backdrop');
-                if (backdrop) {
-                    backdrop.remove();
-                }
-            });
-        });
+                console.log('Modal closed via fallback');
+            }
+            
+            // バックドロップを削除
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+                console.log('Backdrop removed');
+            }
+            
+            // ページのスクロールを復活
+            document.body.style.overflow = '';
+            
+        } catch (error) {
+            console.error('Error closing modal:', error);
+            
+            // エラー時のフォールバック
+            const modalElement = document.getElementById('productModal');
+            if (modalElement) {
+                modalElement.style.display = 'none';
+                modalElement.classList.remove('show');
+            }
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+            
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+        }
+        
+        console.log('Modal close process completed');
     }
     
     // ページ読み込み時に直接イベントリスナーを追加
     addDirectEventListeners();
     
     // 商品追加
-    function addOrderItem(productId, productName, productPrice) {
+    function addOrderItem(productId, productName, productPrice, requiresPackaging = null) {
         const orderItems = document.getElementById('order-items');
         const itemCount = orderItems.children.length;
         
@@ -689,6 +701,15 @@ document.addEventListener('DOMContentLoaded', function() {
         
         orderItems.insertAdjacentHTML('beforeend', itemHtml);
         updateTotalAmount();
+        
+        // 梱包物流の初期値を設定（最初の商品の場合のみ）
+        if (itemCount === 0 && requiresPackaging !== null) {
+            if (requiresPackaging === '1') {
+                document.getElementById('packaging_required').checked = true;
+            } else {
+                document.getElementById('packaging_not_required').checked = true;
+            }
+        }
     }
     
     // 商品削除
