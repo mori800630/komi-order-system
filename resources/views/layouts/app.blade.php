@@ -440,7 +440,7 @@
                         @endif
 
                         <div class="mt-auto">
-                            <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                            <form method="POST" action="{{ secure_url(route('logout', [], false)) }}" class="d-inline">
                                 @csrf
                                 <button type="submit" class="nav-link border-0 bg-transparent w-100 text-start">
                                     <i class="fas fa-sign-out-alt"></i> ログアウト
