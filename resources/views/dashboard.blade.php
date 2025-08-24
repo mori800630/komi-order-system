@@ -147,12 +147,11 @@
                                     <th>ステータス</th>
                                     <th>金額</th>
                                     <th>登録日時</th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($recentOrders as $order)
-                                <tr>
+                                <tr style="cursor: pointer;" onclick="window.location.href='{{ route('orders.show', $order) }}'">
                                     <td>{{ $order->order_number }}</td>
                                     <td>{{ $order->customer->name ?? '未登録' }}</td>
                                     <td>
@@ -162,11 +161,6 @@
                                     </td>
                                     <td>¥{{ number_format($order->total_amount) }}</td>
                                     <td>{{ $order->created_at->format('m/d H:i') }}</td>
-                                    <td>
-                                        <a href="{{ route('orders.show', $order) }}" class="btn btn-sm btn-outline-primary">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

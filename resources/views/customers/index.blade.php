@@ -3,11 +3,9 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>顧客管理</h2>
-    <div>
-        <a href="{{ route('customers.create') }}" class="btn btn-success">
-            <i class="fas fa-plus me-2"></i>新規顧客登録
-        </a>
-    </div>
+    <a href="{{ route('customers.create') }}" class="btn btn-success">
+        <i class="fas fa-plus me-2"></i>新規顧客登録
+    </a>
 </div>
 
 <!-- 検索フィルター -->
@@ -50,7 +48,7 @@
                     </thead>
                     <tbody>
                         @foreach($customers as $customer)
-                        <tr>
+                        <tr style="cursor: pointer;" onclick="window.location.href='{{ route('customers.show', $customer) }}'">
                             <td>{{ $customer->customer_number }}</td>
                             <td>{{ $customer->name }}</td>
                             <td>{{ $customer->email ?? '-' }}</td>
@@ -66,17 +64,14 @@
                             <td>{{ $customer->created_at->format('Y/m/d') }}</td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <a href="{{ route('customers.show', $customer) }}" class="btn btn-sm btn-outline-primary" title="詳細表示">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="{{ route('customers.edit', $customer) }}" class="btn btn-sm btn-outline-secondary" title="編集">
+                                    <a href="{{ route('customers.edit', $customer) }}" class="btn btn-sm btn-outline-secondary" title="編集" onclick="event.stopPropagation();">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <form method="POST" action="{{ route('customers.destroy', $customer) }}" class="d-inline" 
                                           onsubmit="return confirm('この顧客を削除しますか？')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="削除">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="削除" onclick="event.stopPropagation();">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>

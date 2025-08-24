@@ -10,13 +10,12 @@
         <a href="{{ route('orders.create') }}" class="btn btn-success">
             <i class="fas fa-plus me-2"></i>新規注文登録
         </a>
-        <a href="{{ route('orders.index') }}" class="btn btn-outline-secondary ms-2">
+        <a href="{{ route('orders.index') }}" class="btn btn-outline-primary">
             <i class="fas fa-arrow-left me-2"></i>全注文一覧に戻る
         </a>
     </div>
 </div>
 
-<!-- 注文一覧 -->
 <div class="card">
     <div class="card-body">
         @if($orders->count() > 0)
@@ -31,12 +30,12 @@
                             <th>受け取り日時</th>
                             <th>注文ステータス</th>
                             <th>金額</th>
-                            <th>操作</th>
+                            <th>編集</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($orders as $order)
-                        <tr>
+                        <tr style="cursor: pointer;" onclick="window.location.href='{{ route('orders.show', $order) }}'">
                             <td>{{ $order->order_number }}</td>
                             <td>{{ $order->created_at->format('Y/m/d H:i') }}</td>
                             <td>{{ $order->customer->name ?? '未登録' }}</td>
@@ -86,10 +85,7 @@
                             <td>¥{{ number_format($order->total_amount) }}</td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <a href="{{ route('orders.show', $order) }}" class="btn btn-sm btn-outline-primary" title="詳細表示">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="{{ route('orders.edit', $order) }}" class="btn btn-sm btn-outline-secondary" title="編集">
+                                    <a href="{{ route('orders.edit', $order) }}" class="btn btn-sm btn-outline-secondary" title="編集" onclick="event.stopPropagation();">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                 </div>

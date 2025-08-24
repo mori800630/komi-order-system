@@ -39,7 +39,7 @@
                             </thead>
                             <tbody>
                                 @foreach($users as $user)
-                                <tr>
+                                <tr style="cursor: pointer;" onclick="window.location.href='{{ route('users.show', $user) }}'">
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
@@ -58,17 +58,14 @@
                                     <td>{{ $user->created_at->format('Y-m-d H:i') }}</td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('users.show', $user) }}" class="btn btn-sm btn-outline-info">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="{{ route('users.edit', $user) }}" class="btn btn-sm btn-outline-warning">
+                                            <a href="{{ route('users.edit', $user) }}" class="btn btn-sm btn-outline-warning" title="編集" onclick="event.stopPropagation();">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             @if($user->id !== auth()->id())
                                             <form action="{{ route('users.destroy', $user) }}" method="POST" class="d-inline" onsubmit="return confirm('本当に削除しますか？')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" title="削除" onclick="event.stopPropagation();">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>

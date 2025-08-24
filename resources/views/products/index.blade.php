@@ -3,14 +3,12 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>商品管理</h2>
-    <div>
-        <a href="{{ route('products.create') }}" class="btn btn-success">
-            <i class="fas fa-plus me-2"></i>新規商品登録
-        </a>
-    </div>
+    <a href="{{ route('products.create') }}" class="btn btn-success">
+        <i class="fas fa-plus me-2"></i>新規商品登録
+    </a>
 </div>
 
-<!-- 検索フィルター -->
+<!-- 検索・フィルター -->
 <div class="card mb-4">
     <div class="card-body">
         <form method="GET" action="{{ route('products.index') }}" class="row g-3">
@@ -40,12 +38,14 @@
                 </select>
             </div>
             <div class="col-md-2 d-flex align-items-end">
-                <button type="submit" class="btn btn-primary me-2">
-                    <i class="fas fa-search"></i> 検索
-                </button>
-                <a href="{{ route('products.index') }}" class="btn btn-outline-secondary">
-                    <i class="fas fa-times"></i> クリア
-                </a>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fas fa-search me-1"></i>検索
+                    </button>
+                    <a href="{{ route('products.index') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-times me-1"></i>クリア
+                    </a>
+                </div>
             </div>
         </form>
     </div>
@@ -70,7 +70,7 @@
                     </thead>
                     <tbody>
                         @foreach($products as $product)
-                        <tr>
+                        <tr style="cursor: pointer;" onclick="window.location.href='{{ route('products.show', $product) }}'">
                             <td>
                                 <strong>{{ $product->name }}</strong>
                                 @if($product->description)
@@ -104,17 +104,14 @@
                             <td>{{ $product->created_at->format('Y/m/d') }}</td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <a href="{{ route('products.show', $product) }}" class="btn btn-sm btn-outline-primary" title="詳細表示">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="{{ route('products.edit', $product) }}" class="btn btn-sm btn-outline-secondary" title="編集">
+                                    <a href="{{ route('products.edit', $product) }}" class="btn btn-sm btn-outline-secondary" title="編集" onclick="event.stopPropagation();">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <form method="POST" action="{{ route('products.destroy', $product) }}" class="d-inline" 
                                           onsubmit="return confirm('この商品を削除しますか？')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="削除">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="削除" onclick="event.stopPropagation();">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
