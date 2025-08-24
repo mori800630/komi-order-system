@@ -253,7 +253,7 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">商品情報</h5>
-                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productModal">
+                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="openProductModal()">
                         <i class="fas fa-plus me-1"></i>商品追加
                     </button>
                 </div>
@@ -342,6 +342,23 @@
 </div>
 
 <script>
+// モーダルを開く関数
+function openProductModal() {
+    try {
+        const modal = new bootstrap.Modal(document.getElementById('productModal'));
+        modal.show();
+    } catch (error) {
+        console.error('モーダルを開けませんでした:', error);
+        // フォールバック: モーダルを直接表示
+        document.getElementById('productModal').style.display = 'block';
+        document.getElementById('productModal').classList.add('show');
+        document.body.classList.add('modal-open');
+        const backdrop = document.createElement('div');
+        backdrop.className = 'modal-backdrop fade show';
+        document.body.appendChild(backdrop);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const deliveryMethod = document.getElementById('delivery_method');
     const pickupInfo = document.getElementById('pickup_info');
