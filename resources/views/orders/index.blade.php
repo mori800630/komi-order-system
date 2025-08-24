@@ -91,12 +91,15 @@
                             <th>梱包物流</th>
                             <th>金額</th>
                             <th>製造部門</th>
-                            <th>操作</th>
+                            <th>編集</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($orders as $order)
-                        <tr @if($order->orderStatus->code === 'order_received') class="table-danger" style="background: linear-gradient(45deg, #ffebee, #ffcdd2);" @endif>
+                        <tr @if($order->orderStatus->code === 'order_received') class="table-danger" style="background: linear-gradient(45deg, #ffebee, #ffcdd2);" @endif 
+                            onclick="window.location.href='{{ route('orders.show', $order) }}'" 
+                            style="cursor: pointer;" 
+                            class="order-row">
                             <td>
                                 @if($order->orderStatus->code === 'order_received')
                                     <i class="fas fa-exclamation-triangle text-danger me-1" title="製造開始待ち"></i>
@@ -162,7 +165,7 @@
                                                 @csrf
                                                 <input type="hidden" name="new_status_id" value="{{ $transition->to_status_id }}">
                                                 <button type="submit" class="btn btn-xs btn-outline-primary" 
-                                                        onclick="return confirm('ステータスを「{{ $transition->toStatus->name }}」に変更しますか？')"
+                                                        onclick="event.stopPropagation(); return confirm('ステータスを「{{ $transition->toStatus->name }}」に変更しますか？')"
                                                         title="{{ $transition->toStatus->name }}へ変更">
                                                     <i class="fas fa-arrow-right"></i>
                                                 </button>
@@ -200,7 +203,7 @@
                                                         @csrf
                                                         <input type="hidden" name="department_id" value="{{ $department->id }}">
                                                         <input type="hidden" name="status" value="in_progress">
-                                                        <button type="submit" class="btn btn-xs btn-warning" title="製造開始">
+                                                        <button type="submit" class="btn btn-xs btn-warning" title="製造開始" onclick="event.stopPropagation();">
                                                             <i class="fas fa-play"></i>
                                                         </button>
                                                     </form>
@@ -209,7 +212,7 @@
                                                         @csrf
                                                         <input type="hidden" name="department_id" value="{{ $department->id }}">
                                                         <input type="hidden" name="status" value="completed">
-                                                        <button type="submit" class="btn btn-xs btn-success" title="製造完了">
+                                                        <button type="submit" class="btn btn-xs btn-success" title="製造完了" onclick="event.stopPropagation();">
                                                             <i class="fas fa-check"></i>
                                                         </button>
                                                     </form>
@@ -221,10 +224,7 @@
                             </td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <a href="{{ route('orders.show', $order) }}" class="btn btn-sm btn-outline-primary" title="詳細表示">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="{{ route('orders.edit', $order) }}" class="btn btn-sm btn-outline-secondary" title="編集">
+                                    <a href="{{ route('orders.edit', $order) }}" class="btn btn-sm btn-outline-secondary" title="編集" onclick="event.stopPropagation();">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                 </div>
@@ -253,4 +253,16 @@
         @endif
     </div>
 </div>
+<style>
+.order-row:hover {
+    background-color: rgba(0, 123, 255, 0.1) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+
+.order-row {
+    transition: all 0.2s ease;
+}
+</style>
 @endsection
