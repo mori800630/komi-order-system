@@ -360,11 +360,6 @@
                         </tbody>
                     </table>
                 </div>
-                
-                <!-- ページネーション -->
-                <div class="d-flex justify-content-center mt-3">
-                    {{ $products->links() }}
-                </div>
             </div>
         </div>
     </div>
@@ -553,73 +548,6 @@ document.addEventListener('DOMContentLoaded', function() {
     productSearch.addEventListener('input', filterProducts);
     modalDepartmentFilter.addEventListener('change', filterProducts);
     
-    // 動的ページネーション機能
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('page-link') && !e.target.classList.contains('disabled')) {
-            e.preventDefault();
-            const page = e.target.getAttribute('href').split('page=')[1];
-            loadProductsPage(page);
-        }
-    });
-    
-    // 商品ページを動的に読み込み
-    function loadProductsPage(page) {
-        fetch(`/api/products?page=${page}`)
-            .then(response => response.json())
-            .then(data => {
-                updateProductTable(data.data);
-                updatePagination(data);
-            })
-            .catch(error => {
-                console.error('Error loading products:', error);
-            });
-    }
-    
-    // 商品テーブルを更新
-    function updateProductTable(products) {
-        const tbody = document.getElementById('productList');
-        tbody.innerHTML = '';
-        
-        products.forEach(product => {
-            const row = document.createElement('tr');
-            row.setAttribute('data-department-id', product.department_id);
-            if (product.status === 'discontinued') {
-                row.classList.add('table-secondary');
-            }
-            
-            row.innerHTML = `
-                <td>
-                    ${product.status === 'discontinued' 
-                        ? `<span class="text-decoration-line-through text-muted">${product.name}</span><span class="badge bg-secondary ms-1">販売終了</span>`
-                        : product.name
-                    }
-                </td>
-                <td>${product.department.name}</td>
-                <td>¥${Number(product.price).toLocaleString()}</td>
-                <td>
-                    <button type="button" class="btn btn-sm btn-primary select-product" 
-                            data-product-id="${product.id}" 
-                            data-product-name="${product.name}" 
-                            data-product-price="${product.price}"
-                            data-requires-packaging="${product.requires_packaging ? '1' : '0'}">
-                        選択
-                    </button>
-                </td>
-            `;
-            
-            tbody.appendChild(row);
-        });
-    }
-    
-    // ページネーションを更新
-    function updatePagination(data) {
-        const paginationContainer = document.querySelector('.pagination');
-        if (paginationContainer) {
-            // ページネーションリンクを更新
-            // この部分は必要に応じて実装
-        }
-    }
-    
     // 商品選択（イベント委譲を使用）
     document.addEventListener('click', function(e) {
         console.log('Click event detected:', e.target);
@@ -671,6 +599,42 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    
+    // 商品選択ボタンに直接イベントリスナーを追加（フォールバック）
+    function addDirectEventListeners() {
+        const selectButtons = document.querySelectorAll('.select-product');
+        selectButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                console.log('Direct event listener triggered');
+                
+                const productId = this.dataset.productId;
+                const productName = this.dataset.productName;
+                const productPrice = this.dataset.productPrice;
+                const requiresPackaging = this.dataset.requiresPackaging;
+                
+                console.log('Product data (direct):', { productId, productName, productPrice, requiresPackaging });
+                
+                addOrderItem(productId, productName, productPrice);
+                
+                // モーダルを閉じる
+                const modalElement = document.getElementById('productModal');
+                modalElement.style.display = 'none';
+                modalElement.classList.remove('show');
+                document.body.classList.remove('modal-open');
+                
+                const backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop) {
+                    backdrop.remove();
+                }
+            });
+        });
+    }
+    
+    // ページ読み込み時に直接イベントリスナーを追加
+    addDirectEventListeners();
     
     // 商品追加
     function addOrderItem(productId, productName, productPrice) {

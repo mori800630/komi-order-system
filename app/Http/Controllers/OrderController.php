@@ -59,11 +59,11 @@ class OrderController extends Controller
     public function create()
     {
         $customers = Customer::where('is_active', true)->get();
-        // 販売中の商品のみを取得（ページネーション付き）
+        // 販売中の商品のみを取得（全件）
         $products = Product::where('status', 'on_sale')
             ->where('is_active', true)
             ->with('department')
-            ->paginate(20); // 20件ずつ表示
+            ->get();
         $departments = Department::where('is_active', true)->get();
         $orderStatuses = OrderStatus::active()->ordered()->get();
 
