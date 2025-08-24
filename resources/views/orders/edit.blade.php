@@ -333,7 +333,7 @@
 </div>
 
 <!-- 商品選択モーダル -->
-<div class="modal fade" id="productModal" tabindex="-1" style="z-index: 9999 !important;">
+<div class="modal fade" id="productModal" tabindex="-1" style="z-index: 9999 !important;" data-bs-backdrop="false">
     <div class="modal-dialog modal-lg" style="z-index: 10000 !important;">
         <div class="modal-content" style="pointer-events: auto !important; z-index: 10003 !important;">
             <div class="modal-header">
@@ -647,24 +647,30 @@ document.addEventListener('DOMContentLoaded', function() {
     // モーダルの初期化
     const productModal = document.getElementById('productModal');
     if (productModal) {
-        // モーダルの背景オーバーレイのz-indexを設定
+        // モーダルの背景オーバーレイを完全に無効化
         productModal.addEventListener('shown.bs.modal', function () {
             const backdrop = document.querySelector('.modal-backdrop');
             if (backdrop) {
-                backdrop.style.zIndex = '9998';
-                backdrop.style.pointerEvents = 'none';
+                backdrop.style.display = 'none';
             }
         });
         
-        // モーダルが開く前に背景オーバーレイを調整
+        // モーダルが開く前に背景オーバーレイを無効化
         productModal.addEventListener('show.bs.modal', function () {
             setTimeout(() => {
                 const backdrop = document.querySelector('.modal-backdrop');
                 if (backdrop) {
-                    backdrop.style.zIndex = '9998';
-                    backdrop.style.pointerEvents = 'none';
+                    backdrop.style.display = 'none';
                 }
-            }, 100);
+            }, 50);
+        });
+        
+        // モーダルが開く瞬間に背景オーバーレイを無効化
+        productModal.addEventListener('show.bs.modal', function () {
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.style.display = 'none';
+            }
         });
     }
     
