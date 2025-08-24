@@ -42,11 +42,11 @@ class CustomerController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'nullable|email|unique:customers,email',
-            'phone' => 'nullable|string|max:20',
-            'postal_code' => 'nullable|string|max:10',
-            'prefecture' => 'nullable|string|max:50',
-            'address' => 'nullable|string|max:500',
+            'email' => 'required|email|unique:customers,email',
+            'phone' => 'required|string|max:20',
+            'postal_code' => 'required|string|max:10',
+            'prefecture' => 'required|string|max:50',
+            'address' => 'required|string|max:500',
             'notes' => 'nullable|string|max:1000',
         ]);
 
@@ -84,11 +84,11 @@ class CustomerController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'nullable|email|unique:customers,email,' . $customer->id,
-            'phone' => 'nullable|string|max:20',
-            'postal_code' => 'nullable|string|max:10',
-            'prefecture' => 'nullable|string|max:50',
-            'address' => 'nullable|string|max:500',
+            'email' => 'required|email|unique:customers,email,' . $customer->id,
+            'phone' => 'required|string|max:20',
+            'postal_code' => 'required|string|max:10',
+            'prefecture' => 'required|string|max:50',
+            'address' => 'required|string|max:500',
             'notes' => 'nullable|string|max:1000',
         ]);
 
