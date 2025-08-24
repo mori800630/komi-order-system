@@ -1,42 +1,41 @@
 <svg width="200" height="120" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-  <!-- メインのチーズケーキ（円形） -->
-  <circle cx="100" cy="60" r="45" fill="#F5DEB3" stroke="#DEB887" stroke-width="1"/>
+  <!-- パンの本体（楕円形） -->
+  <ellipse cx="100" cy="60" rx="70" ry="25" fill="#D2691E" stroke="#8B4513" stroke-width="1"/>
   
-  <!-- チーズケーキの上部（キャラメル色の層） -->
-  <path d="M 55 60 A 45 45 0 0 1 145 60 L 140 50 A 40 40 0 0 0 60 50 Z" fill="#D2691E" stroke="#8B4513" stroke-width="0.5"/>
+  <!-- パンの上部（明るい部分） -->
+  <ellipse cx="100" cy="55" rx="65" ry="20" fill="#F4A460" stroke="#DEB887" stroke-width="0.5"/>
   
-  <!-- チーズケーキの本体（クリーム色） -->
-  <circle cx="100" cy="60" r="40" fill="#FFF8DC" stroke="#DEB887" stroke-width="0.5"/>
+  <!-- パンのスコア（切り込み）4本 -->
+  <path d="M 40 50 Q 50 45 60 50" stroke="#FFF8DC" stroke-width="2" fill="none"/>
+  <path d="M 60 50 Q 70 45 80 50" stroke="#FFF8DC" stroke-width="2" fill="none"/>
+  <path d="M 80 50 Q 90 45 100 50" stroke="#FFF8DC" stroke-width="2" fill="none"/>
+  <path d="M 100 50 Q 110 45 120 50" stroke="#FFF8DC" stroke-width="2" fill="none"/>
+  <path d="M 120 50 Q 130 45 140 50" stroke="#FFF8DC" stroke-width="2" fill="none"/>
+  <path d="M 140 50 Q 150 45 160 50" stroke="#FFF8DC" stroke-width="2" fill="none"/>
   
-  <!-- チーズケーキの底（クラスト） -->
-  <ellipse cx="100" cy="95" rx="45" ry="8" fill="#DAA520" stroke="#B8860B" stroke-width="0.5"/>
+  <!-- パンの影（立体感） -->
+  <ellipse cx="95" cy="65" rx="65" ry="20" fill="#CD853F" opacity="0.3"/>
   
-  <!-- 切り分けられた一切れ -->
-  <g transform="translate(160, 40)">
-    <!-- 一切れの本体 -->
-    <path d="M 0 0 L 25 0 A 25 25 0 0 1 25 50 L 0 50 Z" fill="#FFF8DC" stroke="#DEB887" stroke-width="0.5"/>
-    
-    <!-- 一切れの上部（キャラメル色） -->
-    <path d="M 0 0 L 25 0 A 25 25 0 0 1 22 8 L 0 8 Z" fill="#D2691E" stroke="#8B4513" stroke-width="0.3"/>
-    
-    <!-- 一切れの底（クラスト） -->
-    <ellipse cx="12.5" cy="45" rx="25" ry="3" fill="#DAA520" stroke="#B8860B" stroke-width="0.3"/>
-    
-    <!-- 一切れの切り口の質感 -->
-    <path d="M 0 8 L 0 42" stroke="#F0E68C" stroke-width="1" opacity="0.6"/>
-    <path d="M 2 10 L 2 40" stroke="#F0E68C" stroke-width="0.5" opacity="0.4"/>
-    <path d="M 4 12 L 4 38" stroke="#F0E68C" stroke-width="0.5" opacity="0.3"/>
-  </g>
+  <!-- パンの表面のテクスチャ（小さな点） -->
+  <circle cx="45" cy="45" r="0.8" fill="#8B4513" opacity="0.6"/>
+  <circle cx="75" cy="42" r="0.6" fill="#8B4513" opacity="0.6"/>
+  <circle cx="105" cy="44" r="0.7" fill="#8B4513" opacity="0.6"/>
+  <circle cx="135" cy="46" r="0.5" fill="#8B4513" opacity="0.6"/>
+  <circle cx="155" cy="48" r="0.6" fill="#8B4513" opacity="0.6"/>
   
-  <!-- メインケーキの表面の光沢 -->
-  <ellipse cx="85" cy="45" rx="15" ry="8" fill="#F0E68C" opacity="0.3"/>
-  <ellipse cx="115" cy="50" rx="12" ry="6" fill="#F0E68C" opacity="0.2"/>
+  <circle cx="50" cy="55" r="0.5" fill="#8B4513" opacity="0.6"/>
+  <circle cx="80" cy="52" r="0.7" fill="#8B4513" opacity="0.6"/>
+  <circle cx="110" cy="54" r="0.6" fill="#8B4513" opacity="0.6"/>
+  <circle cx="140" cy="56" r="0.5" fill="#8B4513" opacity="0.6"/>
   
-  <!-- メインケーキの切り口の質感（一切れが取られた部分） -->
-  <path d="M 145 60 L 145 20" stroke="#F0E68C" stroke-width="1" opacity="0.6"/>
-  <path d="M 143 58 L 143 22" stroke="#F0E68C" stroke-width="0.5" opacity="0.4"/>
-  <path d="M 141 56 L 141 24" stroke="#F0E68C" stroke-width="0.5" opacity="0.3"/>
+  <circle cx="65" cy="58" r="0.6" fill="#8B4513" opacity="0.6"/>
+  <circle cx="95" cy="60" r="0.5" fill="#8B4513" opacity="0.6"/>
+  <circle cx="125" cy="62" r="0.7" fill="#8B4513" opacity="0.6"/>
   
-  <!-- 上部の光沢効果 -->
-  <ellipse cx="100" cy="35" rx="35" ry="5" fill="#FFD700" opacity="0.2"/>
+  <!-- パンの端の立体感 -->
+  <ellipse cx="35" cy="60" rx="8" ry="15" fill="#CD853F" opacity="0.4"/>
+  <ellipse cx="165" cy="60" rx="8" ry="15" fill="#CD853F" opacity="0.4"/>
+  
+  <!-- 光沢効果 -->
+  <ellipse cx="85" cy="40" rx="20" ry="8" fill="#FFD700" opacity="0.2"/>
 </svg>
