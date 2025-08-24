@@ -22,7 +22,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
-            return redirect()->intended(route('dashboard'));
+            return redirect()->secure(route('dashboard', [], false));
         }
 
         return back()->withErrors([
@@ -37,6 +37,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login');
+        return redirect()->secure(route('login', [], false));
     }
 }
