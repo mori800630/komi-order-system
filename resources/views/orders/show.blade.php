@@ -498,4 +498,51 @@
     background-color: #e9ecef;
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 梱包中への遷移ボタンを制御
+    const packagingButtons = document.querySelectorAll('form[action*="update-status"] button[type="submit"]');
+    
+    packagingButtons.forEach(button => {
+        const form = button.closest('form');
+        const statusInput = form.querySelector('input[name="new_status_id"]');
+        
+        if (statusInput) {
+            // 梱包中ステータスのIDを取得（実際のIDに置き換える必要があります）
+            const packagingStatusId = '{{ \App\Models\OrderStatus::where("code", "packaging")->first()->id ?? "" }}';
+            
+            if (statusInput.value == packagingStatusId) {
+                // 部門ステータスをチェック
+                const departmentStatuses = @json($order->departmentStatuses->keyBy('department_id'));
+                const orderDepartments = @json($order->orderItems->pluck('product.department')->unique('id'));
+                
+                let hasIncompleteDepartment = false;
+                let incompleteDepartments = [];
+                
+                orderDepartments.forEach(dept => {
+                    const deptStatus = departmentStatuses[dept.id];
+                    if (!deptStatus || deptStatus.status !== 'completed') {
+                        hasIncompleteDepartment = true;
+                        incompleteDepartments.push(dept.name);
+                    }
+                });
+                
+                if (hasIncompleteDepartment) {
+                    button.disabled = true;
+                    button.classList.add('btn-secondary');
+                    button.classList.remove('btn-outline-primary');
+                    button.title = '未完了の部門があります: ' + incompleteDepartments.join(', ');
+                    
+                    // 警告メッセージを追加
+                    const warningDiv = document.createElement('div');
+                    warningDiv.className = 'mt-1';
+                    warningDiv.innerHTML = '<small class="text-danger"><i class="fas fa-exclamation-triangle me-1"></i>未完了の部門があるため、梱包中に変更できません</small>';
+                    form.parentNode.appendChild(warningDiv);
+                }
+            }
+        }
+    });
+});
+</script>
 @endsection

@@ -240,4 +240,48 @@
     transition: all 0.2s ease;
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 梱包中への遷移ボタンを制御
+    const packagingButtons = document.querySelectorAll('form[action*="update-status"] button[type="submit"]');
+    
+    packagingButtons.forEach(button => {
+        const form = button.closest('form');
+        const statusInput = form.querySelector('input[name="new_status_id"]');
+        
+        if (statusInput) {
+            // 梱包中ステータスのIDを取得
+            const packagingStatusId = '{{ \App\Models\OrderStatus::where("code", "packaging")->first()->id ?? "" }}';
+            
+            if (statusInput.value == packagingStatusId) {
+                // 注文行から部門ステータスを取得
+                const orderRow = form.closest('tr');
+                const departmentCells = orderRow.querySelectorAll('td:nth-child(9) .mb-1'); // 製造部門の列
+                
+                let hasIncompleteDepartment = false;
+                let incompleteDepartments = [];
+                
+                departmentCells.forEach(cell => {
+                    const departmentName = cell.querySelector('.department-tag').textContent.trim();
+                    const statusBadge = cell.querySelector('.badge');
+                    const statusText = statusBadge.textContent.trim();
+                    
+                    if (statusText !== '製造完了') {
+                        hasIncompleteDepartment = true;
+                        incompleteDepartments.push(departmentName);
+                    }
+                });
+                
+                if (hasIncompleteDepartment) {
+                    button.disabled = true;
+                    button.classList.add('btn-secondary');
+                    button.classList.remove('btn-outline-primary');
+                    button.title = '未完了の部門があります: ' + incompleteDepartments.join(', ');
+                }
+            }
+        }
+    });
+});
+</script>
 @endsection

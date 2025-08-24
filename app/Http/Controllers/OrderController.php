@@ -9,6 +9,7 @@ use App\Models\OrderItem;
 use App\Models\OrderStatus;
 use App\Models\OrderStatusTransition;
 use App\Models\Product;
+use App\Rules\AllDepartmentsCompleted;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -276,10 +277,18 @@ class OrderController extends Controller
      */
     public function updateStatus(Request $request, Order $order)
     {
-        $request->validate([
-            'new_status_id' => 'required|exists:order_statuses,id',
-            'notes' => 'nullable|string',
-        ]);
+        try {
+            $request->validate([
+                'new_status_id' => [
+                    'required',
+                    'exists:order_statuses,id',
+                    new AllDepartmentsCompleted($order, $order->order_status_id)
+                ],
+                'notes' => 'nullable|string',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return back()->withErrors($e->validator)->withInput();
+        }
 
         $newStatus = OrderStatus::find($request->new_status_id);
         $user = auth()->user();
