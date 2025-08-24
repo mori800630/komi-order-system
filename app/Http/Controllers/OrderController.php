@@ -282,11 +282,7 @@ class OrderController extends Controller
 
         $newStatus = OrderStatus::find($request->new_status_id);
 
-        // 遷移可能かチェック
-        if (!$order->canTransitionTo($newStatus->id, auth()->user())) {
-            return back()->with('error', 'このステータスへの変更は許可されていません。');
-        }
-
+        // 権限チェックを削除 - 全てのユーザーがステータス変更可能
         $oldStatus = $order->orderStatus;
         $order->update(['order_status_id' => $request->new_status_id]);
 

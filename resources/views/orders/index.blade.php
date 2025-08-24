@@ -148,7 +148,7 @@
                                 
                                 <!-- ステータス遷移ボタン -->
                                 @php
-                                    $availableTransitions = $order->getAvailableTransitions(auth()->user());
+                                    $availableTransitions = $order->getAllAvailableTransitions();
                                 @endphp
                                 @if($availableTransitions->count() > 0)
                                     <div class="mt-1">

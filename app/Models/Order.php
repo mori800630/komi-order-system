@@ -61,6 +61,13 @@ class Order extends Model
             });
     }
 
+    public function getAllAvailableTransitions()
+    {
+        return OrderStatusTransition::where('from_status_id', $this->order_status_id)
+            ->where('is_active', true)
+            ->get();
+    }
+
     public function canTransitionTo($toStatusId, $user)
     {
         $transition = OrderStatusTransition::where('from_status_id', $this->order_status_id)
