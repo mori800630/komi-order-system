@@ -50,8 +50,9 @@
                                     <option value="delivery_site" {{ old('order_source', $order->order_source) == 'delivery_site' ? 'selected' : '' }}>お取り寄せ専用サイト</option>
                                     <option value="email" {{ old('order_source', $order->order_source) == 'email' ? 'selected' : '' }}>メール注文</option>
                                     <option value="event" {{ old('order_source', $order->order_source) == 'event' ? 'selected' : '' }}>催事・イベント</option>
-                                    <option value="other" {{ old('order_source', $order->order_source) == 'other' ? 'selected' : '' }}>その他</option>
-                                </select>
+                                                    <option value="other" {{ old('order_source', $order->order_source) == 'other' ? 'selected' : '' }}>その他</option>
+                <option value="website" {{ old('order_source', $order->order_source) == 'website' ? 'selected' : '' }}>ウェブサイト</option>
+            </select>
                                 @error('order_source')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

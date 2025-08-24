@@ -27,8 +27,12 @@ class Order extends Model
     ];
 
     protected static $rules = [
-        'order_source' => 'in:phone,store,pickup_site,delivery_site,email,event,other',
+        'customer_id' => 'required|exists:customers,id',
+        'order_status_id' => 'required|exists:order_statuses,id',
+        'order_source' => 'in:phone,store,pickup_site,delivery_site,email,event,other,website',
         'delivery_method' => 'in:pickup,delivery',
+        'total_amount' => 'numeric|min:0',
+        'requires_packaging' => 'boolean',
     ];
 
     protected $attributes = [

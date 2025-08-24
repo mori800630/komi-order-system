@@ -51,8 +51,9 @@
                     <option value="delivery_site" {{ request('order_source') == 'delivery_site' ? 'selected' : '' }}>お取り寄せ専用サイト</option>
                     <option value="email" {{ request('order_source') == 'email' ? 'selected' : '' }}>メール注文</option>
                     <option value="event" {{ request('order_source') == 'event' ? 'selected' : '' }}>催事・イベント</option>
-                    <option value="other" {{ request('order_source') == 'other' ? 'selected' : '' }}>その他</option>
-                </select>
+                                    <option value="other" {{ request('order_source') == 'other' ? 'selected' : '' }}>その他</option>
+                <option value="website" {{ request('order_source') == 'website' ? 'selected' : '' }}>ウェブサイト</option>
+            </select>
             </div>
             <div class="col-md-2">
                 <label for="delivery_method" class="form-label">梱包物流</label>
