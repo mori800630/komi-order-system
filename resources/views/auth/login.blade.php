@@ -120,7 +120,7 @@
         .form-control {
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 1rem 1rem 1rem 3rem;
+            padding: 1rem 1rem 1rem 3.5rem;
             font-size: 1rem;
             background-color: white;
             transition: all 0.3s ease;
@@ -136,11 +136,12 @@
             color: var(--text-color);
             opacity: 0.8;
             font-weight: 400;
+            padding-left: 3.5rem;
         }
 
         .input-icon {
             position: absolute;
-            left: 1rem;
+            left: 1.2rem;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-color);
@@ -288,7 +289,7 @@
                 <div class="logo-container">
                     <img src="{{ asset('images/komi-bakery-logo.svg') }}" alt="KOMI BAKERY">
                 </div>
-                <h1 class="brand-title">KOMI BAKERY</h1>
+                <h1 class="brand-title">コミベーカリー様</h1>
                 <p class="brand-subtitle">注文管理システム</p>
             </div>
 
