@@ -92,6 +92,7 @@ class OrderController extends Controller
             'delivery_prefecture' => 'nullable|string|required_if:delivery_method,delivery',
             'delivery_address' => 'nullable|string|required_if:delivery_method,delivery',
             'notes' => 'nullable|string',
+            'requires_packaging' => 'required|boolean',
             'products' => 'required|array|min:1',
             'prices' => 'required|array|min:1',
             'quantities' => 'required|array|min:1',
@@ -113,6 +114,7 @@ class OrderController extends Controller
                 'delivery_method' => $request->delivery_method,
                 'pickup_date' => $request->pickup_date,
                 'pickup_time' => $request->pickup_time,
+                'requires_packaging' => $request->requires_packaging,
                 'notes' => $request->notes,
                 'total_amount' => 0,
             ]);
@@ -206,11 +208,12 @@ class OrderController extends Controller
             'delivery_prefecture' => 'nullable|string|required_if:delivery_method,delivery',
             'delivery_address' => 'nullable|string|required_if:delivery_method,delivery',
             'notes' => 'nullable|string',
+            'requires_packaging' => 'required|boolean',
         ]);
 
         $order->update($request->only([
             'customer_id', 'order_status_id', 'order_source', 'delivery_method',
-            'pickup_date', 'pickup_time', 'notes'
+            'pickup_date', 'pickup_time', 'requires_packaging', 'notes'
         ]));
 
         return redirect()->route('orders.show', $order)

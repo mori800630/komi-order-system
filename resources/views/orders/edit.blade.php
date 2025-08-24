@@ -234,6 +234,33 @@
                 </div>
             </div>
 
+            <!-- 梱包物流 -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">梱包物流</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label">梱包物流 *</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="requires_packaging" id="packaging_required" value="1" {{ old('requires_packaging', $order->requires_packaging ? '1' : '0') == '1' ? 'checked' : '' }} required>
+                            <label class="form-check-label" for="packaging_required">
+                                必要
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="requires_packaging" id="packaging_not_required" value="0" {{ old('requires_packaging', $order->requires_packaging ? '1' : '0') == '0' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="packaging_not_required">
+                                不要
+                            </label>
+                        </div>
+                        @error('requires_packaging')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+
             <!-- 商品情報 -->
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
@@ -353,7 +380,8 @@
                                     <button type="button" class="btn btn-sm btn-primary select-product" 
                                             data-product-id="{{ $product->id }}" 
                                             data-product-name="{{ $product->name }}" 
-                                            data-product-price="{{ $product->price }}">
+                                            data-product-price="{{ $product->price }}"
+                                            data-requires-packaging="{{ $product->requires_packaging ? '1' : '0' }}">
                                         選択
                                     </button>
                                 </td>
@@ -517,8 +545,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const productId = this.dataset.productId;
             const productName = this.dataset.productName;
             const productPrice = this.dataset.productPrice;
+            const requiresPackaging = this.dataset.requiresPackaging;
             
             addOrderItem(productId, productName, productPrice);
+            
+            // 梱包物流の初期値を設定（最初の商品の場合のみ）
+            const orderItems = document.getElementById('order-items');
+            if (orderItems.children.length === 1) {
+                if (requiresPackaging === '1') {
+                    document.getElementById('packaging_required').checked = true;
+                } else {
+                    document.getElementById('packaging_not_required').checked = true;
+                }
+            }
             
             // モーダルを閉じる
             const modal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
