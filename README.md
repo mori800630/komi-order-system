@@ -85,10 +85,10 @@ SESSION_LIFETIME=120
 #### 5. デモアカウント
 デプロイ後、以下のアカウントでログインできます：
 
-- **管理者**: admin@komi-bakery.com / password
-- **店舗スタッフ**: sato.misaki@komi-bakery.com / password
-- **製造担当**: yamada.ichiro@komi-bakery.com / password
-- **物流担当**: ishikawa.kuro@komi-bakery.com / password
+- **管理者**: admin@komi-bakery.com / password123
+- **店舗スタッフ**: sato.misaki@komi-bakery.com / password123
+- **製造担当**: yamada.ichiro@komi-bakery.com / password123
+- **物流担当**: ishikawa.kuro@komi-bakery.com / password123
 
 **全30人のテストユーザーが利用可能です。**
 

@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => '田中 テスト正義',
             'email' => 'admin@komi-bakery.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('password123'),
             'role' => 'admin',
         ]);
 
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
             User::create([
                 'name' => $staff['name'],
                 'email' => $staff['email'],
-                'password' => Hash::make('password'),
+                'password' => Hash::make('password123'),
                 'role' => 'store',
             ]);
         }
@@ -73,7 +73,7 @@ class UserSeeder extends Seeder
             User::create([
                 'name' => $user['name'],
                 'email' => $user['email'],
-                'password' => Hash::make('password'),
+                'password' => Hash::make('password123'),
                 'role' => 'manufacturing',
                 'department_id' => $department ? $department->id : null,
             ]);
@@ -91,7 +91,7 @@ class UserSeeder extends Seeder
             User::create([
                 'name' => $user['name'],
                 'email' => $user['email'],
-                'password' => Hash::make('password'),
+                'password' => Hash::make('password123'),
                 'role' => 'logistics',
             ]);
         }
@@ -109,7 +109,7 @@ class UserSeeder extends Seeder
             User::create([
                 'name' => $user['name'],
                 'email' => $user['email'],
-                'password' => Hash::make('password'),
+                'password' => Hash::make('password123'),
                 'role' => $user['role'],
             ]);
         }
