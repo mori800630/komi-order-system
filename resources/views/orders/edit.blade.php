@@ -539,30 +539,24 @@ document.addEventListener('DOMContentLoaded', function() {
     productSearch.addEventListener('input', filterProducts);
     modalDepartmentFilter.addEventListener('change', filterProducts);
     
-    // 商品選択
-    document.querySelectorAll('.select-product').forEach(button => {
-        button.addEventListener('click', function() {
-            const productId = this.dataset.productId;
-            const productName = this.dataset.productName;
-            const productPrice = this.dataset.productPrice;
-            const requiresPackaging = this.dataset.requiresPackaging;
+    // 商品選択（イベント委譲を使用）
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('select-product') || e.target.closest('.select-product')) {
+            const button = e.target.classList.contains('select-product') ? e.target : e.target.closest('.select-product');
+            const productId = button.dataset.productId;
+            const productName = button.dataset.productName;
+            const productPrice = button.dataset.productPrice;
+            const requiresPackaging = button.dataset.requiresPackaging;
             
             addOrderItem(productId, productName, productPrice);
             
-            // 梱包物流の初期値を設定（最初の商品の場合のみ）
-            const orderItems = document.getElementById('order-items');
-            if (orderItems.children.length === 1) {
-                if (requiresPackaging === '1') {
-                    document.getElementById('packaging_required').checked = true;
-                } else {
-                    document.getElementById('packaging_not_required').checked = true;
-                }
-            }
+            // 注文編集画面では梱包物流の初期値設定は行わない
+            // 既存の注文の梱包物流設定を維持する
             
             // モーダルを閉じる
             const modal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
             modal.hide();
-        });
+        }
     });
     
     // 商品追加
