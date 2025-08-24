@@ -142,7 +142,7 @@ class OrderController extends Controller
 
             DB::commit();
 
-            return redirect()->route('orders.show', $order)
+            return redirect()->secure(route('orders.show', $order, false))
                 ->with('success', '注文が正常に登録されました。');
         } catch (\Exception $e) {
             DB::rollback();
@@ -248,7 +248,7 @@ class OrderController extends Controller
 
             DB::commit();
 
-            return redirect()->route('orders.show', $order)
+            return redirect()->secure(route('orders.show', $order, false))
                 ->with('success', '注文が正常に更新されました。');
         } catch (\Exception $e) {
             DB::rollback();
@@ -268,7 +268,7 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         $order->delete();
-        return redirect()->route('orders.index')
+        return redirect()->secure(route('orders.index', [], false))
             ->with('success', '注文が正常に削除されました。');
     }
 
@@ -313,7 +313,7 @@ class OrderController extends Controller
             'notes' => $request->notes,
         ]);
 
-        return redirect()->route('orders.show', $order)
+        return redirect()->secure(route('orders.show', $order, false))
             ->with('success', 'ステータスが正常に更新されました。');
     }
 
@@ -353,7 +353,7 @@ class OrderController extends Controller
             $deptStatus->update(['completed_at' => now()]);
         }
 
-        return redirect()->route('orders.show', $order)
+        return redirect()->secure(route('orders.show', $order, false))
             ->with('success', '部門ステータスが正常に更新されました。');
     }
 
@@ -370,7 +370,7 @@ class OrderController extends Controller
             'requires_packaging' => $request->requires_packaging,
         ]);
 
-        return redirect()->route('orders.show', $order)
+        return redirect()->secure(route('orders.show', $order, false))
             ->with('success', '梱包物流設定が正常に更新されました。');
     }
 
