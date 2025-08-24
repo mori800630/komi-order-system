@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ config('app.name') }}</title>
-    <link rel="icon" type="image/svg+xml" href="{{ asset('images/favicon.svg') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ secure_url('images/favicon.svg') }}">
+    <link rel="icon" type="image/x-icon" href="{{ secure_url('images/favicon.svg') }}">
+    <link rel="shortcut icon" href="{{ secure_url('images/favicon.svg') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -378,7 +380,7 @@
             <div class="col-md-3 col-lg-2 px-0">
                 <div class="sidebar p-3" style="position: relative; z-index: 10;">
                     <div class="mb-4 text-center">
-                        <img src="{{ asset('images/komi-bakery-logo.svg') }}" alt="コミベーカリー" class="img-fluid mb-2" style="max-width: 180px;">
+                        <img src="{{ secure_url('images/komi-bakery-logo.svg') }}" alt="コミベーカリー" class="img-fluid mb-2" style="max-width: 180px;">
                         <p class="mb-0 small text-white">注文管理システム</p>
                     </div>
 

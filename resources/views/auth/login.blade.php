@@ -296,7 +296,7 @@
             <!-- ロゴセクション -->
             <div class="logo-section">
                 <div class="logo-container">
-                    <img src="{{ asset('images/komi-bakery-logo.svg') }}" alt="KOMI BAKERY">
+                    <img src="{{ secure_url('images/komi-bakery-logo.svg') }}" alt="KOMI BAKERY">
                 </div>
                 <h1 class="brand-title">コミベーカリー様</h1>
                 <p class="brand-subtitle">注文管理システム</p>
