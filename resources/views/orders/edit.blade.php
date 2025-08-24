@@ -335,7 +335,7 @@
 <!-- 商品選択モーダル -->
 <div class="modal fade" id="productModal" tabindex="-1" style="z-index: 9999 !important;">
     <div class="modal-dialog modal-lg" style="z-index: 10000 !important;">
-        <div class="modal-content" style="pointer-events: auto !important;">
+        <div class="modal-content" style="pointer-events: auto !important; z-index: 10003 !important;">
             <div class="modal-header">
                 <h5 class="modal-title">商品選択</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -366,7 +366,7 @@
                         </thead>
                         <tbody id="productList">
                             @foreach($products as $product)
-                            <tr data-department-id="{{ $product->department_id }}" @if($product->status === 'discontinued') class="table-secondary" @endif>
+                            <tr data-department-id="{{ $product->department_id }}" @if($product->status === 'discontinued') class="table-secondary" @endif style="position: relative; z-index: 10001;">
                                 <td>
                                     @if($product->status === 'discontinued')
                                         <span class="text-decoration-line-through text-muted">{{ $product->name }}</span>
@@ -383,7 +383,7 @@
                                             data-product-name="{{ $product->name }}" 
                                             data-product-price="{{ $product->price }}"
                                             data-requires-packaging="{{ $product->requires_packaging ? '1' : '0' }}"
-                                            style="pointer-events: auto !important; cursor: pointer !important; position: relative; z-index: 10001;">
+                                            style="pointer-events: auto !important; cursor: pointer !important; position: relative; z-index: 10002 !important;">
                                         選択
                                     </button>
                                 </td>
@@ -652,7 +652,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const backdrop = document.querySelector('.modal-backdrop');
             if (backdrop) {
                 backdrop.style.zIndex = '9998';
+                backdrop.style.pointerEvents = 'none';
             }
+        });
+        
+        // モーダルが開く前に背景オーバーレイを調整
+        productModal.addEventListener('show.bs.modal', function () {
+            setTimeout(() => {
+                const backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop) {
+                    backdrop.style.zIndex = '9998';
+                    backdrop.style.pointerEvents = 'none';
+                }
+            }, 100);
         });
     }
     
