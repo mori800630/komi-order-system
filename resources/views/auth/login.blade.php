@@ -102,7 +102,8 @@
                             <small class="text-muted">
                                 デモ用アカウント:<br>
                                 管理者: admin@komi-bakery.com / password<br>
-                                店舗担当: store@komi-bakery.com / password
+                                店舗担当: store@komi-bakery.com / password<br>
+                                洋菓子製造担当: western@komi-bakery.com / password
                             </small>
                         </div>
                     </div>
