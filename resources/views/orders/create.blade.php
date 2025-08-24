@@ -380,8 +380,8 @@ function openProductModal() {
     try {
         // Bootstrap 5のモーダルインスタンスを作成
         const modal = new bootstrap.Modal(modalElement, {
-            backdrop: 'static', // バックドロップをクリックしても閉じない
-            keyboard: false     // ESCキーで閉じない
+            backdrop: false, // バックドロップを無効化
+            keyboard: false  // ESCキーで閉じない
         });
         modal.show();
         console.log('Modal opened successfully');
@@ -391,6 +391,7 @@ function openProductModal() {
             const backdrop = document.querySelector('.modal-backdrop');
             if (backdrop) {
                 backdrop.style.zIndex = '1050';
+                backdrop.style.pointerEvents = 'none'; // バックドロップのクリックイベントを無効化
             }
         }, 100);
         
@@ -402,16 +403,8 @@ function openProductModal() {
         modalElement.classList.add('show');
         document.body.classList.add('modal-open');
         
-        // バックドロップを作成
-        let backdrop = document.querySelector('.modal-backdrop');
-        if (!backdrop) {
-            backdrop = document.createElement('div');
-            backdrop.className = 'modal-backdrop fade show';
-            backdrop.style.zIndex = '1050';
-            document.body.appendChild(backdrop);
-        }
-        
-        console.log('Modal opened with fallback method');
+        // バックドロップは作成しない（pointer-eventsの問題を回避）
+        console.log('Modal opened with fallback method (no backdrop)');
     }
 }
 
