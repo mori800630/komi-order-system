@@ -120,7 +120,7 @@
         .form-control {
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 1rem 1rem 1rem 4rem;
+            padding: 1rem 1rem 1rem 1rem;
             font-size: 1rem;
             background-color: white;
             transition: all 0.3s ease;
@@ -136,12 +136,12 @@
             color: var(--text-color);
             opacity: 0.8;
             font-weight: 400;
-            padding-left: 4rem;
+            padding-left: 1rem;
         }
 
         .input-icon {
             position: absolute;
-            left: 1.5rem;
+            left: 1rem;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-color);
