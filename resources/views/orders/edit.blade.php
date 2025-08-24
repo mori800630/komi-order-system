@@ -397,6 +397,8 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('ページが読み込まれました');
+    console.log('商品選択ボタンの数:', document.querySelectorAll('.select-product').length);
     const deliveryMethod = document.getElementById('delivery_method');
     const pickupInfo = document.getElementById('pickup_info');
     const deliveryInfo = document.getElementById('delivery_info');
@@ -548,6 +550,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const productPrice = button.dataset.productPrice;
             const requiresPackaging = button.dataset.requiresPackaging;
             
+            console.log('商品選択ボタンがクリックされました:', { productId, productName, productPrice, requiresPackaging });
+            
             addOrderItem(productId, productName, productPrice);
             
             // 注文編集画面では梱包物流の初期値設定は行わない
@@ -561,8 +565,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 商品追加
     function addOrderItem(productId, productName, productPrice) {
+        console.log('addOrderItem関数が呼び出されました:', { productId, productName, productPrice });
         const orderItems = document.getElementById('order-items');
         const itemCount = orderItems.children.length;
+        console.log('現在の商品アイテム数:', itemCount);
         
         const itemHtml = `
             <div class="order-item border rounded p-3 mb-3">
